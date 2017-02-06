@@ -1,0 +1,387 @@
+\part{Kitchen}
+
+\chapter{Overview}
+
+
+\chapter{分组接口}
+
+
+\section{/chef/api/operation/productGroup/Group}
+
+
+\subsection{GET}
+
+获取分组详情
+
+URL：\url{/chef/api/operation/productGroup/Group}
+
+
+
+
+
+\begin{longtable}{|m{50pt}|m{40pt}|m{50pt}|m{50pt}|}
+%head
+\multicolumn{4}{r}{}
+\tabularnewline\hline
+字段&类型&必填&备注
+\endhead
+%endhead
+
+%firsthead
+\caption{获取分组详情接口-请求参数}\\
+\hline
+字段&类型&必填&备注
+\endfirsthead
+%endfirsthead
+
+%foot
+\multicolumn{4}{r}{}
+\endfoot
+%endfoot
+
+%lastfoot
+\endlastfoot
+%endlastfoot
+\hline
+group\_id&int&是&分组ID\\
+\hline
+\end{longtable}
+
+\begin{lstlisting}[language=JavaScript]
+{
+  "code": 200,
+  "msg": "Ok.",
+  "data": {
+    "group_id": "19",
+    "show_type": "0",
+    "title": "扫货扫货qu去首尔",
+    "sub_title": "特价机票+酒店",
+    "short_desc": "",
+    "route_desc": "首尔自由行特价机票酒店，1999起",
+    "date_desc": "",
+    "pc_image_url": "http://pics.hitour.cc/e969a4546e0228ebe7ed9ffe52319962.png",
+    "h5_image_url": "",
+    "icon_image_url": "",
+    "start_date": "2016-08-23",
+    "end_date": "2016-12-31",
+    "status": "1",
+    "type": "1",
+    "group_dests": [
+      {
+        "id": "27",
+        "group_id": "19",
+        "dest_code": "1",
+        "name": "华南",
+        "type": "1",
+        "display_order": "5"
+      }
+   ],
+    "group_locations": [
+      {
+        "label_id": "1",
+        "group_id": "19",
+        "city_code": "SEL",
+        "type": "3",
+        "city": {
+          "country_code": "KR",
+          "city_code": "SEL",
+          "iata_code": "SEL",
+          "cn_name": "首尔",
+          "en_name": "Seoul",
+          "pinyin": "shou er",
+          "timezone": "+9:00",
+          "has_product": "1",
+          "has_online_product": "1",
+          "top_search": "[{\"value\":\"\\u4e50\\u5929\\u4e16\\u754c\",\"display_order\":1},{\"value\":\"\\u6c11\\u4fd7\",\"display_order\":2},{\"value\":\"\\u4e71\\u6253\\u79c0\",\"display_order\":3},{\"value\":\"\\u660e\\u6d1e\",\"display_order\":4},{\"value\":\"\\u6c5d\\u77e3\\u5c9b\",\"display_order\":5},{\"value\":\"\\u4e1c\\u5927\\u95e8\",\"display_order\":6}]",
+          "data_level": "2",
+          "show_in_country": "0",
+          "link_url": "/South_Korea/Seoul",
+          "link_url_m": "/mobile#/city/SEL",
+          "city_name": "Seoul",
+          "country_name": "South_Korea",
+          "country_cn_name": "韩国"
+        }
+      }
+    ],
+    "group_products": [
+         {
+        "id": "44",
+        "group_id": "19",
+        "product_id": "8837",
+        "display_order": "8",
+        "product_description": {
+          "name": "【秋游季】上海直飞首尔4-5天机酒自由行•五星航空韩亚往返机票+全程热销酒店套餐任选 赠接机半日游/首尔1日游/自由行大礼包",
+          "product_id": "8837",
+          "language_id": "2"
+        }
+      }
+    ]
+  }
+}
+\end{lstlisting}
+
+
+\subsection{POST}
+
+新增分组
+
+URL：\url{/chef/api/operation/productGroup/Group}
+
+
+
+\begin{longtable}{|m{80pt}|m{40pt}|m{50pt}|m{150pt}|}
+%head
+\multicolumn{4}{r}{}
+\tabularnewline\hline
+字段&类型&必填&备注
+\endhead
+%endhead
+
+%firsthead
+\caption{新增分组接口-请求参数}\\
+\hline
+字段&类型&必填&备注
+\endfirsthead
+%endfirsthead
+
+%foot
+\multicolumn{4}{r}{}
+\endfoot
+%endfoot
+
+%lastfoot
+\endlastfoot
+%endlastfoot
+\hline
+title			&string	&是	&唯一\\
+\hline
+sub\_title	&string	&否	&副标题\\
+\hline
+short\_desc	&string	&否	&短标题\\
+\hline
+route\_desc	&string	&是	&专题线路\\
+\hline
+date\_desc	&string	&是	&专题日期\\
+\hline
+pc\_image\_url&string	&否	&\\
+\hline
+h5\_image\_url&string	&否	&\\
+\hline
+icon\_image\_url&string&否	&\\
+\hline
+start\_date	&date	&是	&\\
+\hline
+end\_date	&date	&是	&\\
+\hline
+type			&int		&是	&1普通分组，2是父级分组\\
+\hline
+city\_code	&array	&是	&城市\\
+\hline
+\end{longtable}
+
+
+\begin{lstlisting}[language=JavaScript]
+{
+  "code": 200,
+  "msg": "Ok.",
+  "data": {
+    "show_type": 0,
+    "title": "扫货扫货401",
+    "sub_title": "lalaa",
+    "short_desc": "",
+    "route_desc": "",
+    "date_desc": "",
+    "start_date": "0000-00-00",
+    "end_date": "0000-00-00",
+    "status": 0,
+    "type": 1,
+    "group_id": "49",
+    "pc_image_url": null,
+    "h5_image_url": null,
+    "icon_image_url": null,
+    "group_locations": [
+      {
+        "label_id": "1",
+        "group_id": "19",
+        "city_code": "SEL",
+        "type": "3",
+        "city": {
+          "country_code": "KR",
+          "city_code": "SEL",
+          "iata_code": "SEL",
+          "cn_name": "首尔",
+          "en_name": "Seoul",
+          "pinyin": "shou er",
+          "timezone": "+9:00",
+          "has_product": "1",
+          "has_online_product": "1",
+          "top_search": "[{\"value\":\"\\u4e50\\u5929\\u4e16\\u754c\",\"display_order\":1},{\"value\":\"\\u6c11\\u4fd7\",\"display_order\":2},{\"value\":\"\\u4e71\\u6253\\u79c0\",\"display_order\":3},{\"value\":\"\\u660e\\u6d1e\",\"display_order\":4},{\"value\":\"\\u6c5d\\u77e3\\u5c9b\",\"display_order\":5},{\"value\":\"\\u4e1c\\u5927\\u95e8\",\"display_order\":6}]",
+          "data_level": "2",
+          "show_in_country": "0",
+          "link_url": "/South_Korea/Seoul",
+          "link_url_m": "/mobile#/city/SEL",
+          "city_name": "Seoul",
+          "country_name": "South_Korea",
+          "country_cn_name": "韩国"
+        }
+      }
+    ],
+  }
+}
+\end{lstlisting}
+
+
+\subsection{PUT}
+
+更新分组
+
+URL：\url{/chef/api/operation/productGroup/Group}
+
+
+\begin{longtable}{|m{80pt}|m{40pt}|m{50pt}|m{150pt}|}
+%head
+\multicolumn{4}{r}{}
+\tabularnewline\hline
+字段&类型&必填&备注
+\endhead
+%endhead
+
+%firsthead
+\caption{更新分组接口-请求参数}\\
+\hline
+字段&类型&必填&备注
+\endfirsthead
+%endfirsthead
+
+%foot
+\multicolumn{4}{r}{}
+\endfoot
+%endfoot
+
+%lastfoot
+\endlastfoot
+%endlastfoot
+\hline
+group\_id	&int		&是	&\\
+\hline
+title			&string	&否	&唯一\\
+\hline
+sub\_title	&string	&否	&副标题\\
+\hline
+short\_desc	&string	&否	&短标题\\
+\hline
+route\_desc	&string	&是	&专题线路\\
+\hline
+date\_desc	&string	&是	&专题日期\\
+\hline
+pc\_image\_url&string	&否	&\\
+\hline
+h5\_image\_url&string	&否	&\\
+\hline
+icon\_image\_url&string&否	&\\
+\hline
+start\_date	&date	&否	&\\
+\hline
+end\_date	&date	&否	&\\
+\hline
+type			&int		&否	&1普通分组，2是父级分组\\
+\hline
+city\_code	&array	&否	&城市\\
+\hline
+\end{longtable}
+
+\begin{lstlisting}[language=JavaScript]
+{
+  "code": 200,
+  "msg": "Ok.",
+  "data": {
+    "show_type": 0,
+    "title": "扫货扫货401",
+    "sub_title": "lalaa",
+    "short_desc": "",
+    "route_desc": "",
+    "date_desc": "",
+    "start_date": "0000-00-00",
+    "end_date": "0000-00-00",
+    "status": 0,
+    "type": 1,
+    "group_id": "49",
+    "pc_image_url": null,
+    "h5_image_url": null,
+    "icon_image_url": null,
+    "group_locations": [
+      {
+        "label_id": "1",
+        "group_id": "19",
+        "city_code": "SEL",
+        "type": "3",
+        "city": {
+          "country_code": "KR",
+          "city_code": "SEL",
+          "iata_code": "SEL",
+          "cn_name": "首尔",
+          "en_name": "Seoul",
+          "pinyin": "shou er",
+          "timezone": "+9:00",
+          "has_product": "1",
+          "has_online_product": "1",
+          "top_search": "[{\"value\":\"\\u4e50\\u5929\\u4e16\\u754c\",\"display_order\":1},{\"value\":\"\\u6c11\\u4fd7\",\"display_order\":2},{\"value\":\"\\u4e71\\u6253\\u79c0\",\"display_order\":3},{\"value\":\"\\u660e\\u6d1e\",\"display_order\":4},{\"value\":\"\\u6c5d\\u77e3\\u5c9b\",\"display_order\":5},{\"value\":\"\\u4e1c\\u5927\\u95e8\",\"display_order\":6}]",
+          "data_level": "2",
+          "show_in_country": "0",
+          "link_url": "/South_Korea/Seoul",
+          "link_url_m": "/mobile#/city/SEL",
+          "city_name": "Seoul",
+          "country_name": "South_Korea",
+          "country_cn_name": "韩国"
+        }
+      }
+    ],
+  }
+}
+\end{lstlisting}
+
+
+
+\subsection{DELETE}
+
+删除分组
+
+URL：\url{/chef/api/operation/productGroup/Group}
+
+
+\begin{longtable}{|m{50pt}|m{40pt}|m{50pt}|m{50pt}|}
+%head
+\multicolumn{4}{r}{}
+\tabularnewline\hline
+字段&类型&必填&备注
+\endhead
+%endhead
+
+%firsthead
+\caption{删除分组接口-请求参数}\\
+\hline
+字段&类型&必填&备注
+\endfirsthead
+%endfirsthead
+
+%foot
+\multicolumn{4}{r}{}
+\endfoot
+%endfoot
+
+%lastfoot
+\endlastfoot
+%endlastfoot
+\hline
+group\_id&int&是&分组ID\\
+\hline
+\end{longtable}
+
+\begin{lstlisting}[language=JavaScript]
+{
+  "code": 200,
+  "msg": "Ok.",
+}
+\end{lstlisting}
+
+
