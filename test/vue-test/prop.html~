@@ -1,0 +1,23 @@
+<html>
+<head>
+<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="prop-example-1" class="demo">
+<child message="hello"></child>
+</div>
+
+
+<script>
+new Vue({
+  el: '#prop-example-1',
+  components: {
+    child: {
+      props: ['message'],
+      template: '<span>{{ message }}</span>'
+    }
+  }
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+\part{Vue-cli}
+
+\chapter{Overview}
+
+
+\begin{lstlisting}[language=bash]
+$ vue init webpack my-project
+This will install Vue 2.x version of the template.
+
+For Vue 1.x use: vue init webpack#1.0 my-project
+
+? Project name -> my-project
+? Project description -> A Vue.js project
+? Author -> guoyu07 <guoyu07@gmail.com>
+? Vue build -> standalone
+? Install vue-router? Yes
+? Use ESLint to lint your code? Yes
+? Pick an ESLint preset Standard
+? Setup unit tests with Karma + Mocha? Yes
+? Setup e2e tests with Nightwatch? Yes
+  vue-cli · Generated "my-project".
+
+   To get started:
+   
+     cd my-project
+     npm install
+     npm run dev
+   
+Documentation can be found at https://vuejs-templates.github.io/webpack
+\end{lstlisting}
+
+\section{npm run dev}
+
+
+
+\section{npm run build}
+
+
+\begin{lstlisting}[language=bash]
+$ npm run build
+
+> my-project@1.0.0 build /srv/docker/my-project
+> node build/build.js
+
+Hash: e4f37a6fac8e4652ff67
+Version: webpack 2.2.1
+Time: 2769ms
+                                                  Asset       Size  Chunks             Chunk Names
+                  static/js/app.e40ab91e6f1ccd89735a.js    11.7 kB    0, 2  [emitted]  app
+               static/js/vendor.df0961104544908e1df2.js    98.2 kB    1, 2  [emitted]  vendor
+             static/js/manifest.51dbb89beac075a4d15f.js    1.44 kB       2  [emitted]  manifest
+    static/css/app.de35943482c87a574efe2c251e369832.css  510 bytes    0, 2  [emitted]  app
+static/css/app.de35943482c87a574efe2c251e369832.css.map    1.02 kB    0, 2  [emitted]  app
+                                             index.html  447 bytes          [emitted]  
+
+  Build complete.
+
+  Tip: built files are meant to be served over an HTTP server.
+  Opening index.html over file:// won't work.
+\end{lstlisting}
+

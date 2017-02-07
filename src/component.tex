@@ -1,0 +1,323 @@
+\part{Vue Component}
+
+
+\chapter{Overview}
+
+
+在很多Vue项目中，我们使用 \texttt{Vue.component}来定义全局组件，紧接着用 \texttt{new Vue(\{ el: '\#container '\})} 在每个页面内指定一个容器元素。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<div id="example">
+  <my-component></my-component>
+</div>
+
+<script>
+// 全局注册
+Vue.component('my-component',{
+  template: '<div>A custom component!</div>'
+});
+
+// 创建根实例
+new Vue({
+    el: '#example'
+})
+</script>
+\end{lstlisting}
+
+\begin{compactitem}
+\item 全局定义强制要求每个 component 中的命名不得重复；
+\item 字符串模板无法语法高亮，在 HTML 有多行时需要用到丑陋的 \textbackslash；
+\item 不支持CSS意味着当 HTML 和 JavaScript 组件化时，CSS 明显被遗漏
+\item 没有构建步骤限制只能使用 HTML 和 ES5 JavaScript，不能使用预处理器（例如Pug和Babel）
+\end{compactitem}
+
+Vue.js提供的单文件组件（文件扩展名为 .vue）为上述所有问题提供了解决方法， 每个.vue文件就是一个组件，同时还包含了组件之间的依赖关系，可以使用 Webpack 或 Browserify 等构建工具。
+
+
+
+下面是一个文件名为 Hello.vue 的简单的单文件Vue组件实例：
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <p>{{ greeting }} World!</p>
+</template>
+
+<script>
+module.exports = {
+   data: function () {
+       return {
+           greeting: 'Hello'
+       }
+   }
+}
+</script>
+
+<style scoped>
+p {
+   font-size: 2em;
+   text-align: center;
+}
+</style>
+\end{lstlisting}
+
+Vue单文件组件集成了组件需要的样式、模板和脚本，支持完整的语法高亮、CommonJS模块以及组件化的CSS，而且Vue的单文件组件特性支持使用预处理器来构建简洁和功能更丰富的组件，比如 Jade，Babel (with ES2015 modules)和 Stylus。
+
+实际上，在单文件组件中可以简单地使用 Buble，TypeScript，SCSS，PostCSS 或者其他任何能够帮助提高生产力的预处理器。
+
+Vue单文件组件的组合可以实现一个完整的使用 .vue 组件、ES2015 和 热重载( hot-reloading ) 的Vue项目。例如，在Vue.js模板中结合Webpack可以加载多个模块，并且将多个模块打包成最终Vue应用。
+
+
+
+在 Webpack中，每个模块在被打包到 bundle 之前都由一个相应的 “loader” 来转换，Vue 也提供了 vue-loader 插件来执行 .vue 单文件组件的转换。
+
+\begin{compactitem}
+\item \texttt{npm run dev}使用Webpack+vue-loader实现代码映射和热重载；
+\item \texttt{npm run build}最小化构建HTML/CSS/Javascript。
+\end{compactitem}
+
+
+
+\section{Template}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <p>{{ greeting }} World!</p>
+</template>
+\end{lstlisting}
+
+
+\section{Script}
+
+
+\begin{lstlisting}[language=JavaScript]
+<script>
+module.exports = {
+   data: function () {
+       return {
+           greeting: 'Hello'
+       }
+   }
+}
+</script>
+\end{lstlisting}
+
+\section{Style}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<style scoped>
+p {
+   font-size: 2em;
+   text-align: center;
+}
+</style>
+\end{lstlisting}
+
+
+\chapter{Hikitchen}
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
