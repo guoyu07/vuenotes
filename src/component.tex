@@ -4,7 +4,9 @@
 \chapter{Overview}
 
 
-在很多Vue项目中，我们使用 \texttt{Vue.component}来定义全局组件，紧接着用 \texttt{new Vue(\{ el: '\#container '\})} 在每个页面内指定一个容器元素。
+
+
+Vue全局组件需要使用 \texttt{Vue.component}来定义，并且紧接着用 \texttt{new Vue(\{ el: '\#container '\})} 在每个页面内指定一个容器元素。
 
 
 
@@ -33,11 +35,13 @@ new Vue({
 \item 没有构建步骤限制只能使用 HTML 和 ES5 JavaScript，不能使用预处理器（例如Pug和Babel）
 \end{compactitem}
 
-Vue.js提供的单文件组件（文件扩展名为 .vue）为上述所有问题提供了解决方法， 每个.vue文件就是一个组件，同时还包含了组件之间的依赖关系，可以使用 Webpack 或 Browserify 等构建工具。
 
 
+Vue.js提供的单文件组件（文件扩展名为 .vue）为上述所有问题提供了解决方案，Vue.js 本身提供了配套工具（例如vue-cli）来开发单文件组件。
 
-下面是一个文件名为 Hello.vue 的简单的单文件Vue组件实例：
+具体来说，每个.vue文件就是一个组件，同时还包含了组件之间的依赖关系，这样可以使用 Webpack 或 Browserify 等构建工具。
+
+Vue单文件组件集成了组件需要的样式（style）、模板（template）和脚本（script），支持完整的语法高亮、CommonJS模块以及组件化的CSS。例如，下面是一个文件名为 Hello.vue 的简单的单文件Vue组件实例：
 
 \begin{lstlisting}[language=JavaScript]
 <template>
@@ -62,9 +66,10 @@ p {
 </style>
 \end{lstlisting}
 
-Vue单文件组件集成了组件需要的样式、模板和脚本，支持完整的语法高亮、CommonJS模块以及组件化的CSS，而且Vue的单文件组件特性支持使用预处理器来构建简洁和功能更丰富的组件，比如 Jade，Babel (with ES2015 modules)和 Stylus。
 
-实际上，在单文件组件中可以简单地使用 Buble，TypeScript，SCSS，PostCSS 或者其他任何能够帮助提高生产力的预处理器。
+
+
+Vue的单文件组件支持使用预处理器来构建简洁和功能更丰富的组件，比如 Jade，Babel (with ES2015 modules)和 Stylus，而且实际上在单文件组件中还可以简单地使用 Buble，TypeScript，SCSS，PostCSS 或者其他任何能够帮助提高生产力的预处理器。
 
 Vue单文件组件的组合可以实现一个完整的使用 .vue 组件、ES2015 和 热重载( hot-reloading ) 的Vue项目。例如，在Vue.js模板中结合Webpack可以加载多个模块，并且将多个模块打包成最终Vue应用。
 

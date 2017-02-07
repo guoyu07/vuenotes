@@ -3,9 +3,11 @@
 
 \chapter{Overview}
 
-Vue.js（读音 /vjuː/, 类似于 view） 是一套构建用户界面的 渐进式框架，Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。
+Vue.js（读音 /vjuː/, 类似于 view） 是一套构建用户界面的 渐进式框架，Vue.js 的目标是通过尽可能简单的 API 实现响应式数据绑定和组合的视图组件。
 
-在本地的HTML文件中通过如下方式来引入Vue就可以尝试Vue.js。
+在本地的HTML文件中通过如下方式来引入Vue就可以尝试Vue.js，而且Vue.js的开发版本(非最小压缩版)可以针对常见错误给出友好的警告。
+
+
 
 \begin{lstlisting}[language=HTML]
 <html>
@@ -30,14 +32,15 @@ new Vue({
 
 \begin{compactitem}
 \item Vue的el指定一个视图模板；
-\item Vue的实例创建一个VM对象。
+\item Vue的实例创建一个VM对象；
+\item Vue实例的数据填充到视图模板。
 \end{compactitem}
 
 \section{Kernel}
 
 vue.js具有简单小巧的核心和渐进式技术栈，足以应付任何规模的应用。
 
-vue.js的运行文件使用gzip压缩后最小可以到17kb，其提供的超快虚拟 DOM可以实现最省心的优化。
+vue.js的运行文件使用gzip压缩后最小可以到17kb，其提供的超快速虚拟 DOM（Virtual DOM）可以实现最省心的优化。
 
 
 
@@ -50,12 +53,12 @@ vue.js的运行文件使用gzip压缩后最小可以到17kb，其提供的超快
 \subsection{vue-cli}
 
 
-Vue.js 本身也提供配套工具（例如vue-cli）来开发单文件组件。
+
 
 
 vue.js提供的一个命令行工具vue-cli可以用来搭建Vue项目的脚手架，用于快速搭建大型单页应用。
 
-vue-cli提供了开箱即用的构建工具配置，带来现代化的前端开发流程。只需几分钟即可创建并启动一个带热重载、保存时静态检查以及可用于生产环境的构建配置的项目：
+vue-cli提供了开箱即用的构建工具配置，带来现代化的前端开发流程，只需几分钟即可创建并启动一个带热重载、保存时静态检查以及可用于生产环境的构建配置的项目：
 
 
 \begin{compactitem}
@@ -86,10 +89,10 @@ $ npm run dev
 
 
 
-\section{Installation}
+\section{Building}
 
 
-如果直接下载并用 <script> 标签引入vue.min.js，Vue 会被注册为一个全局变量。
+如果直接使用<script>标签引入Vue.js，Vue 会被注册为一个全局变量。
 
 \begin{lstlisting}[language=HTML]
 <html>
@@ -102,7 +105,7 @@ $ npm run dev
 </html>
 \end{lstlisting}
 
-在开发时使用vue.js的开发版本(非最小压缩版)，遇到常见错误时，vue.js会给出友好的警告。
+
 
 如果使用 Vue.js 构建大型应用，推荐使用 NPM 进行安装，而且NPM 能很好地和 Webpack 或 Browserify 等模块打包器配合使用。
 
@@ -133,6 +136,11 @@ $ cd node_modules/vue
 $ npm install
 $ npm run build
 \end{lstlisting}
+
+\begin{compactitem}
+\item Vue.js开发版本包含完整的警告和调试模式
+\item Vue.js生产版本删除了警告
+\end{compactitem}
 
 
 \subsection{Standalone Build}
