@@ -2,7 +2,7 @@
 
 \chapter{Overview}
 
-Vue-cli用于创建Vue.js项目的脚手架，其中脚手架默认依赖的项目中包括vue、vue-router、vue-loader、vue-style-loader、vue-template-compiler等。
+Vue.js提供的一个命令行工具vue-cli可以用来创建Vue.js项目的脚手架，其中脚手架默认依赖的项目中包括vue、vue-router、vue-loader、vue-style-loader、vue-template-compiler等。
 
 
 \begin{lstlisting}[language=bash]
@@ -30,6 +30,43 @@ For Vue 1.x use: vue init webpack#1.0 my-project
    
 Documentation can be found at https://vuejs-templates.github.io/webpack
 \end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+vue-cli提供了开箱即用的构建工具配置，带来现代化的前端开发流程，只需几分钟即可创建并启动一个带热重载、保存时静态检查以及可用于生产环境的构建配置的项目：
+
+
+\begin{compactitem}
+\item 全局安装vue-cli
+
+\begin{lstlisting}[language=bash]
+$ sudo npm install --global vue-cli
+\end{lstlisting}
+
+\item 创建一个基于 webpack 模板的新项目
+
+\begin{lstlisting}[language=bash]
+$ vue init webpack my-project
+\end{lstlisting}
+
+\item 安装依赖
+
+\begin{lstlisting}[language=bash]
+$ cd my-project
+$ npm install
+$ npm run dev
+\end{lstlisting}
+\end{compactitem}
+
+在使用vue-cli搭建好Vue项目的脚手架之后，也可以使用Vue.js来快速搭建大型单页应用，不过vue-cli要求用户事先了解Node.js和相关的构建工具（例如webpack），或者在熟悉Vue.js本身之后再使用vue-cli。
+
 
 \section{npm run dev}
 

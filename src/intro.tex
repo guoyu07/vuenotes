@@ -3,9 +3,9 @@
 
 \chapter{Overview}
 
-Vue.js（读音 /vjuː/, 类似于 view） 是一套构建用户界面的 渐进式框架，Vue.js 的目标是通过尽可能简单的 API 实现响应式数据绑定和组合的视图组件。
+Vue.js是一套构建用户界面的渐进式框架，Vue.js 的目标是通过尽可能简单的 API 实现响应式数据绑定和组合的视图组件。
 
-在本地的HTML文件中通过如下方式来引入Vue就可以尝试Vue.js，而且Vue.js的开发版本(非最小压缩版)可以针对常见错误给出友好的警告。
+在HTML文件的<script>标签中引入Vue.js就可以把Vue注册为一个全局变量。
 
 
 
@@ -16,12 +16,13 @@ Vue.js（读音 /vjuː/, 类似于 view） 是一套构建用户界面的 渐进
 </head>
 <body>
 <div id="app">
+   <!--  Vue实例的数据传递并填充到视图模板 -->
    <p>{{ message }}</p>
 </div>
 </body>
 <scritpt>
-new Vue({
-   el: '#app',
+new Vue({ // Vue的实例创建一个VM对象
+   el: '#app', // Vue的el指定一个视图模板
    data: {
       message: 'Hello Vue.js!'
    }
@@ -30,66 +31,35 @@ new Vue({
 </html>
 \end{lstlisting}
 
+
+
 \begin{compactitem}
 \item Vue的el指定一个视图模板；
 \item Vue的实例创建一个VM对象；
 \item Vue实例的数据填充到视图模板。
 \end{compactitem}
 
-\section{Kernel}
-
-vue.js具有简单小巧的核心和渐进式技术栈，足以应付任何规模的应用。
-
-vue.js的运行文件使用gzip压缩后最小可以到17kb，其提供的超快速虚拟 DOM（Virtual DOM）可以实现最省心的优化。
+Vue.js提供了配套的工具来开发单文件组件。
 
 
 
-\subsection{vue-kernel}
+\section{Vue Kernel}
 
-与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，并且非常容易学习，非常容易与其它库或已有项目整合。
+与其他重量级框架不同的是，Vue.js 采用自底向上增量开发的设计，因此Vue.js具有简单小巧的核心和渐进式技术栈，足以应付任何规模的应用。
 
-另一方面，Vue 完全有能力驱动采用单文件组件和 Vue 生态系统支持的库开发的复杂单页应用。
+Vue.js的核心库只关注视图层，非常容易学习和与其它库或已有项目整合，现在Vue.js完全有能力驱动采用单文件组件和 Vue 生态系统支持的库开发的复杂单页应用。
 
-\subsection{vue-cli}
+Vue.js的运行文件使用gzip压缩后最小可以到17kb，其提供的超快速虚拟 DOM（Virtual DOM）可以实现最省心的优化。
+
+Vue.js的开发版本(非最小压缩版)可以针对常见错误给出友好的警告。
 
 
 
 
 
-vue.js提供的一个命令行工具vue-cli可以用来搭建Vue项目的脚手架，用于快速搭建大型单页应用。
-
-vue-cli提供了开箱即用的构建工具配置，带来现代化的前端开发流程，只需几分钟即可创建并启动一个带热重载、保存时静态检查以及可用于生产环境的构建配置的项目：
 
 
-\begin{compactitem}
-\item 全局安装vue-cli
-
-\begin{lstlisting}[language=bash]
-$ sudo npm install --global vue-cli
-\end{lstlisting}
-
-\item 创建一个基于 webpack 模板的新项目
-
-\begin{lstlisting}[language=bash]
-$ vue init webpack my-project
-\end{lstlisting}
-
-\item 安装依赖
-
-\begin{lstlisting}[language=bash]
-$ cd my-project
-$ npm install
-$ npm run dev
-\end{lstlisting}
-\end{compactitem}
-
-注意，vue-cli要求用户事先了解Node.js和相关的构建工具（例如webpack），或者在熟悉Vue本身之后再使用vue-cli。
-
-
-
-
-
-\section{Building}
+\section{Vue Building}
 
 
 如果直接使用<script>标签引入Vue.js，Vue 会被注册为一个全局变量。
@@ -99,15 +69,23 @@ $ npm run dev
 <head>
    <script src="path/to/vue.js"></script>
 </head>
+<div id="app"></div>
 <body>
 
 </body>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+  }
+})
+</script>
 </html>
 \end{lstlisting}
 
 
 
-如果使用 Vue.js 构建大型应用，推荐使用 NPM 进行安装，而且NPM 能很好地和 Webpack 或 Browserify 等模块打包器配合使用。
+如果使用 Vue.js 构建大型应用，推荐使用 NPM 进行安装和管理，而且NPM可以很好地和 Webpack 或 Browserify 等模块打包器配合使用。
 
 \begin{compactitem}
 \item 使用NPM全局安装vue.js的最新稳定版
@@ -143,13 +121,16 @@ $ npm run build
 \end{compactitem}
 
 
-\subsection{Standalone Build}
-
-
 Vue.js有两种构建方式，独立构建和运行构建。它们的区别在于前者包含模板编译器而后者不包含，而且运行时构建比独立构建要轻量30\%，只有 17.14 Kb min+gzip大小。
 
 
 模板（template）编译用于把 Vue 模板字符串编译成纯 JavaScript 渲染函数。如果想用 template 选项， 就需要编译。其中，模板编译器的职责是将模板字符串编译为纯 JavaScript 的渲染函数。如果想要在组件中使用 template 选项，那么就需要模板编译器。
+
+
+\subsection{Standalone Build}
+
+
+
 
 
 \begin{compactitem}
