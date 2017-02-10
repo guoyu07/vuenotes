@@ -326,7 +326,7 @@ var app6 = new Vue({
 \end{lstlisting}
 
 
-\section{Compose Components}
+\section{Component System}
 
 
 组件系统是Vue.js的重要概念，Vue.js的组件系统提供了一种抽象，从而可以用独立可复用的小组件来构建大型应用，这样几乎任意类型的应用的界面都可以通过组件系统来抽象为一个组件树。
@@ -424,10 +424,26 @@ var app7 = new Vue({
 
 上述示例将应用分割成了两个更小的单元，子元素通过 props 接口实现了与父亲元素很好的解耦，现在可以在不影响到父应用的基础上，进一步为todo 组件改进更多复杂的模板和逻辑。
 
+
+\section{Reactivity System}
+
+组件系统（Component System）和响应式系统（Reactivity System）是Vue 最显著的两个特性。
+
+在Vue.js响应式系统中，模型层(model)只是普通 JavaScript 对象，修改它则更新视图(view)，从而可以让状态管理变得非常简单且直观。
+
+
+
 \chapter{Vue Prop}
 
 
 在 Vue.js 中，父子组件的关系可以总结为 props down, events up，父组件通过 props 向下传递数据给子组件，子组件通过 events 给父组件发送消息。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.4]{props-events.png}
+\caption{Vue.js的父子组件关系}
+\end{figure}
+
 
 
 \section{Prop}
@@ -457,6 +473,14 @@ new Vue({
 </script>
 \end{lstlisting}
 
+最终渲染结果如下：
+
+
+\begin{lstlisting}[language=JavaScript]
+<div id="app">
+    <span>hello!</span>
+</div>
+\end{lstlisting}
 
 prop的本质是父组件用来传递数据的一个自定义属性。
 
@@ -482,11 +506,11 @@ Vue.component('child',{
 <child message="hello!"></child>
 \end{lstlisting}
 
-
+下面是一个使用Prop向子组件传递数据的示例：
 
 \begin{lstlisting}[language=JavaScript]
 <div id="prop-example-1" class="demo">
-<child message="hello!"></child>
+  <child message="hello!"></child>
 </div>
 <script>
 new Vue({
@@ -538,6 +562,32 @@ new Vue({
 <child :my-message="parentMsg"></child>
 \end{lstlisting}
 
+下面是一个动态Prop的示例：
+
+\begin{lstlisting}[language=JavaScript]
+<div id="demo">
+  <input v-model="parentMsg">
+  <br>
+  <child v-bind:my-message="parentMsg"></child>
+</div>
+
+<script>
+new Vue({
+  el: '#demo',
+  data: {
+     parentMsg: 'Message from parent'
+  },
+  components: {
+     child: {
+        props: ['myMessage'],
+        template: '<span>{{ myMessage }}</span>'
+     }
+  } 
+})
+</script>
+\end{lstlisting}
+
+
 以下实例中将 v-bind 指令将 todo 传到每一个重复的组件中：
 
 \begin{lstlisting}[language=JavaScript]
@@ -576,7 +626,10 @@ new Vue({
 \end{lstlisting}
 
 
-因为它是一个字面 prop ，它的值以字符串 "1" 而不是以实际的数字传下去。如果想传递一个实际的 JavaScript 数字，需要使用 v-bind ，从而让它的值被当作 JavaScript 表达式计算：
+因为它是一个字面 prop ，它的值以字符串 "1" 而不是以实际的数字传下去。
+
+
+如果想传递一个实际的 JavaScript 数字，需要使用 v-bind ，这样可以让它的值被当作 JavaScript 表达式计算：
 
 
 
@@ -591,9 +644,15 @@ new Vue({
 
 
 
-prop 默认是单向绑定的，当父组件的属性变化时，将传导给子组件，但是不会反过来。这是为了防止子组件无意修改了父组件的状态——这会让应用的数据流难以理解。
+prop 默认是单向绑定的，当父组件的属性变化时，将传导给子组件，但是不会反过来。
 
-另外，每次父组件更新时，子组件的所有 prop 都会更新为最新值。这意味着你不应该在子组件内部改变 prop 。如果你这么做了，Vue 会在控制台给出警告。
+prop单向绑定的特性是为了防止子组件无意修改了父组件的状态——否则会让应用的数据流难以理解。
+
+JavaScript中的对象和数组是引用类型，指向同一个内存空间，如果 prop 是一个对象或数组，在子组件内部改变它会影响父组件的状态。
+
+每次父组件更新时，子组件的所有 prop 都会更新为最新值，这意味着不应该在子组件内部改变 prop，否则Vue 会在控制台给出警告。
+
+
 
 通常有两种改变 prop 的情况：
 
@@ -628,7 +687,7 @@ computed: {
 
 \end{compactenum}
 
-注意，在 JavaScript 中对象和数组是引用类型，指向同一个内存空间，如果 prop 是一个对象或数组，在子组件内部改变它会影响父组件的状态。
+
 
 \section{Prop Validation}
 
@@ -642,7 +701,7 @@ prop 是一个对象而不是字符串数组时，它包含验证要求：
 \begin{lstlisting}[language=JavaScript]
 Vue.component('example', {
   props: {
-    // 基础类型检测 （`null` 意思是任何类型都可以）
+    // 基础类型检测 （null的意思是任何类型都可以）
     propA: Number,
     // 多种类型
     propB: [String, Number],
@@ -656,7 +715,7 @@ Vue.component('example', {
       type: Number,
       default: 100
     },
-    // 数组／对象的默认值应当由一个工厂函数返回
+    // 数组/对象的默认值应当由一个工厂函数返回
     propE: {
       type: Object,
       default: function () {
@@ -686,17 +745,21 @@ type 可以是如下的原生构造器：
 
 type 也可以是一个自定义构造器，使用 instanceof 检测。
 
-如果prop验证失败，在开发版下面会抛出一条警告。
+如果prop验证失败，在Vue.js的开发版本中会抛出一条警告。
 
 \chapter{Vue Event}
 
 \section{Custom Event}
 
 
-父组件默认使用 props 传递数据给子组件，如果子组件要把数据传递回去，则需要自定义事件，可以使用 v-on 绑定自定义事件。
+父组件默认使用 props 传递数据给子组件，如果子组件要把数据传递回去，需要使用自定义事件。
+
+
 
 
 \subsection{Bind Custom Event}
+
+在Vue.js中，可以使用 v-on 绑定自定义事件。
 
 每个 Vue 实例都实现了事件接口(Events interface)，即：
 
@@ -712,7 +775,7 @@ Vue的事件系统分离自浏览器的EventTarget API。尽管它们的运行�
 
 
 
-下面的示例中的子组件已经和它外部完全解耦了。它所做的只是触发一个父组件关心的内部事件。
+下面的示例中的子组件已经和它外部完全解耦了，它所做的只是触发一个父组件关心的内部事件。
 
 
 
@@ -755,29 +818,21 @@ new Vue({
 \end{lstlisting}
 
 
-\subsection{Bind Native Event}
 
-如果需要在某个组件的根元素上监听一个原生事件，可以使用 .native 修饰 v-on。
-
-
-\begin{lstlisting}[language=JavaScript]
-<my-component v-on:click.native="doTheThing"></my-component>
-\end{lstlisting}
-
-自定义事件也可以用来创建自定义的表单输入组件，使用 v-model 来进行数据双向绑定。
+自定义事件也可以用来创建自定义的表单输入组件，必须使用 v-model 来进行数据双向绑定。
 
 
 \begin{lstlisting}[language=JavaScript]
 <input v-model="something">
 \end{lstlisting}
 
-v-model仅仅是一个语法糖：
+v-model本身仅仅是一个语法糖：
 
 \begin{lstlisting}[language=JavaScript]
 <input v-bind:value="something" v-on:input="something = $event.target.value">
 \end{lstlisting}
 
-在组件中使用时，它相当于下面的简写：
+在组件中使用v-model时，相当于下面的简写：
 
 \begin{lstlisting}[language=JavaScript]
 <custom-input v-bind:value="something" v-on:input="something = arguments[0]"></custom-input>
@@ -793,7 +848,9 @@ v-model仅仅是一个语法糖：
 下面是一个非常简单的货币输入：
 
 \begin{lstlisting}[language=JavaScript]
-<currency-input v-model="price"></currency-input>
+<div id="currency-input-example">
+  <currency-input v-model="price"></currency-input>
+</div>
 
 
 Vue.component('currency-input', {
@@ -809,24 +866,411 @@ Vue.component('currency-input', {
   ',
   props: ['value'],
   methods: {
-    // 不是直接更新值，而是使用此方法来对输入值进行格式化和位数限制
     updateValue: function (value) {
       var formattedValue = value
-        // 删除两侧的空格符
         .trim()
-        // 保留 2 小数位
         .slice(0, value.indexOf('.') + 3)
-      // 如果值不统一，手动覆盖以保持一致
       if (formattedValue !== value) {
         this.$refs.input.value = formattedValue
       }
-      // 通过 input 事件发出数值
       this.$emit('input', Number(formattedValue))
     }
   }
 })
+new Vue({ el: '#currency-input-example' })
 \end{lstlisting}
 
+
+如果用户需要输入多个小数点或句号，则需要继续完善上述的货币过滤器。
+
+
+\begin{lstlisting}[language=JavaScript]
+<div id="app">
+  <currency-input label="Price" v-model="price"></currency-input>
+  <currency-input label="Shipping" v-model="shipping"></currency-input>
+  <currency-input label="Handling" v-model="handling"></currency-input>
+  <currency-input label="Discount" v-model="discount"></currency-input>
+  <p>Total: ${{ total }}</p>
+</div>
+
+<script>
+Vue.component('currency-input', {
+  template: '\
+    <div>\
+      <label v-if="label">{{ label }}</label>\
+      $\
+      <input\
+        ref="input"\
+        v-bind:value="value"\
+        v-on:input="updateValue($event.target.value)"\
+        v-on:focus="selectAll"\
+        v-on:blur="formatValue"\
+      >\
+    </div>\
+  ',
+  props: {
+    value: {
+      type: Number,
+      default: 0
+    },
+    label: {
+      type: String,
+      default: ''
+    }
+  },
+  mounted: function () {
+    this.formatValue()
+  },
+  methods: {
+    updateValue: function (value) {
+      var result = currencyValidator.parse(value, this.value)
+      if (result.warning) {
+        this.$refs.input.value = result.value
+      }
+      this.$emit('input', result.value)
+    },
+    formatValue: function () {
+      this.$refs.input.value = currencyValidator.format(this.value)
+    },
+    selectAll: function (event) {
+      // Workaround for Safari bug
+      // http://stackoverflow.com/questions/1269722/selecting-text-on-focus-using-jquery-not-working-in-safari-and-chrome
+      setTimeout(function () {
+      	event.target.select()
+      }, 0)
+    }
+  }
+})
+
+new Vue({
+  el: '#app',
+  data: {
+    price: 0,
+    shipping: 0,
+    handling: 0,
+    discount: 0
+  },
+  computed: {
+    total: function () {
+      return ((
+        this.price * 100 + 
+        this.shipping * 100 + 
+        this.handling * 100 - 
+        this.discount * 100
+      ) / 100).toFixed(2)
+    }
+  }
+})
+</script>
+\end{lstlisting}
+
+
+这个接口不仅仅可以用来连接组件内部的表单输入，也很容易集成自定义的输入类型。
+
+
+\begin{lstlisting}[language=JavaScript]
+<voice-recognizer v-model="question"></voice-recognizer>
+<webcam-gesture-reader v-model="gesture"></webcam-gesture-reader>
+<webcam-retinal-scanner v-model="retinalImage"></webcam-retinal-scanner>
+\end{lstlisting}
+
+
+
+\subsection{Bind Native Event}
+
+如果需要在某个组件的根元素上监听一个原生事件，可以使用 .native 来修饰 v-on。
+
+
+\begin{lstlisting}[language=JavaScript]
+<my-component v-on:click.native="doTheThing"></my-component>
+\end{lstlisting}
+
+
+
+\section{Central Eventbus}
+
+非父子关系的组件也需要通信时，简单的场景下可以使用一个空的 Vue 实例作为中央事件总线：
+
+
+
+\begin{lstlisting}[language=JavaScript]
+var bus = new Vue()
+\end{lstlisting}
+
+\begin{compactitem}
+\item 触发组件 A 中的事件
+
+\begin{lstlisting}[language=JavaScript]
+// 触发组件 A 中的事件
+bus.$emit('id-selected', 1)
+\end{lstlisting}
+
+\item 在组件 B 创建的钩子中监听事件
+
+\begin{lstlisting}[language=JavaScript]
+// 在组件 B 创建的钩子中监听事件
+bus.$on('id-selected', function (id) {
+  // ...
+})
+\end{lstlisting}
+\end{compactitem}
+
+在更复杂的情况下，应该考虑使用专门的 状态管理模式。
+
+
+\chapter{Vue Slot}
+
+组件经常需要组合进行使用，例如：
+
+\begin{lstlisting}[language=JavaScript]
+<app>
+   <app-header></app-header>
+   <app-footer></app-footer>
+</app>
+\end{lstlisting}
+
+\begin{compactitem}
+\item <app> 组件不知道它的挂载点会有什么内容。挂载点的内容是由<app>的父组件决定的。
+\item <app> 组件很可能有它自己的模版。
+\end{compactitem}
+
+为了让组件可以组合，需要一种方式来混合父组件的内容与子组件自己的模板，这个过程被称为 内容分发（或 “transclusion”）。
+
+在组合组件时，内容分发 API 是非常有用的机制，因此Vue.js参照 Web 组件规范草案实现了一个内容分发 API，可以使用特殊的 <slot> 元素作为原始内容的插槽。
+
+
+\section{Compilation Scope}
+
+首先，明确内容的编译作用域，假定模板为：
+
+
+\begin{lstlisting}[language=JavaScript]
+<child-component>
+{{ message }}
+</child-component>
+\end{lstlisting}
+
+这里的message 应该绑定到父组件的数据，组件作用域简单地说是：
+
+\begin{compactitem}
+\item 父组件模板的内容在父组件作用域内编译；
+\item 子组件模板的内容在子组件作用域内编译。
+\end{compactitem}
+
+一个常见错误是试图在父组件模板内将一个指令绑定到子组件的属性/方法：
+
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 无效 -->
+<child-component v-show="someChildProperty"></child-component>
+\end{lstlisting}
+
+假定 someChildProperty 是子组件的属性，上例不会如预期那样工作，而且父组件模板不应该知道子组件的状态。
+
+如果要绑定子组件内的指令到一个组件的根节点，应当在它的模板内这么做：
+
+\begin{lstlisting}[language=JavaScript]
+Vue.component('child-component',{
+   //有效，在正确的作用域内
+   template: '<div v-show="someChildProperty">Child</div>',
+   data: function() {
+      return someChildProperty: true
+   }
+})
+\end{lstlisting}
+
+类似地，分发内容是在父组件作用域内编译。
+
+
+\section{Single Slot}
+
+
+除非子组件模板包含至少一个 <slot> 插口，否则父组件的内容将会被丢弃。当子组件模板只有一个没有属性的 slot 时，父组件整个内容片段将插入到 slot 所在的 DOM 位置，并替换掉 slot 标签本身。
+
+最初在 <slot> 标签中的任何内容都被视为备用内容。备用内容在子组件的作用域内编译，并且只有在宿主元素为空，且没有要插入的内容时才显示备用内容。
+
+假定 my-component 组件有下面模板：
+
+\begin{lstlisting}[language=JavaScript]
+<div>
+  <h2>我是子组件的标题</h2>
+  <slot>
+    只有在没有要分发的内容时才会显示。
+  </slot>
+</div>
+\end{lstlisting}
+
+
+父组件模版：
+
+
+\begin{lstlisting}[language=JavaScript]
+<div>
+  <h1>我是父组件的标题</h1>
+  <my-component>
+    <p>这是一些初始内容</p>
+    <p>这是更多的初始内容</p>
+  </my-component>
+</div>
+\end{lstlisting}
+
+
+渲染结果如下：
+
+
+\begin{lstlisting}[language=JavaScript]
+<div>
+  <h1>我是父组件的标题</h1>
+  <div>
+    <h2>我是子组件的标题</h2>
+    <p>这是一些初始内容</p>
+    <p>这是更多的初始内容</p>
+  </div>
+</div>
+\end{lstlisting}
+
+
+\section{Named Slot}
+
+<slot> 元素可以用一个特殊的属性 name 来配置如何分发内容。多个 slot 可以有不同的名字。具名 slot 将匹配内容片段中有对应 slot 特性的元素。
+
+仍然可以有一个匿名 slot ，它是默认 slot ，作为找不到匹配的内容片段的备用插槽。如果没有默认的 slot ，这些找不到匹配的内容片段将被抛弃。
+
+例如，假定有一个 app-layout 组件，它的模板为：
+
+\begin{lstlisting}[language=JavaScript]
+<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>
+\end{lstlisting}
+
+
+父组件模版：
+
+
+\begin{lstlisting}[language=JavaScript]
+<app-layout>
+  <h1 slot="header">这里可能是一个页面标题</h1>
+  <p>主要内容的一个段落。</p>
+  <p>另一个主要段落。</p>
+  <p slot="footer">这里有一些联系信息</p>
+</app-layout>
+\end{lstlisting}
+
+
+渲染结果为：
+
+
+\begin{lstlisting}[language=JavaScript]
+<div class="container">
+  <header>
+    <h1>这里可能是一个页面标题</h1>
+  </header>
+  <main>
+    <p>主要内容的一个段落。</p>
+    <p>另一个主要段落。</p>
+  </main>
+  <footer>
+    <p>这里有一些联系信息</p>
+  </footer>
+</div>
+\end{lstlisting}
+
+
+\section{Scoped Slot}
+
+作用域插槽是一种特殊类型的插槽，用作使用一个（能够传递数据到）可重用模板替换已渲染元素。
+
+在子组件中，只需将数据传递到插槽，就像将 prop 传递给组件一样：
+
+\begin{lstlisting}[language=JavaScript]
+<div class="child">
+  <slot text="hello from child"></slot>
+</div>
+\end{lstlisting}
+
+在父级中，具有特殊属性 scope 的 <template> 元素，表示它是作用域插槽的模板。scope 的值对应一个临时变量名，此变量接收从子组件中传递的 prop 对象：
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<div class="parent">
+  <child>
+    <template scope="props">
+      <span>hello from parent</span>
+      <span>{{ props.text }}</span>
+    </template>
+  </child>
+</div>
+\end{lstlisting}
+
+
+渲染以上组件得到的输出如下：
+
+\begin{lstlisting}[language=JavaScript]
+<div class="parent">
+  <div class="child">
+    <span>hello from parent</span>
+    <span>hello from child</span>
+  </div>
+</div>
+\end{lstlisting}
+
+
+作用域插槽更具代表性的用例是列表组件，允许组件自定义应该如何渲染列表每一项：
+
+\begin{lstlisting}[language=JavaScript]
+<my-awesome-list :items="items">
+  <!-- 作用域插槽也可以在这里命名 -->
+  <template slot="item" scope="props">
+    <li class="my-fancy-item">{{ props.text }}</li>
+  </template>
+</my-awesome-list>
+\end{lstlisting}
+
+列表组件的模板：
+
+
+\begin{lstlisting}[language=JavaScript]
+<ul>
+  <slot name="item"
+    v-for="item in items"
+    :text="item.text">
+    <!-- fallback content here -->
+  </slot>
+</ul>
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
 
 
 
@@ -840,9 +1284,28 @@ Vue.component('currency-input', {
 
 
 
+
 \begin{lstlisting}[language=JavaScript]
 
 \end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
 
 
 
@@ -1924,7 +2387,9 @@ var vm = new Vue({
 \subsection{data}
 
 
-使用组件时，大多数可以传入到 Vue 构造器中的选项可以在注册组件时使用，只有一个例外—— data 必须是函数，否则Vue 会在控制台发出警告，说明在组件中 data 必须是一个函数，因此最好理解这种规则的存在意义。
+使用组件时，大多数可以传入到 Vue 构造器中的选项（options）可以在注册组件时使用，只有一个例外—— data。
+
+data必须是一个函数，否则Vue 会在控制台发出警告，说明在组件中 data 必须是一个函数，因此最好理解这种规则的存在意义。
 
 
 
@@ -1937,6 +2402,7 @@ Vue.component('my-component', {
 })
 \end{lstlisting}
 
+在使用上述的Vue组件时，Vue会在控制台发出警告说明Vue组件中的data必须是一个函数。
 
 \begin{lstlisting}[language=JavaScript]
 <div id="example-2">
@@ -1961,7 +2427,7 @@ new Vue({
 </script>
 \end{lstlisting}
 
-由于这三个组件共享了同一个 data ， 因此增加一个 counter 会影响所有组件，可以通过为每个组件返回新的 data 对象来解决这个问题，这样每个 counter 都有它自己内部的状态了：
+上述的这三个组件共享了同一个 data ， 因此会导致增加一个 counter 会影响所有组件，可以通过为每个组件返回新的 data 对象来解决这个问题，这样每个 counter 都有它自己内部的状态了：
 
 \begin{lstlisting}[language=JavaScript]
 data: function () {
@@ -2133,6 +2599,27 @@ Vue.js 使用了基于 HTML 的模版语法，允许开发者声明式地将 DOM
 在底层的实现上， Vue 将模板编译成虚拟 DOM 渲染函数。结合响应系统，在应用状态改变时， Vue 能够智能地计算出重新渲染组件的最小代价并应用到 DOM 操作上。
 
 如果熟悉虚拟 DOM，可以结合原生JavaScript代码，从而在不用模板，直接写渲染（render）函数，使用可选的 JSX 语法。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
 
 \section{Interpolation}
 
@@ -2862,16 +3349,77 @@ v-bind:style 的数组语法可以将多个样式对象应用到一个元素上�
 
 \chapter{Vue Component}
 
-Vue的组件系统（Component）是 Vue.js 最强大的功能之一。
+组件系统（Component）是 Vue.js 最强大的功能之一，组件系统让我们可以用独立可复用的小组件来构建大型应用，任意类型的Vue应用的界面都可以抽象为一个组件树：
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.3]{components.png}
+\caption{Vue.js组件系统}
+\end{figure}
 
 
-Vue组件可以扩展 HTML 元素，封装可重用的代码。
+Vue组件可以扩展 HTML 元素，并封装可重用的代码。
 
 \begin{compactitem}
 \item 在较高层面上，组件是自定义元素， Vue.js 的编译器为它添加特殊功能。
-\item 在有些情况下，组件也可以是原生 HTML 元素的形式，以 is 特性扩展。
+\item 在有些情况下，组件也可以以 is 特性扩展为原生 HTML 元素的形式。
 \end{compactitem}
 
+Vue.js支持在注册组件（或者 props）时使用 kebab-case、camelCase或TitleCase等命名方式。
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+// 在组件定义中
+components: {
+  // 使用 kebab-case 形式注册
+  'kebab-cased-component': { /* ... */ },
+  // register using camelCase
+  'camelCasedComponent': { /* ... */ },
+  // register using TitleCase
+  'TitleCasedComponent': { /* ... */ }
+}
+\end{lstlisting}
+
+\begin{compactitem}
+\item 在 HTML 模版中，推荐使用 kebab-case 形式：
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 在HTML模版中始终使用 kebab-case -->
+<kebab-cased-component></kebab-cased-component>
+<camel-cased-component></camel-cased-component>
+<title-cased-component></title-cased-component>
+\end{lstlisting}
+
+\item 当使用字符串模式时，可以不受 HTML 的 case-insensitive 限制，在模版中可以使用 camelCase 、 TitleCase 或者 kebab-case 来引用：
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 在字符串模版中可以用任何你喜欢的方式! -->
+<my-component></my-component>
+<myComponent></myComponent>
+<MyComponent></MyComponent>
+\end{lstlisting}
+
+\end{compactitem}
+
+如果组件未经 slot 元素传递内容，Vue.js允许在组件名后使用/使其自闭合：
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<my-component/>
+\end{lstlisting}
+
+自闭合只在字符串模版中有效。因为自闭的自定义元素是无效的 HTML ，浏览器原生的解析器也无法识别它。
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\section{Register Component}
+
+Vue支持注册全局组件和局部组件等。
 
 注册一个Vue全局组件语法格式如下：
 
@@ -2879,25 +3427,28 @@ Vue组件可以扩展 HTML 元素，封装可重用的代码。
 
 
 \begin{lstlisting}[language=JavaScript]
-Vue.component(tagName,options)
+Vue.component(tagName,
+   options
+)
 \end{lstlisting}
 
-其中，tagName为组件名，options为配置选项，在注册了一个Vue全局组件之后就可以使用如下的方式来调用：
+其中，tagName是组件名，options是配置选项。
+
+在注册了一个Vue全局组件之后就可以使用如下的方式来调用：
 
 
 \begin{lstlisting}[language=JavaScript]
 <tagName></tagName>
 \end{lstlisting}
 
-对于自定义标签名tagName，Vue.js 不强制要求遵循 W3C规则 （小写并且包含一个短杠）。
+Vue.js 不强制要求自定义标签名tagName遵循W3C规则 （小写并且包含一个短杠）。
 
-\section{Register Component}
 
 
 \subsection{Global Component}
 
 
-默认情况下，Vue组件可以通过以下方式创建 ：
+默认情况下，全局Vue组件可以通过以下方式注册和创建 ：
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -2907,17 +3458,8 @@ new Vue({
 })
 \end{lstlisting}
 
-要注册一个全局组件，可以使用 \texttt{Vue.component(tagName, options)}，例如：
-
-\begin{lstlisting}[language=JavaScript]
-Vue.component('my-component', {
-  // 选项
-})
-\end{lstlisting}
-
 
 所有的Vue实例都可以使用全局组件。
-
 
 \begin{lstlisting}[language=JavaScript]
 <div id="app">
@@ -2942,9 +3484,9 @@ new Vue({
 \end{compactenum}
 
 
-\begin{lstlisting}[language=JavaScript]
 
-\end{lstlisting}
+
+
 
 
 
@@ -2952,7 +3494,9 @@ new Vue({
 
 \subsection{Partial Component}
 
-除了在全局注册每个组件，也可以在组件实例选项中注册局部组件，局部组件仅在实例/组件的内部作用域中可用：
+除了在全局注册Vue组件，也可以使用组件实例选项注册局部组件。
+
+Vue局部组件仅在另一个实例/组件的内部作用域中可用，例如：
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -2993,8 +3537,16 @@ new Vue({
 
 \section{Custom Component}
 
+要注册一个全局组件，可以使用 \texttt{Vue.component(tagName, options)}的语法，例如：
 
-Vue组件在注册之后，便可以在父实例的模块中以自定义元素 <my-component></my-component> 的形式使用，只要确保在初始化根实例 之前 注册了组件：
+\begin{lstlisting}[language=JavaScript]
+Vue.component('my-component', {
+  // 选项
+})
+\end{lstlisting}
+
+
+Vue组件在注册之后就可以在父实例的模块中以自定义元素 <my-component></my-component> 的形式使用，只要确保在初始化根实例 之前 注册了组件即可：
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -3054,7 +3606,7 @@ new Vue({
 </table>
 \end{lstlisting}
 
-自定义组件 <my-row> 将会被认为是无效的内容，因此在渲染的时候会导致错误，Vue.js提供的变通的方案是使用特殊的 is 属性：
+这里，自定义组件 <my-row> 将会被认为是无效的内容，因此在渲染的时候会导致错误，Vue.js提供的变通的方案是使用特殊的 is 属性：
 
 \begin{lstlisting}[language=JavaScript]
 <table>
@@ -3062,7 +3614,7 @@ new Vue({
 </table>
 \end{lstlisting}
 
-注意，如果使用来自以下来源之一的字符串模板，这些限制将不适用，因此有必要的话推荐使用字符串模版。
+注意，如果使用来自以下来源之一的字符串模板，这些限制将不适用，因此推荐使用字符串模版。
 
 \begin{compactitem}
 \item \texttt{<script type="text/x-template">}
@@ -3070,9 +3622,10 @@ new Vue({
 \item .vue 组件
 \end{compactitem}
 
-HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）：
+HTML 特性不区分大小写，当在Vue组件中使用非字符串模版时，prop的名字形式会从 camelCase 转换为 kebab-case（短横线隔开）：
 
-
+\begin{compactitem}
+\item camelCase形式的props
 
 \begin{lstlisting}[language=JavaScript]
 Vue.component('child', {
@@ -3082,14 +3635,62 @@ Vue.component('child', {
 })
 \end{lstlisting}
 
-
+\item kebab-case形式的props
 
 \begin{lstlisting}[language=JavaScript]
 <!-- kebab-case in HTML -->
 <child my-message="hello!"></child>
 \end{lstlisting}
 
+
+\end{compactitem}
+
+
 实际上，如果使用字符串模版，不用在意这些限制。
+
+
+\subsection{Inline Template}
+
+
+
+如果子组件有 inline-template 特性，组件将把它的内容当作它的模板，而不是把它当作分发内容，可以让模板更灵活。
+
+\begin{lstlisting}[language=JavaScript]
+<my-component inline-template>
+  <div>
+    <p>These are compiled as the component's own template.</p>
+    <p>Not parent's transclusion content.</p>
+  </div>
+</my-component>
+\end{lstlisting}
+
+不过，inline-template语法让模板的作用域难以理解，Vue.js推荐的最佳实践是使用 template 选项在组件内定义模板或者在 .vue 文件中使用 template 元素。
+
+
+\subsection{X-Template}
+
+
+另一种定义模版的方式是在 JavaScript 标签里使用 text/x-template 类型，并且指定一个id。例如：
+
+
+\begin{lstlisting}[language=JavaScript]
+<script type="text/x-template" id="hello-world-template">
+  <p>Hello hello hello</p>
+</script>
+\end{lstlisting}
+
+
+X-Template在有很多模版或者小的应用中有用，否则应该避免使用，因为它将模版和组件的其他定义隔离了。
+
+\begin{lstlisting}[language=JavaScript]
+Vue.component('hello-world', {
+  template: '#hello-world-template'
+})
+\end{lstlisting}
+
+
+
+
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -3102,9 +3703,286 @@ Vue.component('child', {
 
 \section{Component Composing}
 
-组件意味着协同工作，通常父子组件会是这样的关系：组件 A 在它的模版中使用了组件 B ，它们之间必然需要相互通信——父组件要给子组件传递数据，子组件需要将它内部发生的事情告知给父组件。
+组件意味着协同工作，通常父子组件的关系就是组件 A 在它的模版中使用了组件 B ，它们之间必然需要相互通信——父组件要给子组件传递数据，子组件需要将它内部发生的事情告知给父组件。
 
-在一个良好定义的接口中尽可能将父子组件解耦是很重要的，这样保证了每个组件可以在相对隔离的环境中书写和理解，也大幅提高了组件的可维护性和可重用性。
+在一个良好定义的接口中尽可能将父子组件解耦是很重要的，这样保证了每个组件可以在相对隔离的环境中书写和理解，最终也大幅提高了组件的可维护性和可重用性。
+
+在 Vue.js 中，父子组件的关系可以总结为 props down, events up：
+
+\begin{compactitem}
+\item 父组件通过 props 向下传递数据给子组件；
+\item 子组件通过 events 给父组件发送消息。
+\end{compactitem}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.4]{props-events.png}
+\caption{Vue.js的父子组件关系}
+\end{figure}
+
+
+
+props用于从父组件向子组件传递数据。
+
+组件实例的作用域是孤立的，这意味着不能并且不应该在子组件的模板内直接引用父组件的数据，可以使用 props 把数据传给子组件。
+
+prop 是父组件用来传递数据的一个自定义属性，子组件需要显式地用 props 选项声明 “prop”：
+
+\begin{lstlisting}[language=JavaScript]
+Vue.component('child',{
+  // 声明props
+  props: ['message'],
+  // prop和data都可以用在模板内
+  // 同样就可以在vm实例中使用this.message来访问
+  template: '<span>{{ message }}</span>'
+})
+\end{lstlisting}
+
+向Vue组件中传入一个普通字符串并检查结果：
+
+
+\begin{lstlisting}[language=JavaScript]
+<child message="hello!"></child>
+\end{lstlisting}
+
+下面是一个使用prop传递数据的示例：
+
+\begin{lstlisting}[language=JavaScript]
+<div id="prop-example-1">
+  <child></child>
+</div>
+
+<script>
+new Vue({
+  el: '#prop-example-1',
+  components: {
+     child: {
+        props: ['message'],
+        template: '<span>{{ message }}</span>'
+     }
+  }
+})
+</script>
+\end{lstlisting}
+
+
+
+最终渲染结果如下：
+
+
+\begin{lstlisting}[language=JavaScript]
+<div id="prop-example-1" class="demo">
+  <span>hello!</span>
+</div>
+\end{lstlisting}
+
+
+\subsection{Child Component}
+
+尽管有 props 和 events ，但是有时仍然需要在 JavaScript 中直接访问子组件，为此可以使用 ref 为子组件指定一个索引 ID 。例如：
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<div id="parent">
+  <user-profile ref="profile"></user-profile>
+</div>
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+var parent=new Vue({el: '#parent'})
+// 访问子组件
+var child = parent.$refs.profile
+\end{lstlisting}
+
+当 ref 和 v-for 一起使用时， ref 是一个数组或对象，包含相应的子组件。
+
+注意，\$refs 只在组件渲染完成后才填充，并且它是非响应式的。它仅仅作为一个直接访问子组件的应急方案——应当避免在模版或计算属性中使用 \$refs 。
+
+
+\subsection{Async Component}
+
+
+在大型应用中可能需要将应用拆分为多个小模块，按需从服务器下载。
+
+为了简化模块拆分， Vue.js 允许将组件定义为一个工厂函数，动态地解析组件的定义。
+
+Vue.js 只在组件需要渲染时触发工厂函数，并且把结果缓存起来，用于后面的再次渲染。例如：
+
+\begin{lstlisting}[language=JavaScript]
+Vue.component('async-example',function(resolve,reject){
+   setTimeout(function(){
+      // pass the component definition to the resolve callback
+      resolve({
+         template: '<div>I am async!</div>'
+      })
+   },1000)
+})
+\end{lstlisting}
+
+工厂函数接收一个 resolve 回调，在收到从服务器下载的组件定义时调用，也可以调用 reject(reason) 指示加载失败。这里 setTimeout 只是为了演示，具体图和获取组件可以完全自定义，或者配合Webpack的代码分割功能使用。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+Vue.component('async-webpack-example', function (resolve) {
+  // 这个特殊的 require 语法告诉 webpack
+  // 自动将编译后的代码分割成不同的块，
+  // 这些块将通过 Ajax 请求自动下载。
+  require(['./my-async-component'], resolve)
+})
+\end{lstlisting}
+
+可以使用 Webpack 2 + ES2015 的语法返回一个 Promise resolve 函数：
+
+
+\begin{lstlisting}[language=JavaScript]
+Vue.component(
+  'async-webpack-example',
+  () => System.import('./my-async-component')
+)
+\end{lstlisting}
+
+Browserify不支持异步加载，因此Browserify无法使用异步组件，Webpack则提供了一流的异步支持。
+
+\subsection{Recursive Component}
+
+组件在它的模板内可以递归地调用自己，不过，只有当它有 name 选项时才可以：
+
+\begin{lstlisting}[language=JavaScript]
+name: 'unique-name-of-my-component'
+\end{lstlisting}
+
+当使用Vue.component在全局注册了一个组件后，全局组件的ID会作为组件的 name 选项被自动设置。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+Vue.component('unique-name-of-my-component', {
+  // ...
+})
+\end{lstlisting}
+
+如果使用不当，递归组件可能导致死循环，例如下面的组件会导致一个错误 “max stack size exceeded” ，所以要确保递归调用有终止条件 (比如递归调用时使用 v-if 并让他最终返回 false )。
+
+
+\begin{lstlisting}[language=JavaScript]
+name: 'stack-overflow',
+template: '<div><stack-overflow></stack-overflow></div>'
+\end{lstlisting}
+
+
+
+\subsection{Circular Reference}
+
+如果需要创建一个文件目录树，那么可以使用下面的模板来创建一个tree-folder组件：
+
+
+\begin{lstlisting}[language=JavaScript]
+<p>
+  <span>{{ folder.name }}</span>
+  <tree-folder-contents :children="folder.children"/>
+</p>
+\end{lstlisting}
+
+其中，tree-folder-contents组件使用下面的模板来创建：
+
+\begin{lstlisting}[language=JavaScript]
+<ul>
+  <li v-for="child in children">
+    <tree-folder v-if="child.children" :folder="child"/>
+    <span v-else>{{ child.name }}</span>
+  </li>
+</ul>
+\end{lstlisting}
+
+在渲染树上，这些组件实际上是彼此的后代和祖先——这是一个悖论，当使用Vue.component在全局注册组件时，这个矛盾是自动解决的。
+
+如果使用模块系统（例如Webpack或Browserify）来引用/导入组件，将会得到一个错误：
+
+
+\begin{lstlisting}[language=JavaScript]
+Failed to mount component: template or render function not defined.
+\end{lstlisting}
+
+为了解释发生了什么，这里以组件A和B为例进行解释，模块系统需要A，但是A需要B，同时B需要A，这样Webpack或Browserify就被困在一个循环中， 不知道如何完全解析任何一个组件，而不先解析另一个。 
+
+为了要解决上述这个问题，我们需要给模块系统一个点，它可以说，“A最终需要B，但是没有必要先解析B”。
+
+在tree-folder的例子中，引发矛盾的地方是tree-folder-contents组件，所以可以等到beforeCreate生命周期钩子中再注册它就可以解决这个问题。
+
+
+\begin{lstlisting}[language=JavaScript]
+beforeCreate: function () {
+  this.$options.components.TreeFolderContents = require('./tree-folder-contents.vue')
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+\section{Dynamic Component}
+
+
+多个组件可以使用同一个挂载点，然后动态地在它们之间切换。
+
+\begin{lstlisting}[language=JavaScript]
+var vm = new Vue({
+  el: '#example',
+  data: {
+    currentView: 'home'
+  },
+  components: {
+    home: { /* ... */ },
+    posts: { /* ... */ },
+    archive: { /* ... */ }
+  }
+})
+\end{lstlisting}
+
+
+使用保留的 <component> 元素，动态地绑定到它的 is 特性：
+
+
+\begin{lstlisting}[language=JavaScript]
+<component v-bind:is="currentView">
+  <!-- 组件在 vm.currentview 变化时改变！ -->
+</component>
+\end{lstlisting}
+
+也可以直接绑定到组件对象上：
+
+\begin{lstlisting}[language=JavaScript]
+var Home = {
+  template: '<p>Welcome home!</p>'
+}
+var vm = new Vue({
+  el: '#example',
+  data: {
+    currentView: Home
+  }
+})
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
 
 
 
@@ -3121,6 +3999,73 @@ Vue.component('child', {
 
 
 
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\section{Memery Component}
+
+
+如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。为此可以添加一个 keep-alive 指令参数：
+
+\begin{lstlisting}[language=JavaScript]
+<keep-alive>
+  <component :is="currentView">
+    <!-- 非活动组件将被缓存！ -->
+  </component>
+</keep-alive>
+\end{lstlisting}
+
+
+\section{Reusable Component}
+
+一次性组件跟其它组件紧密耦合没关系，可复用组件应当定义一个清晰的公开接口。
+
+Vue 组件的 API 来自三部分 - props, events 和 slots ：
+
+\begin{compactitem}
+\item Props允许外部环境传递数据给组件
+\item Events允许组件触发外部环境的副作用
+\item Slots允许外部环境将额外的内容组合在组件中
+\end{compactitem}
+
+使用 v-bind 和 v-on 的简写语法，模板的缩进清楚且简洁：
+
+
+\begin{lstlisting}[language=JavaScript]
+<my-component
+  :foo="baz"
+  :bar="qux"
+  @event-a="doThis"
+  @event-b="doThat"
+>
+  <img slot="icon" src="...">
+  <p slot="main-text">Hello!</p>
+</my-component>
+\end{lstlisting}
+
+\section{Static Component}
+
+
+尽管在 Vue 中渲染 HTML 很快，不过当组件中包含大量静态内容时，可以考虑使用 v-once的低级静态组件（cheap static component）将渲染结果缓存起来。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+Vue.component('terms-of-service', {
+  template: '\
+    <div v-once>\
+      <h1>Terms of Service</h1>\
+      ... a lot of static content ...\
+    </div>\
+  '
+})
+\end{lstlisting}
+
+
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -3129,27 +4074,6 @@ Vue.component('child', {
 
 
 
-
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
-
-
-
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
-
-
-
-
-
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
-
-
-
 \begin{lstlisting}[language=JavaScript]
 
 \end{lstlisting}
@@ -3175,9 +4099,6 @@ Vue.component('child', {
 
 
 
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
 
 
 

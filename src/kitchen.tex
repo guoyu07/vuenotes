@@ -191,6 +191,23 @@ $ npm config list
 
 
 \begin{lstlisting}[language=bash]
+$ npm docs vue
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+$ npm docs webpack
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
 
 \end{lstlisting}
 
@@ -919,8 +936,8 @@ var path = require('path')
 var common_proxy = {
   //target       : 'http://test.hitour.cc',
   //target       : 'http://sandbox.hitour.cc',
-  target: 'http://trial.hitour.cc',
-  // target       : 'http://hitour.host',
+  target          : 'http://trial.hitour.cc',
+  // target      : 'http://hitour.host',
   changeOrigin: true,
   pathRewrite: {}
 };
@@ -1096,7 +1113,154 @@ module.exports = {
 
 
 \begin{lstlisting}[language=bash]
-
+export default {
+  path: 'operation',
+  name: 'operation',
+  component: require('views/desktop/operation/operation'),
+  redirect: { name: 'operation_destination_nav' },
+  children: [
+    // ----------------------------------------------------------------------------------------
+    // 目的地导航
+    {
+      path: 'destination_nav/:continent_id?/:continent_code?/:country_id?/:country_code?',
+      name: 'operation_destination_nav',
+      component: require('views/desktop/operation/destination_nav/destination_nav')
+    },
+    // ----------------------------------------------------------------------------------------
+    // 周边游导航
+    {
+      path: 'around_tour_nav/:first_level_id?/:first_level_code?/:second_level_id?/:second_level_code?',
+      name: 'operation_around_tour_nav',
+      component: require('views/desktop/operation/around_tour_nav/around_tour_nav')
+    },
+    // ----------------------------------------------------------------------------------------
+    // 商品分组
+    {
+      path: 'product_group',
+      name: 'operation_product_group',
+      component: require('views/desktop/operation/product_group/product_group')
+    },
+    {
+      path: 'product_group/:group_id/:tab',
+      name: 'operation_product_group_detail',
+      component: require('views/desktop/operation/product_group/product_group_detail')
+    },
+    // ----------------------------------------------------------------------------------------
+    // 商品分组的分组
+    {
+      path: 'group_product_group',
+      name: 'operation_group_product_group',
+      component: require('views/desktop/operation/group_product_group/group_product_group')
+    },
+    {
+      path: 'group_product_group/:group_id',
+      name: 'operation_group_product_group_detail',
+      component: require('views/desktop/operation/group_product_group/group_product_group_detail')
+    },
+    {
+      path: 'group_product_group_in_group/:group_id/:tab',
+      name: 'operation_product_group_detail_in_group',
+      component: require('views/desktop/operation/group_product_group/product_group_detail_in_group')
+    },
+    // ----------------------------------------------------------------------------------------
+    // 商户分组
+    {
+      path: 'merchant_group',
+      name: 'operation_merchant_group',
+      component: require('views/desktop/operation/merchant_group/merchant_group')
+    },
+    {
+      path: 'merchant_group/:group_id/:tab',
+      name: 'operation_merchant_group_detail',
+      component: require('views/desktop/operation/merchant_group/merchant_group_detail')
+    },
+    // ----------------------------------------------------------------------------------------
+    // Banner
+    {
+      path: 'banner',
+      name: 'operation_banner',
+      component: require('views/desktop/operation/banner/banner')
+    },
+    {
+      path: 'banner/:banner_id',
+      name: 'operation_banner_detail',
+      component: require('views/desktop/operation/banner/banner_detail')
+    },
+    // ----------------------------------------------------------------------------------------
+    // Tag
+    {
+      path: 'tag',
+      name: 'operation_tag',
+      component: require('views/desktop/operation/tag/tag')
+    },
+    {
+      path: 'tag/:tag_id',
+      name: 'operation_tag_detail',
+      component: require('views/desktop/operation/tag/tag_detail')
+    },
+    // ----------------------------------------------------------------------------------------
+    // web首页
+    {
+      path: 'web_home',
+      name: 'operation_web_home',
+      component: require('views/desktop/operation/web_home/web_home')
+    },
+    {
+      path: 'web_home/:area_id/:tab',
+      name: 'operation_web_home_area',
+      component: require('views/desktop/operation/web_home/web_home_area')
+    },
+    {
+      path: 'web_home_product_group/:group_id/:tab',
+      name: 'operation_web_home_product_group_detail',
+      component: require('views/desktop/operation/web_home/product_group_detail')
+    },
+    {
+      path: 'web_home_group_product_group/:group_id',
+      name: 'operation_web_home_group_product_group_detail',
+      component: require('views/desktop/operation/web_home/group_product_group_detail')
+    },
+    {
+      path: 'web_home/:area_id/:tab/banner/:banner_id',
+      name: 'operation_web_home_banner_detail',
+      component: require('views/desktop/operation/banner/banner_detail')
+    },
+    // ----------------------------------------------------------------------------------------
+    // web目的地页
+    {
+      path: 'web_dest',
+      name: 'operation_web_dest',
+      component: require('views/desktop/operation/web_dest/web_dest')
+    },
+    {
+      path: 'web_dest_detail/:dest_id/:dest_title/:dest_type/:tab/:country_code',
+      name: 'operation_web_dest_detail',
+      component: require('views/desktop/operation/web_dest/web_dest_detail')
+    },
+    // ----------------------------------------------------------------------------------------
+    // 菠萝PASS
+    {
+      path: 'wxapp_bolo_city',
+      name: 'operation_wxapp_bolo_city',
+      component: require('views/desktop/operation/wxapp_bolo_city/wxapp_bolo_city')
+    },
+    {
+      path: 'wxapp_bolo_city_detail/:city_code/:cn_name/:tab',
+      name: 'operation_wxapp_bolo_city_detail',
+      component: require('views/desktop/operation/wxapp_bolo_city/wxapp_bolo_city_detail')
+    },
+    {
+      path: 'wxapp_bolo_gift_card',
+      name: 'operation_wxapp_bolo_gift_card',
+      component: require('views/desktop/operation/wxapp_bolo_gift_card/wxapp_bolo_gift_card')
+    },
+    {
+      path: 'wxapp_bolo_gift_card_detail/:card_id/:tab',
+      name: 'operation_wxapp_bolo_gift_card_detail',
+      component: require('views/desktop/operation/wxapp_bolo_gift_card/wxapp_bolo_gift_card_detail')
+    }
+  ]
+};
 \end{lstlisting}
 
 
@@ -1104,6 +1268,11 @@ module.exports = {
 \begin{lstlisting}[language=bash]
 
 \end{lstlisting}
+
+\subsection{/k/desktop/operation/destination\_nav}
+
+
+/k/desktop/operation默认跳转到/k/desktop/operaton/destination\_nav。
 
 
 
@@ -1126,9 +1295,67 @@ module.exports = {
 
 
 \begin{lstlisting}[language=bash]
-
+export default {
+  path: 'resource',
+  name: 'resource',
+  component: require('views/desktop/resource/resource'),
+  redirect: { name: 'resource_hotel' },
+  children: [
+    {
+      path: 'hotel',
+      name: 'resource_hotel',
+      component: require('views/desktop/resource/ui_hotel/ui_hotel_list')
+    },
+    {
+      path: 'hotel/:hotel_id/:tab',
+      name: 'resource_hotel_detail',
+      component: require('views/desktop/resource/ui_hotel/ui_hotel_detail')
+    },
+    {
+      path: 'airline',
+      name: 'resource_airline',
+      components: require('views/desktop/resource/ui_airline/ui_airline_list')
+    }
+  ]
+};
 \end{lstlisting}
 
+\subsection{resource.vue}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <board :nav_group="nav_groups"></board>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        nav_groups: [
+          {
+            group_name: '酒店基本信息',
+            group_items: [
+              { name: '酒店列表', route: { name: 'resource_hotel' } }
+            ]
+          },
+          {
+            group_name: '航空公司信息',
+            group_items: [
+              { name: '航空公司列表', route: { name: 'resource_airline' } }
+            ]
+          }
+        ]
+      };
+    }
+  };
+</script>
+\end{lstlisting}
+
+
+
+\subsection{/k/desktop/resource/hotel}
 
 
 \begin{lstlisting}[language=bash]
@@ -1153,6 +1380,33 @@ module.exports = {
 
 
 
+\chapter{Resource}
+
+\section{resource.js}
+
+在\_router中设置resource的路由配置：
+
+
+\begin{lstlisting}[language=bash]
+export default {
+   path: 'resource',
+   name: 'resource',
+   component: require('views/desktop/resource/resource'),
+   redirect: { name: 'resource_hotel' },
+   children: [
+      {
+        path: 'hotel',
+        name: 'resource_hotel',
+        component: require('views/desktop/resource/ui_hotel/ui_hotel_list')
+      },
+      {
+        path: 'airline',
+        name: 'resource_airline',
+        component: require('views/desktop/resource/ui_airline/ui_airline_list')
+      }
+   ]
+}
+\end{lstlisting}
 
 
 
@@ -1161,9 +1415,69 @@ module.exports = {
 \end{lstlisting}
 
 
+\section{resource.vue}
 
 \begin{lstlisting}[language=bash]
+<template>
+  <board :nav_groups="nav_groups"></board>
+</template>
 
+<script>
+export default {
+   data() {
+      return {
+         nav_groups: [
+            {
+               group_name: '酒店基本信息',
+               group_items: [
+                   { name: '酒店列表', route: { name: 'resource_hotel' } }
+               ]
+            },
+            {
+               group_name: '航空公司列表',
+               group_items: [
+                   { name: '航空公司列表', route: { name: 'resource_airline'} }
+               ]
+            }
+         ]
+      }
+   }
+}
+</script>
+\end{lstlisting}
+
+
+
+
+\subsection{board.vue}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+<template>
+  <section class="board">
+    <left-nav :nav_groups="nav_groups"></left-nav>
+    <router-view class="" :class="{ 'move-left' : $store.state.is_cheat_sheet_show }"></router-view>
+  </section>
+</template>
+
+<style scoped>
+  .board .left-nav { position: fixed; top: 80px; width: 200px; }
+  .board .paper-view { margin-left: 220px; }
+  /*.board .paper-view.move-left { transform: translateX(-220px); }*/
+  .board .paper-view.move-left { margin-left: 0; }
+</style>
+
+<script>
+export default {
+   props: ['nav_groups'],
+   components: {
+       'left-nav': require(`views/_components/left_nav')
+   }
+};
+</script>
 \end{lstlisting}
 
 

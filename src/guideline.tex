@@ -1,0 +1,843 @@
+\part{Guideline}
+
+
+\chapter{Overview}
+
+
+
+
+\chapter{card}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <section class="card" :class="{ 'little': is_little, 'no-padding': !use_padding }">
+    <slot name="card-header"></slot>
+    <slot name="card-neck"></slot>
+    <slot></slot>
+  </section>
+</template>
+
+<style scoped>
+  .card { position: relative; padding-top: 18px; padding-bottom: 18px; }
+  .card.little { padding-top: 0; padding-bottom: 0; margin-bottom: 12px; }
+  /* 状态 */
+  .card.no-padding { padding-top: 0; padding-bottom: 0; }
+</style>
+
+<script>
+  export default {
+    props: {
+      is_little: { type: Boolean, default: false },
+      use_padding: { type: Boolean, default: true }
+    }
+  };
+</script>
+\end{lstlisting}
+
+\section{card\_header}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <header class="card-header" :class="{ 'in-little-card': $parent.is_little }">
+    <div class="card-header-main">{{ title }}
+      <slot name="after-title"></slot>
+    </div>
+    <aside class="card-header-actions">
+      <span v-show="is_save_actions_show">
+        <btn :icon="'i-undo'" @click.native="$emit('reset-form')"></btn>
+        <btn :icon="'i-check'" :text="'保存'" :mood="'emphasis'" @click.native="$emit('save-form')"></btn>
+      </span>
+      <slot></slot>
+      <btn v-if="use_delete" :icon="'i-bin'" :mood="'danger'" @click.native="doDelete"></btn>
+    </aside>
+  </header>
+</template>
+
+<style scoped lang="stylus">
+  @import "~styles/variables.styl";
+  .card-header { position: relative; line-height: row_height_1; border-bottom: 1px solid light_gray_1; margin-bottom: 10px; }
+  .card-header-main { font-weight: bold; }
+  .card-header-main .icon { width: 12px; height: 12px; vertical-align: -2px; margin-left: 5px; }
+  .card-header-actions { position: absolute; bottom: 2px; right: 2px; }
+  /* 类型 */
+  .card-header.in-little-card { background: #fff; padding: 2px 10px; height: 26px; margin-bottom: 0; border: none; }
+</style>
+
+<script>
+  export default {
+    props: {
+      title: String,
+      use_delete: { type: Boolean, default: false },
+      is_save_actions_show: { type: Boolean, default: false },
+      in_little_card: { type: Boolean, default: false }
+    },
+    methods: {
+      doDelete: function (row, index) {
+        if (window.confirm('确认删除?')) {
+          this.$emit('do-delete', row, index);
+        }
+      }
+    }
+  };
+</script>
+
+\end{lstlisting}
+
+
+\section{card\_neck}
+
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <aside class="card-neck">
+    <slot></slot>
+  </aside>
+</template>
+
+<style scoped>
+  .card-neck { margin-bottom: 10px; }
+  .card-neck > *:not(:first-child) { margin-left: 1px; }
+</style>
+\end{lstlisting}
+
+
+\section{card\_footer}
+
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <header class="card-footer" :style="{ 'text-align': align }">
+    <slot></slot>
+  </header>
+</template>
+
+<style scoped lang="stylus">
+  @import './../../../_styles/variables';
+  .card-footer { position: relative; line-height: row_height_1; padding: 2px 0 5px; border-top: 1px solid light_gray_1; margin-top: 10px; }
+</style>
+
+<script>
+  export default {
+    props: {
+      align: { type: String, default: 'right' }
+    }
+  };
+</script>
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+\chapter{table\_grid}
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <section class="table-grid" :class="{ 'is-sortable': use_sort }">
+
+    <!-- table header -->
+    <header class="table-header" v-if="data_source.length > 0">
+      <span class="table-header-col" v-if="use_sort" style="width: 35px;"><span>排序</span></span>
+      <span class="table-header-col" v-for="col in cols"
+            :style="[getWidth(col.span), { 'text-align': col.align }]"><span v-html="col.col_title"></span></span>
+    </header>
+
+    <transition :name="page_transition" :mode="'out-in'">
+      <div class="table-body" v-if="data_source.length > 0" :key="transition_key">
+        <draggable :list="data_source" :options="{ disabled: !use_sort, animation: 150, handle: '.drag-handle' }"
+                   @end="doSort">
+          <slot></slot>
+        </draggable>
+      </div>
+    </transition>
+
+    <aside class="text-center" v-if="!data_source.length > 0">~ Empty ~</aside>
+
+  </section>
+</template>
+
+<style scoped lang="stylus">
+  @import '~styles/variables.styl';
+  .table-grid { position: relative; height: 100%; }
+  .table-header { position: absolute; top: 0; left: 0; right: 0; z-index: 100; display: flex; line-height: row_height_2_inner; white-space: nowrap; box-shadow: 0 1px 2px -1px rgba(0, 0, 0, .3); }
+  .table-header-col { background: #fff; padding: 0 8px; font-weight: bold; }
+  .table-header-col > span { display: block; transform: scale(.9); transform-origin: 0 100%; }
+  .table-body { height: 100%; padding-top: row_height_2_inner; overflow-y: auto; }
+  /* 类型 */
+  .row-action.blue { color: blue; }
+  .row-action.warning { color: warning; }
+  .row-action.danger { color: danger; }
+  .row-action.success { color: success; }
+</style>
+
+<script>
+  import color from 'styles/color.js';
+  export default {
+    props: {
+      data_source: [Array, Object],
+      active_index: Number,
+      use_delete: { type: Boolean, default: false },
+      use_sort: { type: Boolean, default: false },
+      page_num: Number,
+      transition_key: String
+    },
+    data () {
+      return {
+        color: color,
+        rows: [],
+        cols: [],
+        page_transition: 'slide-right'
+      };
+    },
+    watch: {
+      data_source: function () {
+        this.$nextTick(() => {
+          this.initTable();
+        });
+      },
+      page_num: function (new_page_num, old_page_num) {
+        this.page_transition = new_page_num >= old_page_num ? 'slide-right' : 'slide-left';
+      }
+    },
+    mounted: function () {
+      this.$nextTick(() => {
+        if (this.data_source.length > 0) {
+          this.initTable();
+        }
+      });
+    },
+    methods: {
+      initTable: function () {
+        var rows = [];
+        var closest_children = this.$children[0];
+        if (!closest_children || !closest_children.$slots.default) return;
+        closest_children.$slots.default.map((VNode) => {
+          if (VNode.child) rows.push(VNode.child);
+        });
+        var cols = [];
+        rows[0].$slots.default.map((VNode) => {
+          if (VNode.child) cols.push(VNode.child);
+        });
+        this.rows = rows;
+        this.cols = cols;
+      },
+      doSort: function (event) {
+        this.$emit('do-sort', this.data_source[event.newIndex || 0], event.newIndex || 0, event.oldIndex);
+      },
+      getWidth: function (span) {
+        if (!span) return { 'flex': 1 };
+        else if (typeof span === 'string') return { 'width': span };
+        else return { 'flex': span };
+      }
+    }
+  };
+</script>
+\end{lstlisting}
+
+
+\section{template}
+
+
+
+\section{style}
+
+
+
+\section{script}
+
+
+\chapter{table\_grid\_2}
+
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <section class="table-grid" :class="{ 'is-sortable': use_sort }">
+
+    <!-- table header -->
+    <header class="table-header" v-if="data_source.length > 0">
+      <span class="table-header-col" v-if="use_sort" style="width: 35px;"><span>排序</span></span>
+      <span class="table-header-col" v-for="col in cols"
+            :style="[getWidth(col.span), { 'text-align': col.align }]"><span v-html="col.col_title"></span></span>
+    </header>
+
+    <transition :name="page_transition" :mode="'out-in'">
+      <div class="table-body" v-if="data_source.length > 0" :key="transition_key">
+        <draggable :list="data_source" :options="{ disabled: !use_sort, animation: 150, handle: '.drag-handle' }"
+                   @end="doSort">
+          <slot></slot>
+        </draggable>
+      </div>
+    </transition>
+
+    <aside class="text-center" v-if="!data_source.length > 0">~ Empty ~</aside>
+
+  </section>
+</template>
+
+<style scoped lang="stylus">
+  @import '~styles/variables.styl';
+  .table-grid { position: relative; height: 100%; }
+  .table-header { position: absolute; top: 0; left: 0; right: 0; z-index: 100; display: flex; line-height: row_height_2_inner; white-space: nowrap; box-shadow: 0 1px 2px -1px rgba(0, 0, 0, .3); }
+  .table-header-col { background: #fff; padding: 0 8px; font-weight: bold; }
+  .table-header-col > span { display: block; transform: scale(.9); transform-origin: 0 100%; }
+  .table-body { height: 100%; padding-top: row_height_2_inner; overflow-y: auto; }
+  /* 类型 */
+  .row-action.blue { color: blue; }
+  .row-action.warning { color: warning; }
+  .row-action.danger { color: danger; }
+  .row-action.success { color: success; }
+</style>
+
+<script>
+  import color from 'styles/color.js';
+  export default {
+    props: {
+      data_source: [Array, Object],
+      active_index: Number,
+      use_delete: { type: Boolean, default: false },
+      use_sort: { type: Boolean, default: false },
+      page_num: Number,
+      transition_key: String
+    },
+    data () {
+      return {
+        color: color,
+        rows: [],
+        cols: [],
+        page_transition: 'slide-right'
+      };
+    },
+    watch: {
+      data_source: function () {
+        this.$nextTick(() => {
+          this.initTable();
+        });
+      },
+      page_num: function (new_page_num, old_page_num) {
+        this.page_transition = new_page_num >= old_page_num ? 'slide-right' : 'slide-left';
+      }
+    },
+    mounted: function () {
+      this.$nextTick(() => {
+        if (this.data_source.length > 0) {
+          this.initTable();
+        }
+      });
+    },
+    methods: {
+      initTable: function () {
+        var rows = [];
+        var closest_children = this.$children[0];
+        if (!closest_children || !closest_children.$slots.default) return;
+        closest_children.$slots.default.map((VNode) => {
+          if (VNode.child) rows.push(VNode.child);
+        });
+        var cols = [];
+        rows[0].$slots.default.map((VNode) => {
+          if (VNode.child) cols.push(VNode.child);
+        });
+        this.rows = rows;
+        this.cols = cols;
+      },
+      doSort: function (event) {
+        this.$emit('do-sort', this.data_source[event.newIndex || 0], event.newIndex || 0, event.oldIndex);
+      },
+      getWidth: function (span) {
+        if (!span) return { 'flex': 1 };
+        else if (typeof span === 'string') return { 'width': span };
+        else return { 'flex': span };
+      }
+    }
+  };
+</script>
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{table\_grid\_row}
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <section class="table-grid-row" :class="{ 'highlight': is_highlight, 'can-be-click': use_click }">
+    <table-grid-col class="drag-handle" v-if="$parent.$parent.use_sort" :span="'35px'">
+      <icon :name="'i-sort'" :color="'#666'"></icon>
+    </table-grid-col>
+    <slot></slot>
+  </section>
+</template>
+
+<style scoped lang="stylus">
+  @import '~styles/variables.styl';
+  .table-grid-row { display: flex; margin-top: 1px; background: #fff; box-shadow: 0 1px 2px -1px rgba(0, 0, 0, .1); transition: all .2s; }
+  .table-grid-row .icon { width: 12px; height: 12px; vertical-align: middle; }
+  .table-grid-row .drag-handle { cursor: move; cursor: -webkit-grabbing; text-align: center; }
+  .table-grid-row.highlight { background: light_gray_2; }
+  .table-grid-row.can-be-click:not(.highlight):hover { background: light_gray_3; cursor: pointer; }
+</style>
+
+<script>
+  export default {
+    props: {
+      dd: String,
+      is_highlight: { type: Boolean, default: false },
+      use_click: { type: Boolean, default: false }
+    }
+  };
+</script>
+
+\end{lstlisting}
+
+\chapter{table\_grid\_col}
+
+\begin{lstlisting}[language=JavaScript]
+<template>
+  <section class="table-grid-col"
+           :title="!span || span > 0 ? $slots.default[0].text : ''"
+           :style="[getWidth, { 'text-align': align }]">
+    <slot></slot>
+  </section>
+</template>
+
+<style scoped lang="stylus">
+  @import '~styles/variables.styl';
+  .table-grid-col { padding: 10px 8px; line-height: row_height_1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* drag */
+  .table-grid-row.sortable-ghost .table-grid-col { background: rgba(0, 0, 0, .02); }
+</style>
+
+<script>
+  export default {
+    props: {
+      col_title: String,
+      span: [String, Number],
+      align: String
+    },
+    computed: {
+      getWidth: function () {
+        if (!this.span) return { 'flex': 1 };
+        else if (typeof this.span === 'string') return { 'width': this.span };
+        else return { 'flex': this.span };
+      }
+    }
+  };
+</script>
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+

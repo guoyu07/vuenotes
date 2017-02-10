@@ -1,0 +1,108 @@
+\part{ECMAScript}
+
+\chapter{Overview}
+
+JavaScript和JScript等都是ECMA-262（ECMAScript）标准的实现和扩展，虽然二者出于不同的目的，但是现在JavaScript和JScript都可以与ECMAScript相容，但是包含超出ECMAScript的功能。
+
+\begin{lstlisting}[language=JavaScript]
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Hello World</title>
+        <script type="text/javascript">
+        // 在浏览器视窗内直接显示
+        document.write("Hello, world!"); 
+        // 弹窗显示
+        alert("Hello, world!"); 
+        // 在控制台（console）里显示
+        console.log("Hello, world!");
+        </script>
+    </head>
+    <body>
+    <!-- HTML 内容 -->
+    </body>
+</html>
+\end{lstlisting}
+
+
+许多应用程序（特别是Web浏览器）都支持ECMAScript，而且浏览器中的ECMAScript实现（例如V8）添加了与DOM（文档对象模型）交互的接口，可以通过ECMAScript脚本改变网页的内容、结构和样式。
+
+\begin{compactitem}
+\item Firefox Gecko、SpiderMonkey和Rhino
+\item Chrome V8
+\item IE Trident
+\item Opera
+\item Konqeror KHTML
+\item  Safari KHTML
+\end{compactitem}
+
+
+在浏览器的地址栏中可以使用\texttt{javascript:}以交互方式运行JavaScript：
+
+\begin{lstlisting}[language=JavaScript]
+javascript:alert("Hello world!");
+\end{lstlisting}
+
+注意，和主流的JavaScript引擎都是每次运行时加载JavaScript代码并解析不同，V8是将所有JavaScript代码解析后才开始运行，其他引擎则是逐行解析（SpiderMonkey会将解析过的指令暂存来提高性能）。
+
+实际上，完整的JavaScript实现应该包含三个部分，分别是：
+
+\begin{compactenum}
+\item ECMAScript（语言核心）描述了该语言的语法和基本对象；
+\item DOM（文档对象模型）描述处理网页内容的方法和接口；
+\item BOM（浏览器对象模型）描述与浏览器进行交互的方法和接口。
+\end{compactenum}
+
+JavaScript引擎（例如V8）就是一个专门处理JavaScript脚本的虚拟机，一般会内置在Web浏览器中来提供操作浏览器的功能（例如网络、DOM、外部事件、HTML5视频、canvas和存储）。
+
+一个典型的Web浏览器有一个图形引擎和一个独立的JavaScript引擎，例如V8与WebKit被内置于Google Chrome中，这样JavaScript引擎能够被更方便的测试、重新生成或者在其他项目中使用。
+
+
+
+\section{Prototype}
+
+ECMAScript方言（JavaScript和JScript等）都扩展了ECMAScript语言，或者标准库和相关API（例如W3C定义的DOM），不过这也这意味着以一种方言实现的程序不兼容于另一种方言的实现，除非程序使用了方言中的公共子集所具有的特性和API。
+
+JavaScript基于原型（Prototype）来支持面向对象，并且支持函数优先。例如，eval() 函数可以直接运行一个JavaScript函数。
+
+
+\begin{lstlisting}[language=JavaScript]
+eval("alert(\"Message\")");
+\end{lstlisting}
+
+JavaScript通过ECMAScript实现标准化，已经支持面向对象编程、命令式编程和函数式编程。
+
+JavaScript的语法可以操控文本、数组、日期以及正则表达式等，但是不支持I/O（例如网络、存储和图形等），不过这些都可以通过其宿主环境提供支持。
+
+JavaScript的事件驱动特性和异步I/O特性允许其被用来编写服务器端程序，而且Node.js的出现使得JavaScript可以运行在游戏、桌面和移动应用程序和开发和服务器环境中，不过最通用的JavaScript宿主环境仍然是Web浏览器，Web浏览器使用公共的API创建“宿主对象”以便于在JavaScript中支持DOM。
+
+JavaScript支持和C语言相似的结构化编程语法（例如if条件语句、while循环、switch语句、do-while循环等），但是作用域是一个例外——JavaScript只支持使用var关键字来定义变量的函数作用域。
+
+ECMAScript加入了let关键字来支持块级作用域，这样就意味着JavaScript可以既支持函数作用域又支持块级作用域。
+
+\begin{compactitem}
+\item JavaScript中的表达式和语句是不同的；
+\item JavaScript支持自动在语句末尾添加分号。
+\end{compactitem}
+
+和大部分动态类型的脚本语言类似，JavaScript的类型与值而不是与变量关联。例如，x变量可以为数值，随后又可被赋值为字符串，JavaScript提供了包括鸭子类型在内的方法来检测变量类型。
+
+在JavaScript中，如果一条语句运行不了，那么其后面的语言也无法运行，解决办法就是于使用try\{\}catch()\{\}︰
+
+\begin{lstlisting}[language=JavaScript]
+console.log("a");    //正确
+console.log("b");    //正确
+console.logg("c");   //这是错误的，并且到这里会停下来
+console.log("d");    //正确
+console.log("e");    //正确
+
+/*解决方案*/
+try{console.log("a");}catch(e){}    //正确
+try{console.log("b");}catch(e){}    //正确
+try{console.logg("c");}catch(e){}   //这是错误的，但是到这里不会停下来，而是跳过
+try{console.log("d");}catch(e){}    //正确
+try{console.log("e");}catch(e){}    //正确
+\end{lstlisting}
+
+
+

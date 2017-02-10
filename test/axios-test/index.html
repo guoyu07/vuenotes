@@ -1,0 +1,15 @@
+<html>
+<head>
+<script src="axios.min.js"></script>
+</head>
+<script>
+  axios.get('http://trial.hitour.cc/admin/flight/airlineList',{
+      headers: {
+        'Access-Control-Allow-Origin':'*'
+      }
+    })
+    .then(function(response){
+      console.log(response);
+    });
+</script>
+</html>
