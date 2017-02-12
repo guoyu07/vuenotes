@@ -18,7 +18,7 @@ IME复合系统的工作原理是缓存用户的键盘输入，直到一个字�
 \begin{compactitem}
 \item compositionstart：在IME的文本复合系统打开时触发；
 \item compositionend：在IME的文本复合系统关闭（即用户选中了字符并确定输入）时触发，表示返回正常键盘的输入状态；
-\item compositionupdate：在compositionstart事件触发后、compositionend事件触发前的这段时间内，每次向输入字段中进行输入时均会触发。
+\item compositionupdate：在compositionstart事件触发后、compositionend事件触发前的这段时间内，每次向输入字段中进行输入时均会触发compositionupdate事件。
 \end{compactitem}
 
 注意，input事件将在复合事件后触发。
