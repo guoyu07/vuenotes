@@ -1,0 +1,29 @@
+\part{Composition Event}
+
+\chapter{Overview}
+
+
+Composition Event（复合事件）是DOM3级事件中新添加的一类事件类型，用于处理IME的输入序列。
+
+IME（Input Method Editor，输入法编辑器）可以让用户输入在物理键盘上找不到的字符，复合事件就是针对检测和处理这种输入而设计的。
+
+所有的拉丁字母都可以通过物理键盘输入，因此复合事件很少被拉丁系语言输入的开发者了解，而且在开发中使用到复合事件类型的情况比较少见。
+
+IME复合系统的工作原理是缓存用户的键盘输入，直到一个字符被选中后才确定输入，缓存的键盘输入会暂时展示在输入框中，并不会真正被插入到DOM中。
+
+如果在复合事件的过程中改变了输入框的值（例如切换了输入法或者直接按下Enter键），那么复合事件就会提前结束，同时缓存的键盘输入值将会被插入到输入框中。
+
+复合事件类型包含以下几种事件：
+
+\begin{compactitem}
+\item compositionstart：在IME的文本复合系统打开时触发；
+\item compositionend：在IME的文本复合系统关闭（即用户选中了字符并确定输入）时触发，表示返回正常键盘的输入状态；
+\item compositionupdate：在compositionstart事件触发后、compositionend事件触发前的这段时间内，每次向输入字段中进行输入时均会触发。
+\end{compactitem}
+
+注意，input事件将在复合事件后触发。
+
+在实际情况中，复合事件的兼容性并不好，因此在使用复合事件处理input相关问题时，仍然需要慎重。
+
+
+
