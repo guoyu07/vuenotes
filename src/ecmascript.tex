@@ -3,8 +3,9 @@
 \chapter{Overview}
 
 
-2015年6月发布的ECMAScript 6.0（简称ES6）是JavaScript语言的下一代标准，其目标是使得JavaScript语言可以用来编写复杂的大型应用程序的企业级开发语言。
+2015年6月发布的ECMAScript 6.0（简称ES6）是JavaScript语言的下一代标准，其目标是使得JavaScript语言成为可以用来编写复杂的大型应用程序的企业级开发语言。
 
+\section{ECMAScript1.0}
 
 
 1996年11月，JavaScript的创造者Netscape公司，决定将JavaScript提交给国际标准化组织ECMA，希望这种语言能够成为国际标准。次年，ECMA发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为ECMAScript，这个版本就是1.0版。
@@ -13,6 +14,35 @@
 
 因此，ECMAScript和JavaScript的关系是，前者是后者的规格，后者是前者的一种实现（另外的ECMAScript方言还有Jscript和ActionScript）。日常场合，这两个词是可以互换的。
 
+\section{ECMAScript2.0}
+
+
+ECMAScript 1.0是1997年发布的，接下来的两年，连续发布了ECMAScript 2.0（1998年6月）和ECMAScript 3.0（1999年12月）。
+
+
+\section{ECMAScript3.0}
+
+ECMAScript 3.0版是一个巨大的成功，在业界得到广泛支持，成为通行标准，奠定了JavaScript语言的基本语法，以后的版本完全继承。直到今天，初学者一开始学习JavaScript，其实就是在学3.0版的语法。
+
+\section{ECMAScript4.0}
+
+2000年，ECMAScript 4.0开始酝酿。这个版本最后没有通过，但是它的大部分内容被ES6继承了。因此，ES6制定的起点其实是2000年。
+
+
+为什么ES4没有通过呢？因为这个版本太激进了，对ES3做了彻底升级，导致标准委员会的一些成员不愿意接受。ECMA的第39号技术专家委员会（Technical Committee 39，简称TC39）负责制订ECMAScript标准，成员包括Microsoft、Mozilla、Google等大公司。
+
+2007年10月，ECMAScript 4.0版草案发布，本来预计次年8月发布正式版本。但是，各方对于是否通过这个标准，发生了严重分歧。以Yahoo、Microsoft、Google为首的大公司，反对JavaScript的大幅升级，主张小幅改动；以JavaScript创造者Brendan Eich为首的Mozilla公司，则坚持当前的草案。
+
+2008年7月，由于对于下一个版本应该包括哪些功能，各方分歧太大，争论过于激烈，ECMA开会决定，中止ECMAScript 4.0的开发，将其中涉及现有功能改善的一小部分，发布为ECMAScript 3.1，而将其他激进的设想扩大范围，放入以后的版本，由于会议的气氛，该版本的项目代号起名为Harmony（和谐）。会后不久，ECMAScript 3.1就改名为ECMAScript 5。
+
+\section{ECMAScript5.0}
+
+
+2009年12月，ECMAScript 5.0版正式发布。Harmony项目则一分为二，一些较为可行的设想定名为JavaScript.next继续开发，后来演变成ECMAScript 6；一些不是很成熟的设想，则被视为JavaScript.next.next，在更远的将来再考虑推出。TC39委员会的总体考虑是，ES5与ES3基本保持兼容，较大的语法修正和新功能加入，将由JavaScript.next完成。当时，JavaScript.next指的是ES6，第六版发布以后，就指ES7。TC39的判断是，ES5会在2013年的年中成为JavaScript开发的主流标准，并在此后五年中一直保持这个位置。
+
+\section{ECMAScript5.1}
+
+
 2011年，ECMAScript 5.1版发布后，就开始制定6.0版了。因此，”ES6”这个词的原意，就是指JavaScript语言的下一个版本。
 
 但是，因为这个版本引入的语法功能太多，而且制定过程当中，还有很多组织和个人不断提交新功能。事情很快就变得清楚了，不可能在一个版本里面包括所有将要引入的功能。常规的做法是先发布6.0版，过一段时间再发6.1版，然后是6.2版、6.3版等等。
@@ -20,6 +50,9 @@
 但是，标准的制定者不想这样做。他们想让标准的升级成为常规流程：任何人在任何时候，都可以向标准委员会提交新语法的提案，然后标准委员会每个月开一次会，评估这些提案是否可以接受，需要哪些改进。如果经过多次会议以后，一个提案足够成熟了，就可以正式进入标准了。这就是说，标准的版本升级成为了一个不断滚动的流程，每个月都会有变动。
 
 标准委员会最终决定，标准在每年的6月份正式发布一次，作为当年的正式版本。接下来的时间，就在这个版本的基础上做改动，直到下一年的6月份，草案就自然变成了新一年的版本。这样一来，就不需要以前的版本号了，只要用年份标记就可以了。
+
+\section{ECMAScript6}
+
 
 ES6的第一个版本，就这样在2015年6月发布了，正式名称就是《ECMAScript 2015标准》（简称ES2015）。2016年6月，小幅修订的《ECMAScript 2016标准》（简称ES2016）如期发布，这个版本可以看作是ES6.1版，因为两者的差异非常小（只新增了数组实例的includes方法和指数运算符），基本上是同一个标准。根据计划，2017年6月将发布ES2017标准。
 
@@ -34,7 +67,7 @@ ES6的第一个版本，就这样在2015年6月发布了，正式名称就是《
 
 
 
-\section{History}
+\subsection{History}
 
 ES6从开始制定到最后发布，整整用了15年。
 
@@ -59,15 +92,2222 @@ ES6从开始制定到最后发布，整整用了15年。
 2015年6月，ECMAScript 6正式通过，成为国际标准。从2000年算起，这时已经过去了15年。
 
 
+\chapter{Module}
+
+Python的import和Ruby的require等都确保了模块功能的实现，JavaScript一直缺少模块（Module）的概念，导致当项目规模增大时，JavaScritpt代码变得难以复用且极难维护。
+
+在ES6发布之前，JavaScript社区就制定了CommonJS（node模块化加载）和AMD（RequireJS）等规范来实现模块加载。
+
+\begin{compactitem}
+\item CommonJS用于服务器环境；
+\item AMD用于浏览器环境。
+\end{compactitem}
+
+ES6的官方标准中使用export和import来支持模块化开发，至此JavaScript开始正式提供模块支持。
 
 
 
-\chapter{Prototype}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\section{export}
+
+ES6支持一个文件就是一个模块。
+
+一个模块内部的所有变量，对于外界来说是无法获取的，除非使用关键词export对外暴露接口。
+
+export对外暴露的各个接口通过名字来进行区分。例如，下面的示例中的lib.js模块通过sqrt、square、diag向外界暴露了三个接口：
+
+
+
+\begin{example}
+export向外界暴露接口
+\begin{lstlisting}[language=JavaScript]
+//-----lib.js----
+/*
+暴露三个接口给外界
+*/
+export const sqrt = Math.sqrt;
+export function square(x) {
+   return x * x;
+}
+export function diag(x,y) {
+   return sqrt(square(x) + square(y));
+}
+\end{lstlisting}
+\end{example}
+
+export支持使用大括号的方式指定要向外界暴露的接口，例如：
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+//-----lib.js----
+/*
+以大括号形式暴露三个接口给外界
+*/
+const sqrt = Math.sqrt;
+function square(x) {
+   return x * x;
+}
+function diag(x,y) {
+   return sqrt(square(x) + square(y));
+}
+
+export { sqrt, square, diag };
+\end{lstlisting}
+
+\subsection{as}
+
+
+export支持使用as语法进行别名export，这样就可以把一个接口通过多个名字对外暴露。
+
+\begin{lstlisting}[language=JavaScript]
+// ---- lib.js ----
+const sqrt = Math.sqrt;
+// 使用两个别名对外暴露sqrt
+export { sqrt as sq1, sqrt as sq2 };
+\end{lstlisting}
+
+ES6模块规范规定，如果b模块从a模块导入一个原始值后，在a模块中修改这个原始值，那么b模块中的值也会与a模块中最新的值保持同步，即export暴露的接口与其在模块内部对应的值是一种动态绑定的关系，通过接口可以获取模块内部实时的值。
+
+
+\section{import}
+
+在使用export对外界暴露接口后，其他的JavaScript文件就可以通过import命令加载这个模块（文件）。例如，在main.js模块中就可以通过import导入lib.js暴露的接口：
+
+
+\begin{example}
+import导入其他ES6文件暴露的接口
+\begin{lstlisting}[language=JavaScript]
+// ---- main.js ----
+/* 
+通过import语法从lib模块中导入所需要的接口
+*/
+import { square, diag } from './lib';
+console.log(square(11)); // 121
+console.log(diag(4,3)); // 5
+\end{lstlisting}
+\end{example}
+
+导入外部接口时，大括号中的接口名必须已经通过export关键字导出。
+
+
+\subsection{as}
+
+import也支持使用as语法对导入的变量进行重命名。
+
+
+\begin{lstlisting}[language=JavaScript]
+// ---- lib.js ----
+export var myVar1  'var1';
+// ---- main.js ----
+import {myVar1 as myCustomVar1 } from './lib';
+console.log(myCustomVar1);
+\end{lstlisting}
+
+import默认会执行加载的模块，因此ES6支持空import，例如：
+
+
+\begin{lstlisting}[language=JavaScript]
+// 只加载并执行模块，不引用任何接口
+import 'lib';
+\end{lstlisting}
+
+import还可以通过整体加载模块来提供命名空间的支持，例如：
+
+
+
+\begin{lstlisting}[language=JavaScript]
+// ---- lib.js ----
+export var myVar1 = 'var1';
+export let myVar2 = 'var2';
+export const MY_CONST = 'my_const';
+
+export function myFunc() {
+   return 'myFunc';
+}
+
+export function* myGeneratorFunc() {
+   // ...
+}
+
+export class MyClass {
+   // ...
+}
+
+// ---- main.js ----
+import * as lib from './lib';
+console.log(lib.myVar1);
+console.log(lib.myVar2);
+new lib.MyClass();
+\end{lstlisting}
+
+\subsection{default}
+
+默认情况下，使用模块接口时必须要知道该模块导出了哪些接口，对于只暴露一个接口的模块实际上就没有必要限定暴露的接口名字，因此ES6支持使用\texttt{export default}语法让接口调用者自定义要导入的接口名字。
+
+
+
+\begin{example}
+导入单接口模块时可以自定义接口名字
+\begin{lstlisting}[language=JavaScript]
+// ---- myFunc.js ----
+export default function() { }
+
+// ---- main.js ----
+import myFunc from 'myFunc';
+myFunc();
+\end{lstlisting}
+\end{example}
+
+从本质上来说，export default就是输出一个名为default的变量或方法，然后系统允许对其进行重命名。
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+// lib.js
+function add(x,y) {
+    return x * y;
+}
+
+export { add as default };
+// 等同于
+export default add; 
+
+// ---- main.js ----
+import { default as myAdd } from 'lib';
+// 等同于
+import myAdd from 'lib';
+\end{lstlisting}
+
+
+export default可以更直观的表示引入模块时，例如jQuery可以以下面的方式来引入：
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+import $ from 'jquery';
+\end{lstlisting}
+
+
+
+Vue.js采用export和import来进行模块化开发，代码通过export暴露接口并import引用其他文件中的功能。例如，下面是Vue.js的入口文件/src/core/index.js的内容：
+
+\begin{lstlisting}[language=JavaScript]
+import Vue from './instance/index'
+import { initGlobalAPI } from './global-api/index'
+import { isServerRendering } from 'core/util/env'
+
+initGlobalAPI(Vue)
+
+Object.defineProperty(Vue.prototype, '$isServer', {
+   get: isServerRendering
+})
+
+Vue.version = '__VERSION__'
+
+export default Vue
+\end{lstlisting}
+
+下面的代码使用正常的方式向外界暴露了三个函数方法：
+
+\begin{lstlisting}[language=JavaScript]
+export function orderBy(...) {},
+export function filterBy(...) {},
+export function limitBy(...) {}
+\end{lstlisting}
+
+在引入上述三个函数时的语法如下：
+
+
+
+\begin{lstlisting}[language=JavaScript]
+import { orderBy, filterBy, limitBy } from './array-filters'
+\end{lstlisting}
+
+
+
+\chapter{Scope}
+
+在ES5以及之前的版本中都不支持块级作用域，只有全局作用域和函数作用域，从ES6开始支持全局作用域、函数作用域和块级作用域。
+
+代码中的任何一对花括号中的语句集合都属于一个块，如果其中定义的所有变量在代码块外部都是不可见的，那么就称之为块级作用域。
+
+如果只有全局作用域和函数作用域，那么内层变量可能会覆盖外层变量，用于计数的循环变量可能泄露为全局变量等。
+
+
+\section{let}
+
+
+在ECMAScript不支持块级作用域之前，往往需要通过闭包等方式来模拟块级作用域，现在ES6通过let关键字来提供块级作用域的直接支持。
+
+
+let和var的作用都是声明变量，但是var和let是不同的。
+
+\begin{compactitem}
+\item var声明的变量可以在全局作用域或函数作用域内有效；
+\item let声明的变量只在let所在的代码块内有效。
+\end{compactitem}
+
+
+\begin{lstlisting}[language=JavaScript]
+> 
+{
+  let a = 'hello';  
+  var b = 'world';
+}
+< undefined
+> a;
+Uncaught ReferenceError: a is not defined
+    at <anonymous>:1:1
+> b;
+"abc"
+\end{lstlisting}
+
+\begin{compactitem}
+\item 在用let声明的a的代码块之外调用a会报错；
+\item 在用var声明的b的代码块之外调用b则返回正确值。
+\end{compactitem}
+
+let声明的变量只在其所在代码块内有效，var声明的变量可以在全局内、函数内或块内都有效。
+
+let适合用于声明局部变量（例如循环变量i），代码示例如下：
+
+
+\begin{lstlisting}[language=JavaScript]
+> for (let i = 0; i < 5; i++){
+  console.log(i);
+}
+console.log(i);
+< 
+0
+1
+2
+3
+4
+Uncaught ReferenceError: i is not defined
+    at <anonymous>:1:51
+\end{lstlisting}
+
+let不允许重复声明，否则在相同作用域内，重复声明同一个变量会报错。
+
+
+\begin{lstlisting}[language=JavaScript]
+> 
+{
+  let a = 'hello';
+  let a = 'world';
+}
+Uncaught SyntaxError: Identifier 'a' has already been declared
+\end{lstlisting}
+
+
+let不存在变量提升，因此变量需要在声明后才可以使用，否则会报错。
+
+\begin{lstlisting}[language=JavaScript]
+console.log(foo);
+console.log(bar);
+var foo = 'hello';
+var bar = 'world';
+\end{lstlisting}
+
+let存在暂时性死区（temporal deadzone，简称TDZ），也就是说在当前代码块内如果使用了let声明变量，那么在这条声明语句之前，该变量不可用。
+
+
+\begin{lstlisting}[language=JavaScript]
+if(true){
+  // TDZ开始
+  tmp = 'hello';
+  console.log(tmp);
+  
+  let tmp; // TDZ结束
+  console.log(tmp);
+  
+  tmp = 123;
+  console.log(tmp);
+}
+< Uncaught ReferenceError: tmp is not defined
+    at <anonymous>:1:13
+\end{lstlisting}
+
+总而言之，let相比var更严谨，更不易发生错误，同时支持块级作用域。例如，Vue.js使用let来保存全局配置信息等：
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+let delimiters = ['{{','}}']
+let unsafeDelimiters = ['{{{','}}}']
+\end{lstlisting}
+
+下面的runBatcherQueue函数中的for循环变量就是使用let来声明的：
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+function runBatcherQueue(queue) {
+  // do not cache length because more watchers might be pushed
+  // as we run existing watchers
+  for(let i = 0; i < queue.lenght; i++) {
+     // ...
+  }
+  queue.length = 0
+}
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\chapter{Node.js}
 
 ECMAScript方言（JavaScript和JScript等）都扩展了ECMAScript语言，或者标准库和相关API（例如W3C定义的DOM），不过这也这意味着以一种方言实现的程序不兼容于另一种方言的实现，除非程序使用了方言中的公共子集所具有的特性和API。
 
+各大浏览器的最新版本都实现了ES6的大部分特性，Node.js对ES6的支持度比浏览器更高。
+
+Node.js是JavaScript语言的服务器运行环境，通过Node可以体验更多ES6的特性，建议使用版本管理工具nvm来安装Node，因为可以自由切换版本。
+
+Babel等JavaScript预编译期（或转码器）可以将ES6代码转换为ES5代码，从而在现有环境中执行。
+
+\section{NVM}
+
+
+安装nvm需要打开命令行窗口，运行下面的命令：
+
+\begin{lstlisting}[language=JavaScript]
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/<version number>/install.sh | JavaScript
+[sudo] password for localhost: 
+=> Downloading nvm from git to '/home/localhost/.nvm'
+=> Cloning into '/home/localhost/.nvm'...
+remote: Counting objects: 6082, done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 6082 (delta 2), reused 0 (delta 0), pack-reused 6072
+Receiving objects: 100% (6082/6082), 1.74 MiB | 152.00 KiB/s, done.
+Resolving deltas: 100% (3752/3752), done.
+Checking connectivity... done.
+* (detached from v0.33.0)
+  master
+=> Compressing and cleaning up git repository
+Counting objects: 6082, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6044/6044), done.
+Writing objects: 100% (6082/6082), done.
+Total 6082 (delta 4017), reused 1882 (delta 0)
+
+=> Appending nvm source string to /home/localhost/.JavaScriptrc
+=> JavaScript_completion source string already in /home/localhost/.JavaScriptrc
+=> You currently have modules installed globally with `npm`. These will no
+=> longer be linked to the active version of Node when you install a new node
+=> with `nvm`; and they may (depending on how you construct your `$PATH`)
+=> override the binaries of modules installed with `nvm`:
+=> If you wish to uninstall them at a later point (or re-install them under your
+=> `nvm` Nodes), you can remove them from the system Node as follows:
+
+     $ nvm use system
+     $ npm uninstall -g a_module
+
+=> Close and reopen your terminal to start using nvm or run the following to use it now:
+
+export NVM_DIR="/home/localhost/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+\end{lstlisting}
 
 
 
+上面命令的version number处，需要用版本号替换。
+
+上述命令运行后，nvm会默认安装在用户主目录的.nvm子目录，然后激活nvm。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+$ source ~/.nvm/nvm.sh
+\end{lstlisting}
+
+激活以后，安装Node的最新版。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ nvm install node
+\end{lstlisting}
+
+
+安装完成后，切换到该版本。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ nvm use node
+\end{lstlisting}
+
+使用下面的命令，可以查看Node所有已经实现的ES6特性。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ node --v8-options | grep harmony
+  --es_staging (enable test-worthy harmony features (for internal use only))
+  --harmony (enable all completed harmony features)
+  --harmony_shipping (enable all shipped harmony features)
+  --harmony_array_prototype_values (enable "harmony Array.prototype.values" (in progress))
+  --harmony_function_sent (enable "harmony function.sent" (in progress))
+  --harmony_sharedarraybuffer (enable "harmony sharedarraybuffer" (in progress))
+  --harmony_simd (enable "harmony simd" (in progress))
+  --harmony_explicit_tailcalls (enable "harmony explicit tail calls" (in progress))
+  --harmony_do_expressions (enable "harmony do-expressions" (in progress))
+  --harmony_restrictive_generators (enable "harmony restrictions on generator declarations" (in progress))
+  --harmony_regexp_named_captures (enable "harmony regexp named captures" (in progress))
+  --harmony_regexp_property (enable "harmony unicode regexp property classes" (in progress))
+  --harmony_for_in (enable "harmony for-in syntax" (in progress))
+  --harmony_trailing_commas (enable "harmony trailing commas in function parameter lists" (in progress))
+  --harmony_regexp_lookbehind (enable "harmony regexp lookbehind")
+  --harmony_tailcalls (enable "harmony tail calls")
+  --harmony_async_await (enable "harmony async-await")
+  --harmony_string_padding (enable "harmony String-padding methods")
+  --harmony_restrictive_declarations (enable "harmony limitations on sloppy mode function declarations")
+  --harmony_object_values_entries (enable "harmony Object.values / Object.entries")
+  --harmony_object_own_property_descriptors (enable "harmony Object.getOwnPropertyDescriptors()")
+\end{lstlisting}
+
+上面命令的输出结果，会因为版本的不同而有所不同。
+
+
+ES-Checker模块可以用来检查各种运行环境（例如Node或浏览器）对ES6的支持情况。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ sudo npm install -g es-checker
+$ es-checker
+ECMAScript 6 Feature Detection (v1.4.0)
+
+Variables
+  √ let and const
+  √ TDZ error for too-early access of let or const declarations
+  √ Redefinition of const declarations not allowed
+  √ destructuring assignments/declarations for arrays and objects
+  √ ... operator
+
+Data Types
+  √ For...of loop
+  √ Map, Set, WeakMap, WeakSet
+  √ Symbol
+  √ Symbols cannot be implicitly coerced
+
+Number
+  √ Octal (e.g. 0o1 ) and binary (e.g. 0b10 ) literal forms
+  √ Old octal literal invalid now (e.g. 01 )
+  √ Static functions added to Math (e.g. Math.hypot(), Math.acosh(), Math.imul() )
+  √ Static functions added to Number (Number.isNaN(), Number.isInteger() )
+
+String
+  √ Methods added to String.prototype (String.prototype.includes(), String.prototype.repeat() )
+  √ Unicode code-point escape form in string literals (e.g. \u{20BB7} )
+  √ Unicode code-point escape form in identifier names (e.g. var \u{20BB7} = 42; )
+  √ Unicode code-point escape form in regular expressions (e.g. var regexp = /\u{20BB7}/u; )
+  √ y flag for sticky regular expressions (e.g. /b/y )
+  √ Template String Literals
+
+Function
+  √ arrow function
+  √ default function parameter values
+  √ destructuring for function parameters
+  √ Inferences for function name property for anonymous functions
+  × Tail-call optimization for function calls and recursion
+
+Array
+  × Methods added to Array.prototype ([].fill(), [].find(), [].findIndex(), [].entries(), [].keys(), [].values() )
+  √ Static functions added to Array (Array.from(), Array.of() )
+  √ TypedArrays like Uint8Array, ArrayBuffer, Int8Array(), Int32Array(), Float64Array()
+  √ Some Array methods (e.g. Int8Array.prototype.slice(), Int8Array.prototype.join(), Int8Array.prototype.forEach() ) added to the TypedArray prototypes
+  √ Some Array statics (e.g. Uint32Array.from(), Uint32Array.of() ) added to the TypedArray constructors
+
+Object
+  √ __proto__ in object literal definition sets [[Prototype]] link
+  √ Static functions added to Object (Object.getOwnPropertySymbols(), Object.assign() )
+  √ Object Literal Computed Property
+  √ Object Literal Property Shorthands
+  √ Proxies
+  √ Reflect
+
+Generator and Promise
+  √ Generator function
+  √ Promises
+
+Class
+  √ Class
+  √ super allowed in object methods
+  √ class ABC extends Array { .. }
+
+Module
+  × Module export command
+  × Module import command
+
+
+=========================================
+Passes 38 feature Detections
+Your runtime supports 90% of ECMAScript 6
+=========================================
+\end{lstlisting}
+
+
+\section{Babel}
+
+
+Babel是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。这意味着，你可以用ES6的方式编写程序，又不用担心现有环境是否支持。
+
+
+\begin{lstlisting}[language=JavaScript]
+// 转码前
+input.map(item => item + 1);
+
+// 转码后
+input.map(function (item) {
+  return item + 1;
+});
+\end{lstlisting}
+
+
+
+上面的原始代码用了箭头函数(\texttt{=>})，这个特性还没有得到广泛支持，Babel将其转为普通函数，就能在现有的JavaScript环境执行了。
+
+
+
+Babel也可以用于浏览器环境。但是，从Babel 6.0开始，不再直接提供浏览器版本，而是要用构建工具构建出来。如果你没有或不想使用构建工具，可以通过安装5.x版本的babel-core模块获取。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install babel-core@5
+\end{lstlisting}
+
+运行上面的命令以后，就可以在当前目录的node\_modules/babel-core/子目录里面，找到babel的浏览器版本browser.js（未精简）和browser.min.js（已精简）。
+
+然后，将下面的代码插入网页。
+
+\begin{lstlisting}[language=JavaScript]
+<script src="node_modules/babel-core/browser.js"></script>
+<script type="text/babel">
+// Your ES6 code
+</script>
+\end{lstlisting}
+
+
+上面代码中，browser.js是Babel提供的转换器脚本，可以在浏览器运行。用户的ES6脚本放在script标签之中，但是要注明\texttt{type="text/babel"}。
+
+另一种方法是使用babel-standalone模块提供的浏览器版本，将其插入网页。
+
+
+\begin{lstlisting}[language=JavaScript]
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.4.4/babel.min.js"></script>
+<script type="text/babel">
+// Your ES6 code
+</script>
+\end{lstlisting}
+
+
+注意，网页中实时将ES6代码转为ES5，对性能会有影响。生产环境需要加载已经转码完成的脚本。
+
+下面是如何将代码打包成浏览器可以使用的脚本，以Babel配合Browserify为例。首先，安装babelify模块。
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install --save-dev babelify babel-preset-es2015
+\end{lstlisting}
+
+然后，再用命令行转换ES6脚本。
+
+\begin{lstlisting}[language=JavaScript]
+$  browserify script.js -o bundle.js \
+  -t [ babelify --presets [ es2015 ] ]
+\end{lstlisting}
+
+上面代码将ES6脚本script.js，转为bundle.js，浏览器直接加载后者就可以了。
+
+在package.json设置下面的代码，就不用每次命令行都输入参数了。
+
+
+\begin{lstlisting}[language=JavaScript]
+{
+  "browserify": {
+    "transform": [["babelify", { "presets": ["es2015"] }]]
+  }
+}
+\end{lstlisting}
+
+Babel提供一个REPL在线编译器(\url{https://babeljs.io/repl/})，可以在线将ES6代码转为ES5代码。转换后的代码，可以直接作为ES5代码插入网页运行。
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\subsection{.babelrc}
+
+
+
+Babel的配置文件是.babelrc，存放在项目的根目录下。使用Babel的第一步，就是配置这个文件。
+
+
+该文件用来设置转码规则和插件，基本格式如下。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+{
+  "presets": [],
+  "plugins": []
+}
+\end{lstlisting}
+
+presets字段设定转码规则，官方提供以下的规则集，你可以根据需要安装。
+
+
+\begin{lstlisting}[language=JavaScript]
+# ES2015转码规则
+$ npm install --save-dev babel-preset-es2015
+
+# react转码规则
+$ npm install --save-dev babel-preset-react
+
+# ES7不同阶段语法提案的转码规则（共有4个阶段），选装一个
+$ npm install --save-dev babel-preset-stage-0
+$ npm install --save-dev babel-preset-stage-1
+$ npm install --save-dev babel-preset-stage-2
+$ npm install --save-dev babel-preset-stage-3
+\end{lstlisting}
+
+然后，将这些规则加入.babelrc。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+{
+    "presets": [
+      "es2015",
+      "react",
+      "stage-2"
+    ],
+    "plugins": []
+}
+\end{lstlisting}
+
+
+注意，以下所有Babel工具和模块的使用，都必须先写好.babelrc。
+
+\begin{compactitem}
+\item babel-cli
+\item babel-node
+\item babel-register
+\item babel-core
+\item babel-polyfill
+\end{compactitem}
+
+
+\subsection{babel-cli}
+
+Babel提供babel-cli工具，用于命令行转码。
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install --global babel-cli
+# 转码结果输出到标准输出
+$ babel example.js
+
+# 转码结果写入一个文件
+# --out-file 或 -o 参数指定输出文件
+$ babel example.js --out-file compiled.js
+# 或者
+$ babel example.js -o compiled.js
+
+# 整个目录转码
+# --out-dir 或 -d 参数指定输出目录
+$ babel src --out-dir lib
+# 或者
+$ babel src -d lib
+
+# -s 参数生成source map文件
+$ babel src -d lib -s
+\end{lstlisting}
+
+上面代码是在全局环境下，进行Babel转码。这意味着，如果项目要运行，全局环境必须有Babel，也就是说项目产生了对环境的依赖。另一方面，这样做也无法支持不同项目使用不同版本的Babel。
+
+一个解决办法是将babel-cli安装在项目之中。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install --save-dev babel-cli
+\end{lstlisting}
+
+
+然后，改写package.json。
+
+
+\begin{lstlisting}[language=JavaScript]
+{
+  // ...
+  "devDependencies": {
+    "babel-cli": "^6.0.0"
+  },
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+}
+\end{lstlisting}
+
+转码的时候，就执行下面的命令。
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+$ npm run build
+\end{lstlisting}
+
+
+\subsection{babel-node}
+
+
+
+babel-cli工具自带一个babel-node命令，提供一个支持ES6的REPL环境。它支持Node的REPL环境的所有功能，而且可以直接运行ES6代码。
+
+它不用单独安装，而是随babel-cli一起安装。然后，执行babel-node就进入REPL环境。
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+$ babel-node
+> (x => x * 2)(1)
+2
+\end{lstlisting}
+
+babel-node命令可以直接运行ES6脚本。将上面的代码放入脚本文件es6.js，然后直接运行。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ babel-node es6.js
+2
+\end{lstlisting}
+
+
+
+babel-node也可以安装在项目中。
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install --save-dev babel-cli
+\end{lstlisting}
+
+
+然后，改写package.json。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+{
+  "scripts": {
+    "script-name": "babel-node script.js"
+  }
+}
+\end{lstlisting}
+
+上面代码中，使用babel-node替代node，这样script.js本身就不用做任何转码处理。
+
+\subsection{babel-register}
+
+babel-register模块改写require命令，为它加上一个钩子。此后，每当使用require加载.js、.jsx、.es和.es6后缀名的文件，就会先用Babel进行转码。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install --save-dev babel-register
+\end{lstlisting}
+
+
+
+使用时，必须首先加载babel-register。
+
+\begin{lstlisting}[language=JavaScript]
+require("babel-register");
+require("./index.js");
+\end{lstlisting}
+
+
+然后，就不需要手动对index.js转码了。
+
+需要注意的是，babel-register只会对require命令加载的文件转码，而不会对当前文件转码。另外，由于它是实时转码，所以只适合在开发环境使用。
+
+
+
+\subsection{babel-core}
+
+
+如果某些代码需要调用Babel的API进行转码，就要使用babel-core模块。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install babel-core --save
+\end{lstlisting}
+
+
+然后，在项目中就可以调用babel-core。
+
+
+\begin{lstlisting}[language=JavaScript]
+var babel = require('babel-core');
+
+// 字符串转码
+babel.transform('code();', options);
+// => { code, map, ast }
+
+// 文件转码（异步）
+babel.transformFile('filename.js', options, function(err, result) {
+  result; // => { code, map, ast }
+});
+
+// 文件转码（同步）
+babel.transformFileSync('filename.js', options);
+// => { code, map, ast }
+
+// Babel AST转码
+babel.transformFromAst(ast, code, options);
+// => { code, map, ast }
+\end{lstlisting}
+
+
+下面是一个例子。
+
+\begin{lstlisting}[language=JavaScript]
+var es6Code = 'let x = n => n + 1';
+var es5Code = require('babel-core')
+  .transform(es6Code, {
+    presets: ['es2015']
+  })
+  .code;
+// '"use strict";\n\nvar x = function x(n) {\n  return n + 1;\n};'
+\end{lstlisting}
+
+
+上面代码中，transform方法的第一个参数是一个字符串，表示需要被转换的ES6代码，第二个参数是转换的配置对象。
+
+\subsection{babel-polyfill}
+
+Babel默认只转换新的JavaScript句法（syntax），而不转换新的API，比如Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise等全局对象，以及一些定义在全局对象上的方法（比如Object.assign）都不会转码。
+
+举例来说，ES6在Array对象上新增了Array.from方法。Babel就不会转码这个方法。如果想让这个方法运行，必须使用babel-polyfill，为当前环境提供一个垫片。
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install --save babel-polyfill
+\end{lstlisting}
+
+
+
+然后，在脚本头部，加入如下一行代码。
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+import 'babel-polyfill';
+// 或者
+require('babel-polyfill');
+\end{lstlisting}
+
+
+Babel默认不转码的API非常多。
+
+
+\section{ESLint}
+
+
+许多工具需要Babel进行前置转码，这里举两个例子：ESLint和Mocha。
+
+ESLint用于静态检查代码的语法和风格，安装命令如下。
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install --save-dev eslint babel-eslint
+\end{lstlisting}
+
+
+然后，在项目根目录下，新建一个配置文件.eslintrc，在其中加入parser字段。
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+{
+  "parser": "babel-eslint",
+  "rules": {
+    ...
+  }
+}
+\end{lstlisting}
+
+再在package.json之中，加入相应的scripts脚本。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+{
+    "name": "my-module",
+    "scripts": {
+      "lint": "eslint my-files.js"
+    },
+    "devDependencies": {
+      "babel-eslint": "...",
+      "eslint": "..."
+    }
+}
+\end{lstlisting}
+
+\section{Mocha}
+
+Mocha则是一个测试框架，如果需要执行使用ES6语法的测试脚本，可以修改package.json的scripts.test。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+"scripts": {
+  "test": "mocha --ui qunit --compilers js:babel-core/register"
+}
+\end{lstlisting}
+
+
+上面命令中，\texttt{-\/-compilers}参数指定脚本的转码器，规定后缀名为js的文件，都需要使用babel-core/register先转码。
+
+
+\section{Traceur}
+
+Google公司的Traceur转码器，也可以将ES6代码转为ES5代码。
+
+Traceur允许将ES6代码直接插入网页。首先，必须在网页头部加载Traceur库文件。
+
+\begin{lstlisting}[language=JavaScript]
+<script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
+<script src="https://google.github.io/traceur-compiler/bin/BrowserSystem.js"></script>
+<script src="https://google.github.io/traceur-compiler/src/bootstrap.js"></script>
+<script type="module">
+  import './Greeter.js';
+</script>
+\end{lstlisting}
+
+上面代码中，一共有4个script标签。第一个是加载Traceur的库文件，第二个和第三个是将这个库文件用于浏览器环境，第四个则是加载用户脚本，这个脚本里面可以使用ES6代码。
+
+注意，第四个script标签的type属性的值是module，而不是text/javascript。这是Traceur编译器识别ES6代码的标志，编译器会自动将所有type=module的代码编译为ES5，然后再交给浏览器执行。
+
+除了引用外部ES6脚本，也可以直接在网页中放置ES6代码。
+
+\begin{lstlisting}[language=JavaScript]
+<script type="module">
+  class Calc {
+    constructor(){
+      console.log('Calc constructor');
+    }
+    add(a, b){
+      return a + b;
+    }
+  }
+
+  var c = new Calc();
+  console.log(c.add(4,5));
+</script>
+\end{lstlisting}
+
+正常情况下，上面代码会在控制台打印出9。
+
+如果想对Traceur的行为有精确控制，可以采用下面参数配置的写法。
+
+\begin{lstlisting}[language=JavaScript]
+<script>
+  // Create the System object
+  window.System = new traceur.runtime.BrowserTraceurLoader();
+  // Set some experimental options
+  var metadata = {
+    traceurOptions: {
+      experimental: true,
+      properTailCalls: true,
+      symbols: true,
+      arrayComprehension: true,
+      asyncFunctions: true,
+      asyncGenerators: exponentiation,
+      forOn: true,
+      generatorComprehension: true
+    }
+  };
+  // Load your module
+  System.import('./myModule.js', {metadata: metadata}).catch(function(ex) {
+    console.error('Import failed', ex.stack || ex);
+  });
+</script>
+\end{lstlisting}
+
+
+上面代码中，首先生成Traceur的全局对象window.System，然后System.import方法可以用来加载ES6模块。加载的时候，需要传入一个配置对象metadata，该对象的traceurOptions属性可以配置支持ES6功能。如果设为\texttt{experimental: true}，就表示除了ES6以外，还支持一些实验性的新功能。
+
+
+Traceur也提供一个在线编译器，可以在线将ES6代码转为ES5代码。转换后的代码，可以直接作为ES5代码插入网页运行。
+
+上面的例子转为ES5代码运行，就是下面这个样子。
+
+
+\begin{lstlisting}[language=JavaScript]
+<script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
+<script src="https://google.github.io/traceur-compiler/bin/BrowserSystem.js"></script>
+<script src="https://google.github.io/traceur-compiler/src/bootstrap.js"></script>
+<script>
+$traceurRuntime.ModuleStore.getAnonymousModule(function() {
+  "use strict";
+
+  var Calc = function Calc() {
+    console.log('Calc constructor');
+  };
+
+  ($traceurRuntime.createClass)(Calc, {add: function(a, b) {
+    return a + b;
+  }}, {});
+
+  var c = new Calc();
+  console.log(c.add(4, 5));
+  return {};
+});
+</script>
+\end{lstlisting}
+
+作为命令行工具使用时，Traceur是一个Node的模块，首先需要用Npm安装。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+$ npm install -g traceur
+\end{lstlisting}
+
+安装成功后，就可以在命令行下使用Traceur了。
+
+Traceur直接运行es6脚本文件，会在标准输出显示运行结果，以前面的calc.js为例。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ traceur calc.js
+Calc constructor
+9
+\end{lstlisting}
+
+
+如果要将ES6脚本转为ES5保存，要采用下面的写法。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ traceur --script calc.es6.js --out calc.es5.js
+\end{lstlisting}
+
+上面代码的--script选项表示指定输入文件，--out选项表示指定输出文件。
+
+为了防止有些特性编译不成功，最好加上--experimental选项。
+
+
+\begin{lstlisting}[language=JavaScript]
+$ traceur --script calc.es6.js --out calc.es5.js --experimental
+\end{lstlisting}
+
+命令行下转换生成的文件，就可以直接放到浏览器中运行。
+
+
+Traceur的Node.js用法如下（假定已安装traceur模块）。
+
+
+\begin{lstlisting}[language=JavaScript]
+var traceur = require('traceur');
+var fs = require('fs');
+
+// 将ES6脚本转为字符串
+var contents = fs.readFileSync('es6-file.js').toString();
+
+var result = traceur.compile(contents, {
+  filename: 'es6-file.js',
+  sourceMap: true,
+  // 其他设置
+  modules: 'commonjs'
+});
+
+if (result.error)
+  throw result.error;
+
+// result对象的js属性就是转换后的ES5代码
+fs.writeFileSync('out.js', result.js);
+// sourceMap属性对应map文件
+fs.writeFileSync('out.js.map', result.sourceMap);
+\end{lstlisting}
+
+
+
+\chapter{Variable}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\chapter{Datatype}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\chapter{Number}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+\chapter{String}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+\chapter{Function}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\chapter{Array}
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{Object}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\chapter{Generator}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+\chapter{Promise}
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\chapter{Class}
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
 
 
