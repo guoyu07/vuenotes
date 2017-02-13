@@ -473,6 +473,248 @@ function runBatcherQueue(queue) {
 \end{lstlisting}
 
 
+\section{const}
+
+
+\subsection{Constant}
+
+
+
+const用于声明一个常量，一旦声明就会进入只读模式，常量的值就不能再被更改。
+
+
+\begin{lstlisting}[language=JavaScript]
+> const PI = 3.141;
+> PI // 3.141
+> PI = 3; 
+Uncaught TypeError: Assignment to constant variable.
+    at <anonymous>:1:4
+> PI
+3.141 //重新赋值无效,PI值不变
+\end{lstlisting}
+
+
+\subsection{Variable}
+
+
+在严格模式下，对已使用const声明的变量重新赋新值会报错。
+
+const声明后不得再更改的特性意味着在声明变量时就必须初始化，不能仅声明而不进行初始化，或者留到后续进行初始化。
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+> const PI;
+Uncaught SyntaxError: Missing initializer in const declaration
+\end{lstlisting}
+
+在严格模式下，使用const声明变量不赋值会报错。
+
+const的作用域和let相同，只在声明所在的块级作用域内有效，const和let都不允许重复声明，不存在变量提升，而且const和let都有TDZ。
+
+\begin{compactitem}
+\item const的作用域和let相同；
+\item const和let声明的变量只在声明所在的块级作用域内有效；
+\item const和let都不允许重复声明；
+\item const和let都不存在变量提升；
+\item const和let都有TDZ。
+\end{compactitem}
+
+const在声明复合类型的变量时，只能保证变量名指向的地址不变，并不保证该地址的数据不变。
+
+复合类型的变量名指向数据地址而不指向数据，因此使用const声明一个对象，并不能保证对象不可更改。
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+> const obj = {};
+> obj.age = 4;
+> obj
+Object {age: 4}
+> obj = {};
+Uncaught TypeError: Assignment to constant variable.
+    at <anonymous>:1:5
+\end{lstlisting}
+
+使用const声明一个对象后，对象内的属性仍然可以修改，但是不可修改对象所指向的地址。
+
+ES6提供了Object.freeze()、Object.seal()和Object.preventExtensions()等方法来标记一个对象为不可扩展的（non-extensible）。
+
+Vue.js中的常用变量都采用const来声明，例如Vue.js的transition的动画类型的声明如下：
+
+
+\begin{lstlisting}[language=JavaScript]
+const TYPE_TRANSITION = 'transition';
+const TYPE_ANIMATION = 'animation';
+\end{lstlisting}
+
+Vue.js的正则检测的常量也是用const来声明，这样正则表达式一经声明就不可再更改。
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+const bindRE = /^:|^v-bind:/
+const onRE = /^@|^v-on:/
+const argRE = /:(.*)$/
+const modifierRE = /\.[^\.]+/g
+\end{lstlisting}
+
+
+
+\chapter{Object}
+
+
+\section{Object.create}
+
+创建一个拥有指定原型和若干执行属性的对象。
+
+下面的示例使用Object.create实现类式继承（这是一个单继承）：
+
+\begin{lstlisting}[language=JavaScript]
+// Shape - superclass
+function Shape() {
+  this.x = 0;
+  this.y = 0;
+}
+
+Shape.prototype.move = function(x,y) {
+  this.x += x;
+  this.y += y;
+  console.info("Shape moved.");
+};
+
+// Rectange - subclass
+function Rectangle () {
+  Shape.call(this); // call super constructor
+}
+
+Rectangle.prototype = Object.create(Shape.prototype);
+
+var rect = new Rectangle();
+rect instanceof Rectangle; // true
+rect instanceof Shape; // true
+rect.move(1,1); // "Shape moved."
+
+\end{lstlisting}
+
+
+\subsection{Syntax}
+
+
+\begin{lstlisting}[language=JavaScript]
+Object.create(proto, [ propertiesObject ])
+\end{lstlisting}
+
+
+\subsection{Parameter}
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+\begin{compactitem}
+\item proto(必选)：一个作为新创建对象的原型的对象
+\item propertiesObject(可选)：该参数对象是一个数组与值，该对象的属性名称将是新创建的对象的属性名称，值是属性描述符。
+\end{compactitem}
+
+注意，proto不能是undefined，而且只有该对象自身拥有的可枚举的属性才有效，也就是说，该对象的原型链上的属性是无效的。
+
+\subsection{Exception}
+
+使用Object.create创建对象时，如果proto参数不是null或对象值，那么就抛出一个TypeError异常。
+
+
+
+Vue.js的src/core/global-api/extend.js中使用Object.create的示例如下：
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+/* @flow */
+
+import config from '../config'
+import { warn, mergeOptions } from '../util/index'
+
+export function initExtend (Vue: GlobalAPI) {
+  /**
+   * Each instance constructor, including Vue, has a unique
+   * cid. This enables us to create wrapped "child
+   * constructors" for prototypal inheritance and cache them.
+   */
+  Vue.cid = 0
+  let cid = 1
+
+  /**
+   * Class inheritance
+   */
+  Vue.extend = function (extendOptions: Object): Function {
+    extendOptions = extendOptions || {}
+    const Super = this
+    const isFirstExtend = Super.cid === 0
+    if (isFirstExtend && extendOptions._Ctor) {
+      return extendOptions._Ctor
+    }
+    let name = extendOptions.name || Super.options.name
+    if (process.env.NODE_ENV !== 'production') {
+      if (!/^[a-zA-Z][\w-]*$/.test(name)) {
+        warn(
+          'Invalid component name: "' + name + '". Component names ' +
+          'can only contain alphanumeric characaters and the hyphen.'
+        )
+        name = null
+      }
+    }
+    const Sub = function VueComponent (options) {
+      this._init(options)
+    }
+    Sub.prototype = Object.create(Super.prototype)
+    Sub.prototype.constructor = Sub
+    Sub.cid = cid++
+    Sub.options = mergeOptions(
+      Super.options,
+      extendOptions
+    )
+    Sub['super'] = Super
+    // allow further extension
+    Sub.extend = Super.extend
+    // create asset registers, so extended classes
+    // can have their private assets too.
+    config._assetTypes.forEach(function (type) {
+      Sub[type] = Super[type]
+    })
+    // enable recursive self-lookup
+    if (name) {
+      Sub.options.components[name] = Sub
+    }
+    // keep a reference to the super options at extension time.
+    // later at instantiation we can check if Super's options have
+    // been updated.
+    Sub.superOptions = Super.options
+    Sub.extendOptions = extendOptions
+    // cache constructor
+    if (isFirstExtend) {
+      extendOptions._Ctor = Sub
+    }
+    return Sub
+  }
+}
+\end{lstlisting}
+
+
+
+
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -483,6 +725,25 @@ function runBatcherQueue(queue) {
 
 
 
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
 \begin{lstlisting}[language=JavaScript]
 
 \end{lstlisting}
@@ -499,6 +760,26 @@ function runBatcherQueue(queue) {
 
 
 
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
 \begin{lstlisting}[language=JavaScript]
 
 \end{lstlisting}
@@ -516,6 +797,14 @@ function runBatcherQueue(queue) {
 
 
 
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -524,6 +813,82 @@ function runBatcherQueue(queue) {
 
 
 
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
 
 
 \chapter{Node.js}
