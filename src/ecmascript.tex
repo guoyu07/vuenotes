@@ -575,9 +575,9 @@ const modifierRE = /\.[^\.]+/g
 
 \section{Object.create}
 
-创建一个拥有指定原型和若干执行属性的对象。
+创建一个拥有指定原型和若干指定属性的对象。
 
-下面的示例使用Object.create实现类式继承（这是一个单继承）：
+下面的示例使用Object.create()实现类式继承（这是一个单继承）：
 
 \begin{lstlisting}[language=JavaScript]
 // Shape - superclass
@@ -593,17 +593,18 @@ Shape.prototype.move = function(x,y) {
 };
 
 // Rectange - subclass
-function Rectangle () {
+function Rectangle() {
   Shape.call(this); // call super constructor
 }
 
 Rectangle.prototype = Object.create(Shape.prototype);
 
 var rect = new Rectangle();
+
 rect instanceof Rectangle; // true
 rect instanceof Shape; // true
-rect.move(1,1); // "Shape moved."
 
+rect.move(1,1); // "Shape moved."
 \end{lstlisting}
 
 
@@ -619,7 +620,7 @@ Object.create(proto, [ propertiesObject ])
 
 
 \begin{lstlisting}[language=JavaScript]
-
+Object.create(proto, [ propertiesObject ])
 \end{lstlisting}
 
 
@@ -628,11 +629,11 @@ Object.create(proto, [ propertiesObject ])
 \item propertiesObject(可选)：该参数对象是一个数组与值，该对象的属性名称将是新创建的对象的属性名称，值是属性描述符。
 \end{compactitem}
 
-注意，proto不能是undefined，而且只有该对象自身拥有的可枚举的属性才有效，也就是说，该对象的原型链上的属性是无效的。
+注意，propertiesObject不能是undefined，而且只有该对象自身拥有的可枚举的属性才有效，也就是说，该对象的原型链上的属性是无效的。
 
 \subsection{Exception}
 
-使用Object.create创建对象时，如果proto参数不是null或对象值，那么就抛出一个TypeError异常。
+使用Object.create()创建对象时，如果proto参数不是null或对象值，那么就抛出一个TypeError异常。
 
 
 
@@ -713,49 +714,46 @@ export function initExtend (Vue: GlobalAPI) {
 \end{lstlisting}
 
 
+\section{Object.keys}
+
+返回一个字符串数组，其元素来自于给定对象上可枚举的属性，这些属性的顺序和手动遍历该对象属性时的一致。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+var arr = ["a","b","c"];
+alert(Object.keys(arr)); // 0,1,2
+//类数组对象
+var obj = {0: "a", 1:"b", 2:"c"};
+alert(Object.keys(obj)); // 0,1,2
+// getFoo是一个不可枚举的属性
+var my_obj = Object.create({},{getFoo: {value: function() { return this.foo }}});
+my_obj.foo = 1;
+alert(Object.keys(my_obj)); // 只弹出foo
+\end{lstlisting}
+
+\subsection{Syntax}
+
+
+\begin{lstlisting}[language=JavaScript]
+Object.keys(obj)
+\end{lstlisting}
+
+
+\subsection{Parameter}
 
 
 
 
 \begin{lstlisting}[language=JavaScript]
-
+Object.keys(obj)
 \end{lstlisting}
 
 
+\begin{compactitem}
+\item obj(必选)：返回该对象的所有可枚举自身属性的属性名
+\end{compactitem}
 
-
-
-
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
-
-
-
-
-
-
-
-
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
-
-
-
-
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
-
-
-
-
-
-
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
 
 
 
@@ -763,27 +761,165 @@ export function initExtend (Vue: GlobalAPI) {
 
 
 \begin{lstlisting}[language=JavaScript]
+// Mix properties into target object
+export function extend (to,from) {
+  var keys = Object.keys(from)
+  var i = keys.length
+  while (i--) {
+    to[keys[i]] = from[keys[i]]
+  }
+  return to
+}
+\end{lstlisting}
 
+\section{Object.isExtensible}
+
+判断一个对象是否是可扩展的（是否可以在它上面添加新的属性）。
+
+
+\subsection{Syntax}
+
+
+\begin{lstlisting}[language=JavaScript]
+Object.isExtensible(obj)
 \end{lstlisting}
 
 
+\subsection{Parameter}
 
+
+\begin{compactitem}
+\item \texttt{obj \{Object\} }
+\end{compactitem}
+
+默认情况下，对象是可扩展的，即可以为其添加新的属性并且其\_\_proto\_\_属性可以被更改。
+
+Object.preventExtensions、Object.seal或Object.freeze方法都可以标记一个对象为不可扩展的（non-extensible）。
+
+\begin{compactitem}
+\item 在ES5中，如果参数不是对象类型，Object.isExtensible()将抛出一个TypeError异常。
+\item 在ES6中，非对象参数将被视为一个不可扩展的普通对象，因此会返回false。
+\end{compactitem}
 
 
 
 \begin{lstlisting}[language=JavaScript]
+// 新对象默认是可扩展的
+var empty = {};
+Object.isExtensible(empty); // ===true
 
+// 新对象可以变得不可扩展
+Object.preventExtensions(empty);
+Object.isExtensible(empty); // ===false
+
+// 密封对象是不可扩展的
+var sealed = Object.seal({});
+Object.isExtensible(sealed); // === false
+
+// 冻结对象也是不可扩展的
+var frozen = Object.freeze({});
+Object.isExtensible(frozen); // === false
 \end{lstlisting}
 
 
 
+\section{Object.getOwnPropertyNames}
+
+返回一个由指定对象的所有自身属性的属性名（包括不可枚举的属性）组成的数组。
+
+\begin{compactitem}
+\item 数组中枚举属性的顺序与通过for...in loop（或Object.keys）迭代该对象属性时的一致。
+\item 数组中的不可枚举属性的顺序未定义。
+\end{compactitem}
+
+\subsection{Syntax}
 
 
 
 \begin{lstlisting}[language=JavaScript]
-
+Object.getOwnPropertyNames(obj)
 \end{lstlisting}
 
+
+\subsection{Parameter}
+
+
+\begin{compactitem}
+\item \texttt{obj \{Object\}}
+\end{compactitem}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+var arr = ["a","b","c"];
+console.log(Object.getOwnPropertyNames(arr).sort()); 
+// ["0","1","2","length"]
+
+// 类数组对象
+var obj = {0: "a", 1:"b", 2:"c"};
+console.log(Object.getOwnPropertyNames(obj).sort());
+// ["0","1","2"]
+
+// 使用Array.forEach输出属性名和属性值
+Object.getOwnPropertyNames(obj).forEach(function(val,idx,array){\
+  console.log(val + " -> " + obj[val]);
+});
+// 输出
+// 0 -> a
+// 1 -> b
+// 2 -> c
+
+// 不可枚举的属性
+var my_obj = Object.create({}, {
+  getFoo: {
+     value: function() {return this.foo;},
+     enumerable: false
+  }
+});
+my_obj.foo = 1;
+console.log(Object.getOwnPropertyNames(my_obj).sort()); 
+// ["foo","getFoo"]
+\end{lstlisting}
+
+
+\section{Object.defineProperty}
+
+直接在一个对象上定义一个新属性，或者修改一个已经存在的属性，并返回这个对象。
+
+Object.defineProperty()方法在Vue.js中发挥着极为重要的作用——Vue.js实现数据和视图联动的核心原理就是Object.defineProperty()。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+/**
+ * Define a property
+ */
+export function def(obj: Object, key: string, val: any, enumerable?: boolean) {
+  Object.defineProperty(obj, key, {
+    value: val,
+    enumerable: !!enumerable,
+    writable: true,
+    configurable: true
+  })
+}
+\end{lstlisting}
+
+
+\subsection{Syntax}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+Object.defineProperty(obj,prop,descriptor)
+\end{lstlisting}
+
+\subsection{Parameter}
+
+\begin{compactitem}
+\item obj：需要定义属性的对象
+\item prop：需要被定义或修改的属性名
+\item descriptor：需要被定义或修改的属性的描述符
+\end{compactitem}
 
 
 
@@ -1812,34 +1948,88 @@ fs.writeFileSync('out.js.map', result.sourceMap);
 \chapter{Function}
 
 
+\section{Curry}
+
+
+函数柯里化（curry）过程通过逐步传参，在每一步中返回一个更具体的部分配置的函数。
+
+函数柯里化不断传参的过程可以实现对函数的高度服用，而且函数柯里化利用闭包、高阶函数特性来实现动态创建函数和函数复用，最终使得代码逻辑更加清晰，代码实现更加优雅。
+
+
+
+
+
+
+通常情况下使用以下方式来注册DOM事件：
 
 \begin{lstlisting}[language=JavaScript]
-
+var addEvent = function(el, type, fn, capture) {
+   if(window.addEventLister) {
+     el.addEventListener(type, function(e) {
+        fn.call(el,e);
+     },capture);
+   } else if (window.attachEvent) {
+     el.attachEvent("" + type, function(e) {
+       fn.call(el,e);
+     });
+   }
+}
 \end{lstlisting}
 
 
+使用上述方式的问题是每次调用addEvent方法时，都会执行一次判断来决定使用哪个方法来注册事件。
 
+实际上，可以在页面载入后只进行一次判断，然后就可以使用同一注册方法来注册不同的事件。
+
+下面的示例使用函数柯里化来实现动态创建函数。
 
 \begin{lstlisting}[language=JavaScript]
-
+var addEvent = (function(){
+  if(window.addEventListener) {
+    return function(el,sType,fn,capture){
+      el.addEventListener(sType,function(e){
+        fn.call(el,e);
+      },(capture));
+    };
+  } else if (window.attachEvent){
+    return function(el,sType,fn,capture){
+      el.attachEvent("" + type, function(e){
+        fn.call(el,e);
+      });
+    };
+  }
+})()
 \end{lstlisting}
 
+使用函数柯里化实现的自执行代码首先会判断浏览器支持的事件注册方法，根据不同的注册方法返回一个事件注册的函数赋值给addEvent，以后调用addEvent方法注册事件时，内部就不需要再次进行判断，直接使用当前浏览器支持的事件注册方法来注册相应的事件。
 
-
-
+如果需要求出10和任意数的和，可以使用下面的写法：
 
 \begin{lstlisting}[language=JavaScript]
+function sum(x,y) {
+   return x+y;
+}
 
+sum(10,20); // 30
+sum(10,55); // 65
 \end{lstlisting}
 
-
+这里，多次调用同一方法时会传入一个相同的参数10，如果使用函数柯里化就可以实现参数复用，例如：
 
 
 
 
 
 \begin{lstlisting}[language=JavaScript]
+function sum(x) {
+  return function(y) {
+    return x+y;
+  }
+}
 
+var addTen = sum(10);
+addTen(20); // 30
+addTen(55); // 65
 \end{lstlisting}
 
 
