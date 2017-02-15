@@ -1,0 +1,185 @@
+\part{Vue Element}
+
+
+\chapter{Overview}
+
+
+\chapter{key}
+
+key（string） 的特殊属性主要用在 Vue的虚拟DOM算法，在新旧nodes对比时辨识VNodes。
+
+\begin{compactitem}
+\item 如果不使用key，Vue会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。
+\item 使用key，Vue会基于key的变化重新排列元素顺序，并且会移除key不存在的元素。
+\end{compactitem}
+
+
+
+有相同父元素的子元素必须有唯一的key，否则重复的key会造成渲染错误。
+
+key的最常见的用例是结合 v-for:
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<ul>
+  <li v-for="item in items" :key="item.id"></li>
+</ul>
+\end{lstlisting}
+
+key也可以用于强制替换元素/组件而不是重复使用它，当遇到如下场景时它可能会很有用:
+
+\begin{compactitem}
+\item 完整地触发组件的生命周期钩子
+\item 触发过渡
+\end{compactitem}
+
+下面的示例中，当text发生改变时，<span>会随时被更新，因此会触发过渡。
+
+\begin{lstlisting}[language=JavaScript]
+<transition>
+  <span :key="text">{{ text }}</span>
+</transition>
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\chapter{ref}
+
+ref（string）被用来给元素或子组件注册引用信息，引用信息会根据父组件的\$refs对象进行注册。
+
+\begin{compactitem}
+\item 如果在普通的DOM元素上使用，那么引用信息就是元素；
+\item 如果在子组件上使用，那么引用信息就是组件实例。
+\end{compactitem}
+
+
+\begin{lstlisting}[language=JavaScript]
+<!-- vm.$refs.p will be the DOM node -->
+<p ref="p">hello</p>
+
+<!-- vm.$refs.child will be the child comp instance -->
+<child-comp ref="child"></child-comp>
+\end{lstlisting}
+
+
+当 v-for 用于元素或组件的时候，引用信息将是包含DOM节点或组件实例数组。
+
+关于ref注册时间的重要说明如下：
+
+\begin{compactitem}
+\item ref本身是作为渲染结果被创建的，在初始渲染的时候，不能访问它们 - 它们还不存在；
+\item \$refs 也不是响应式的，因此不应该试图用它在模版中做数据绑定。
+\end{compactitem}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\chapter{slot}
+
+
+slot（string）用于标记往哪个slot中插入子组件内容。
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+

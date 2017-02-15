@@ -1,0 +1,1081 @@
+\part{Vue Directive}
+
+
+\chapter{Overview}
+
+\begin{compactitem}
+\item 类型：
+\end{compactitem}
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-text}
+
+
+v-text可以更新元素的 textContent。如果要更新部分的 textContent ，需要使用 \{\{ Mustache \}\} 插值。
+
+\begin{compactitem}
+\item 类型：string
+\end{compactitem}
+
+
+\begin{lstlisting}[language=JavaScript]
+<span v-text="msg"></span>
+<!-- 和下面一样 -->
+<span>{{ msg }}</span>
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-html}
+
+v-html可以更新元素的 innerHTML 。
+
+注意，内容按普通 HTML 插入，不会作为 Vue 模板进行编译 。
+
+如果试图使用 v-html 组合模板，可以重新考虑是否通过使用组件（Component）来替代。
+
+\begin{compactitem}
+\item 类型：string
+\end{compactitem}
+
+在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 XSS 攻击。
+
+仅仅只在可信内容上使用 v-html，永远不要用在用户提交的内容上。
+
+
+\begin{lstlisting}[language=JavaScript]
+<div v-html="html"></div>
+<!-- 和下面的相同 -->
+<div>{{{ html }}}</div>
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-show}
+
+v-show可以根据表达式的真假值来切换元素的display CSS 属性。
+
+\begin{compactitem}
+\item 类型：any
+\end{compactitem}
+
+当条件变化时该指令触发过渡效果。
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-if}
+
+v-if可以根据表达式的值的真假条件渲染元素。
+
+在v-if切换时元素及它的数据绑定/组件被销毁并重建。如果元素是 <template> ，将提出它的内容作为条件块。
+
+\begin{compactitem}
+\item 类型：any
+\end{compactitem}
+
+当条件变化时该指令触发过渡效果。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-else}
+
+v-else可以为 v-if 或者 v-else-if 添加 “else 块”。
+
+
+
+\begin{compactitem}
+\item 类型：any
+\end{compactitem}
+
+
+\begin{lstlisting}[language=JavaScript]
+<div v-if="Math.random() > 0.5">
+  Now you see me
+</div>
+<div v-else>
+  Now you don't
+</div>
+\end{lstlisting}
+
+\begin{compactitem}
+\item 不需要表达式
+\item 前一兄弟元素必须有 v-if 或 v-else-if
+\end{compactitem}
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+\chapter{v-else-if}
+
+
+v-else-if可以为v-if表示“else if块”，支持链式使用。
+
+
+\begin{compactitem}
+\item 类型：any
+\end{compactitem}
+
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<div v-if="type === 'A'">
+   A
+</div>
+<div v-else-if="type ==='B'">
+   B
+</div>
+<div v-else-if="type === 'C'">
+   C
+</div>
+<div v-else>
+   Not A/B/C
+</div>
+\end{lstlisting}
+
+\begin{compactitem}
+\item 前一个同级元素必须具有v-if或v-else-if。
+\end{compactitem}
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-for}
+
+v-for可以基于源数据多次渲染元素或模板块。
+
+\begin{compactitem}
+\item 类型：Array|Object|number|string
+\end{compactitem}
+
+v-for指令的值必须使用特定语法\texttt{alias in expression}来为当前遍历的元素提供别名：
+
+
+\begin{lstlisting}[language=JavaScript]
+<div v-for="item in items">
+  {{ item.text }}
+</div>
+\end{lstlisting}
+
+另外，也可以为数组索引指定别名（或者用于对象的键）：
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<div v-for="(item, index) in items"></div>
+<div v-for="(val,key) in object"></div>
+<div v-for="(val,key,index) in object"></div>
+\end{lstlisting}
+
+v-fom默认行为将尝试不改变整体，只是替换元素。如果需要让v-for重新排序的元素，需要提供一个key的特殊属性，例如：
+
+
+\begin{lstlisting}[language=JavaScript]
+<div v-for="item in items" :key="item.id">
+  {{ item.text }}
+</div>
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-on}
+
+v-on可以绑定事件监听器，v-on绑定的事件类型由参数指定。
+
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 方法处理器 -->
+<button v-on:click="doThis"></button>
+<!-- 缩写 -->
+<button @click="doThis"></button>
+\end{lstlisting}
+
+
+\begin{compactitem}
+\item 缩写：@
+\item 类型：Function|Inline Statement
+\item 参数：event(必选)
+\end{compactitem}
+
+
+如果使用内联语句，语句可以访问一个 \$event 属性。例如，\texttt{v-on:click="handle('ok', \$event)"}。
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 内联语句 -->
+<button v-on:click="doThat('hello',$event)"></button>
+\end{lstlisting}
+
+\begin{compactitem}
+\item v-on用在普通元素上时，只能监听 原生 DOM 事件。
+
+在监听原生 DOM 事件时，方法以事件为唯一的参数。
+
+\item v-on用在自定义元素组件上时，也可以监听子组件触发的自定义事件。
+\end{compactitem}
+
+v-on支持的修饰符如下：
+
+
+\begin{compactitem}
+\item .stop：调用event.stopPropagation()
+\item .prevent：调用event.preventDefault()
+\item .capture：添加事件监听器时使用capture模式
+\item .self：只当事件是从监听器绑定的元素本身触发时才触发回调
+\item .\{keyCode|keyAlias\}：只当事件是从监听器绑定的元素本身触发时才触发回调
+\item .native：监听组件根元素的原生事件
+\end{compactitem}
+
+表达式可以是一个方法的名字或一个内联语句，如果没有修饰符也可以省略。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 方法处理器 -->
+<button v-on:click="doThis"></button>
+
+<!-- 内联语句 -->
+<button v-on:click="doThat('hello',$event)"></button>
+
+<!-- 缩写 -->
+<button @click="doThis"></button>
+
+<!-- 停止冒泡 -->
+<button @click.stop="doThis"></button>
+
+<!-- 阻止默认行为 -->
+<button @click.prevent="doThis"></button>
+
+<!-- 阻止默认行为,没有表达式 -->
+<form @submit.prevent></form>
+
+<!-- 串联修饰符 -->
+<button @click.stop.prevent="doThis"></button>
+
+<!-- 键修饰符,键别名 -->
+<input @keyup.enter="onEnter">
+
+<!-- 键修饰符,键代码 -->
+<input @keyup.13="onEnter''>
+\end{lstlisting}
+
+在子组件上监听自定义事件（当子组件触发 “my-event” 时将调用事件处理器）：
+
+\begin{lstlisting}[language=JavaScript]
+<my-component @my-event="handleThis''></my-component>
+
+<!-- 内联语句 -->
+<my-component @my-event="handleThis(123,$event)"></my-component>
+
+<!-- 组件中的原生事件 -->
+<my-component @click.native="onClick"></my-component>
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-bind}
+
+v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表达式。
+
+\begin{compactitem}
+\item 缩写：\texttt{:}
+\item 类型：any(with argument)|Object(without argument)
+\item 参数：attrOrProp(可选)
+\end{compactitem}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 绑定一个属性 -->
+<img v-bind:src="imageSrc">
+
+<!-- 缩写 -->
+<img :src="imageSrc">
+\end{lstlisting}
+
+
+\begin{compactitem}
+\item v-bind在绑定 class 或 style 特性时，支持其它类型的值（例如数组或对象）。
+
+
+\begin{lstlisting}[language=JavaScript]
+<!-- class绑定 -->
+<div :class="{ red: isRed }"></div>
+<div :class="[classA, classB]"></div>
+<div :class="[classA, { classB: isB, classC: isC }]"></div>
+
+<!-- style绑定 -->
+<div :style="{ fontSize: size + 'px' }"></div>
+<div :style="[styleObjectA, styleObjectB]"></div>
+\end{lstlisting}
+
+\item v-bind在绑定 prop 时，prop 必须在子组件中声明。可以用修饰符指定不同的绑定类型。
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 绑定一个有属性的对象 -->
+<div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
+
+<!-- 通过prop修饰符绑定DOM属性 -->
+<div v-bind:text-content.prop="text"></div>
+
+<!-- prop绑定,prop必须在my-component中声明 -->
+<my-component :prop="someThing"></my-component>
+\end{lstlisting}
+
+\end{compactitem}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 绑定一个属性 -->
+<img v-bind:src="imageSrc">
+
+<!-- 缩写 -->
+<img :src="imageSrc">
+
+<!-- 与内联字符串连接 -->
+<img :src="'/path/to/images/' + fileName ">
+
+<!-- class绑定 -->
+<div :class="{ red: isRed }"></div>
+<div :class="[classA, classB]"></div>
+<div :class="[classA, { classB: isB, classC: isC }]"></div>
+
+<!-- style绑定 -->
+<div :style="{ fontSize: size + 'px' }"></div>
+<div :style="[styleObjectA, styleObjectB]"></div>
+
+<!-- 绑定一个有属性的对象 -->
+<div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
+
+<!-- 通过prop修饰符绑定DOM属性 -->
+<div v-bind:text-content.prop="text"></div>
+
+<!-- prop绑定,prop必须在my-component中声明 -->
+<my-component :prop="someThing"></my-component>
+
+<!-- XLink -->
+<svg><a :xlink:special="foo"></svg>
+\end{lstlisting}
+
+\begin{compactitem}
+\item .camel修饰符允许在使用in-DOM模板时对v-bind属性名称进行camel化。例如，SVG的viewBox属性：
+
+\begin{lstlisting}[language=JavaScript]
+<svg :view-box.camel="viewBox"></svg>
+\end{lstlisting}
+
+
+\item 如果使用字符串模板或使用vue-loader/vueify进行编译，则不需要.camel。
+\end{compactitem}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+\chapter{v-model}
+
+v-model可以在表单控件（例如input、select和textarea）或者组件上创建双向绑定。
+
+
+\begin{compactitem}
+\item 类型：any
+\item 限制：
+
+\begin{compactenum}
+\item <input>
+\item <select>
+\item <textarea>
+\item components
+\end{compactenum}
+
+\item 修饰符
+
+\begin{compactenum}
+\item \texttt{.lazy}：取代input监听change事件
+\item \texttt{.number}：把输入的字符串转换为数字
+\item \texttt{.trim}：过滤输入的首尾空格
+\end{compactenum}
+
+\end{compactitem}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-pre}
+
+
+
+v-pre不需要表达式，其用途是跳过这个元素和它的子元素的编译过程。
+
+v-pre可以用来显示原始 Mustache 标签，或者跳过大量没有指令的节点来加快编译。
+
+
+\begin{lstlisting}[language=JavaScript]
+<span v-pre>{{ this will not be compiled }}</span>
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-cloak}
+
+v-cloak不需要表达式，可以用来保持在元素上直到关联实例结束编译。和 CSS 规则（例如\texttt{[v-cloak] \{ display: none \}} 一起用时，v-pre指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
+
+下面的v-cloak示例让元素不会显示，直到编译结束。
+
+\begin{lstlisting}[language=JavaScript]
+[v-cloak] {
+  display: none;
+}
+
+<div v-cloak>
+  {{ message }}
+</div>
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+\chapter{v-once}
+
+v-once不需要表达式，而且v-once可以只渲染元素和组件一次，这样随后的重新渲染中，元素/组件及其所有的子节点将被视为静态内容并跳过，从而可以用于优化更新性能。
+
+
+\begin{lstlisting}[language=JavaScript]
+<!-- 单个元素 -->
+<span v-once>This will never change: {{ msg }}</span>
+
+<!-- 有子元素 -->
+<div v-once>
+  <h1>comment</h1>
+  <p>{{ msg }}</p>
+</div>
+
+<!-- 组件 -->
+<my-component v-once :comment="msg"></my-component>
+
+<!-- v-for指令 -->
+<ul>
+  <li v-for="i in list" v-once>{{ i }}</li>
+</ul>
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
