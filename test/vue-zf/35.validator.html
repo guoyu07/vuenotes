@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<validator name="validation">
+				<form novalidate>
+					Zip: <input type="text" v-validate:zip="['required']" /><br />
+					<div>
+						<span v-if="$validation.zip.required">邮政编码是必填项</span>
+					</div>
+				</form>
+			</validator>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.24/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="//cdn.bootcss.com/vue-validator/2.1.3/vue-validator.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			
+			new Vue({
+				el: '#app'
+			});
+			
+		</script>
+		
+	</body>
+</html>

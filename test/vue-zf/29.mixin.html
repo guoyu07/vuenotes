@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<my-componet></my-componet>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+		
+			var myMixin = {
+				created: function () {
+					this.hello();
+				},
+				methods: {
+					hello: function () {
+						console.log('hello from mixin~');
+					}
+				}
+			}
+			
+			// 定义组件，使用混合对象
+			var com = Vue.extend({
+				mixins: [myMixin],
+				template: '<h1>HELLO ~</h1>',
+				created: function () {
+					console.log('component hook called');
+				}
+			});
+			
+			// 创建根实例
+			new Vue({
+				el: '#app',
+				components: {
+					'my-componet': com
+				}
+			});
+		
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			
+			<select v-model="bizLine">
+				<option v-for="option in options" :value="option.value">
+					{{option.value}} {{option.premium}}
+				</option>
+			</select>
+			<p>bizLine: {{bizLine}}</p>
+			
+			<input type="checkbox" v-model="toggle" :true-value="a" :false-value="b" />
+			勾选 checkbox时，vm.toggle === vm.a
+			未勾选 checkbox 时，vm.toggle === vm.b
+			<br />
+			
+			<input type="checkbox" id="falsh" :value="flash" v-model="bizLines" />
+			<label for="falsh">{{flash.name}}</label>
+			
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			new Vue({
+				el: '#app',
+				data: {
+					flash: {name: '快'},
+					bizLine: 'falsh',
+					toggle: '',
+					options: [
+						{ text: '快', value: 'falsh' },
+						{ text: '专', value: 'premium' }
+					]
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

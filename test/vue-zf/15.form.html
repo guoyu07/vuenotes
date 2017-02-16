@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			
+			<input type="checkbox" id="flash" value="flash" v-model="bizLines" />
+			<label for="flash">快</label>
+
+			<input type="checkbox" id="premium" value="premium" v-model="bizLines" />
+			<label for="premium">专</label>
+	
+			<p>Checked lines: {{bizLines | json}}</p>
+		
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					bizLines: []
+				},
+				ready: function() {
+					console.log( this.bizLines );
+				}
+			});
+			
+			console.log( vm.bizLines );
+			
+		</script>
+
+		
+		
+	</body>
+</html>

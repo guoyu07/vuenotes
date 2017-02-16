@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	<div id="app">
+		<comp v-ref:aa></comp>
+		<comp v-ref:bb></comp>
+	</div>
+	
+	<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script>
+	
+		Vue.component('comp', {
+			template: '<div>嘻嘻哈哈</div>',
+		});
+		
+		new Vue({
+			el: '#app',
+			data: {
+				msg: []
+			},
+			ready: function () {
+				console.log( this.$refs.aa );
+				console.log( this.$refs.bb );
+			}
+		});
+	
+	</script>
+	
+	</body>
+</html>

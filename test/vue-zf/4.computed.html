@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			{{message}}
+			{{b}}
+		</div>
+		
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					message: 'hello'
+				},
+				computed: {
+//					b: function() { // 获取b的值的时候，可以默认调用方法。
+//						// this 指向 当前实例 , 也就是 vm
+//						this.message = 'hello world';
+//						return 1000; 
+//					}
+						b: {
+							get: function() {
+								return 2000;
+							},
+							set: function ( val ) {
+								this.message = val;
+							}
+						}
+				}
+			});
+			
+			vm.b = 100;
+			
+		</script>
+		
+	</body>
+</html>

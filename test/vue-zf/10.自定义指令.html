@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<my-direactvie class="hello" name="hi" v-bind:a="someValue"></my-direactvie>
+			<input type="text" v-model="someValue" name="" id="" value="" />
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.elementDirective('my-direactvie', {
+				
+				params: ['a'],
+				
+				paramWatchers: {
+					a: function() {
+						console.log('a changed!');
+					}
+				}
+				
+			});
+			
+			new Vue({
+				el: '#app',
+				data: {
+					someValue: ''
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

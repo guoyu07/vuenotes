@@ -1,0 +1,31 @@
+{
+	// 表单整体验证
+	"valid": false, // 字段校验是否通过 
+	"invalid": true, // valid 取反
+	"touched": false, // 校验字段所在元素获得通过焦点时返回true，否则返回false
+	"untouched": true, // touched 取反
+	"modified": false, // 当元素值与初始值不同时返回true，否则返回false
+	"dirty": false, // 字段值改变过至少一次返回true，否则返回false 
+	"pristine": true, // dirty 取反
+	// 字段单一验证
+	"username": {
+		"required": true,
+		"modified": false,
+		"pristine": true,
+		"dirty": false,
+		"untouched": true, 
+		"touched": false,
+		"invalid": true,
+		"valid": false
+	},
+	"comment": {
+		"maxlength": false,
+		"modified": false,
+		"pristine": true,
+		"dirty": false,
+		"untouched": true,
+		"touched": false,
+		"invalid": false,
+		"valid": true
+	}
+}

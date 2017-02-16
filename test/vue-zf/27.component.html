@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<template id="pink">
+			<h1>pink</h1>
+			<slot>
+			asdf				
+			</slot>
+		</template>
+		
+		<template id="tan">
+			<h1>TAN</h1>
+			<slot>如果没有分发内容则显示我</slot>
+		</template>
+		
+		
+		
+		<div id="app">
+			<didi>
+				<h1>123</h1>
+				<pink>
+					<a href="#">123123</a>
+				</pink>
+				<tan></tan>
+			</didi>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+
+			Vue.component('didi', {
+//				template: '<h1>DIDI</h1>',
+			});
+			
+			Vue.component('pink', {
+				template: '#pink'
+			});
+			
+			Vue.component('tan', {
+				template: '#tan'
+			});
+
+			
+			new Vue({
+				el: '#app'
+			});
+			
+		</script>		
+		
+	</body>
+</html>

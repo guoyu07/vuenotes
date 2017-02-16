@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<!--<p v-text="message | reverse 'before' 'after'"></p>-->
+			<input type="text" v-text="msg | MSG" />
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+//			Vue.filter('reverse', function( val, begine, end ) {
+//				return begine + '---' + val + '---' + end;
+////				return val.split('').reverse().join('');
+//			});
+
+
+			Vue.filter('MSG', {
+				// model -> view
+				// read 函数可选
+				read: function() {
+					console.log( 123 );
+				},
+				
+				// view -> model
+				// write函数将在数据被写入Model之前调用
+				// 两个参数分别为表达式的新值和旧值
+				write: function( newVal, oldVal ) {
+					console.log( newVal, oldVal );
+				}
+			});
+			
+			new Vue({
+				el: '#app',
+				data: {
+					msg: ''
+				}
+			});
+			
+		</script>
+
+		
+	</body>
+</html>

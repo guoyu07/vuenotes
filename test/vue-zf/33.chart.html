@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<template id="chart">
+			<canvas class="vchart {{charType}}-chart" v-el:char-canvas :width="width" :height="height"></canvas>
+		</template>
+		
+		<div id="app">
+			
+			<fj-chart :datasets="datasets" :labels="labels" :width="width" :height="height"></fj-chart>
+			
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="//cdn.bootcss.com/Chart.js/2.0.0/Chart.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="//cdn.bootcss.com/Chart.js/2.0.1/Chart.bundle.min.js" type="text/javascript" charset="utf-8"></script>-->
+
+		<script type="text/javascript">
+			
+			// 暂未完成, 
+			
+			Vue.config.debug = true;
+			
+			var data = function () {
+				return {
+					width: 500,
+					height: 200,
+					labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+					datasets: [
+						{ label: '数据1', data: [110, 90, 100, 81, 106, 75, 88] },
+						{ label: '数据2', data: [100, 80, 90, 71, 96, 65, 78] },
+						{ label: '数据3', data: [90, 70, 80, 61, 86, 55, 68] },
+						{ label: '数据4', data: [80, 60, 70, 51, 76, 45, 58] },
+						{ label: '数据5', data: [70, 50, 60, 41, 66, 35, 48] },
+						{ label: '数据6', data: [60, 40, 50, 31, 56, 25, 38] },
+						{ label: '数据7', data: [50, 30, 40, 21, 46, 15, 28] }
+					]
+				}
+			}
+			
+			var Charts = {
+				template: '#chart',
+				props: {
+					chartType: {
+						type: String,
+						default: 'line'
+					},
+					width: {
+						type: Number
+					},
+					height: {
+						type: Number
+					},
+					labels: {
+						type: Array,
+						validator: function ( value ) {
+							return value.every(function ( label ) {
+								return typeof label === 'string';
+							});
+						},
+						default: function () {
+							return [];
+						}
+					},
+					datasets: {
+						type: Array,
+						validator: function ( value ) {
+							return value.every(function ( series ) {
+								return Array.isArray(series.data) && series.data.every(function ( val ) {
+									return typeof val === 'number';
+								});
+							});
+						}
+					},
+					corece: function ( val ) {
+						return JSON.parse(JSON.stringify(val));
+					},
+					default: function () {
+						return {};
+					}
+				},
+				options: {
+					type: Object,
+					defalut: function () {
+						return {};
+					},
+					responsive: {
+						type: Boolean,
+						defalut: null
+					},
+					legend: {
+						coerce: function ( val ) {
+							if ( typeof val === 'boolean' ) {
+								return { display: val }
+							}
+						}
+					},
+					defalut: null
+				},
+				methods: {
+					parseCommonOptions: function ( options ) {
+						// responsive
+						if ( this.responsive !== null ) {
+							options.responsive = this.responsive;
+						}
+						
+						// legend
+						if ( this.legend !== null ) {
+							options.legend = this.legned;
+						}
+						return options;
+					}
+				},
+				computed: {
+					chartData: function () {
+						return {
+							lebels: this.labels,
+							datasets: this.datasets
+						}
+					},
+					chartOptions: function () {
+						
+						let options = {};
+						options = this.parseCommonOptions(options);
+						
+						if ( this.parseCustomOptions ) {
+							options = this.parseCustomOptions(options);
+						}
+						
+						return Object.assign(this.$options, options);
+						
+					}
+				},
+				watch: {
+					datasets: {
+						handler: function ( val, oldVal ) {
+							this.chartInstance.data.datasets = val;
+							this.chartInstance.update();
+						}
+					}
+				},
+				data: function () {
+					return {
+						chartInstance: null
+					}
+				},
+				ready: function () {
+					
+					const chartCanvas = this.$els.charCanvas;
+					const ctx = chartCanvas.getContext('2d');
+					
+					console.log( this.chartOptions );
+					
+					this.chartInstance = new Chart(ctx, {
+						type: this.chartType,
+						data: this.chartData,
+						options: this.chartOptions
+					});
+					
+					console.log(this.chartInstance,'---');
+					
+				}
+			}
+			
+			// 根实例
+			new Vue({
+				el: '#app',
+				data: data,
+				components: {
+					'fj-chart': Charts	
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

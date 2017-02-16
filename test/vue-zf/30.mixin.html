@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<div id="app">
+			<button @click="aa">AA</button>
+			
+			<my-com></my-com>
+			<com></com>
+			
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.mixin({
+				created: function () {
+					var myOptions = this.$options.myOption;
+					if ( myOptions ) {
+						console.log(myOptions);
+					}
+				}
+			});
+			
+			// 定义组件
+			var com = Vue.extend({
+				template: '<h1 @click="hello">HELLO</h1>',
+				methods: {
+					'hello': function () {
+						alert('extend hello');
+					}
+				}
+			});
+
+			Vue.component('com', {
+				template: '<h1 @click="cc">xixiahha</h1>',
+				methods: {
+					cc: function () {
+						alert('com component');		
+					}
+				}
+			});
+			
+			new Vue({
+				
+				el: '#app',
+				components: {
+					'my-com': com,
+				},
+				myOption: 'hello', // 自定义选项
+				
+				methods: {
+					aa: function () {
+						alert(123123);
+					}
+				}
+				
+			});
+			
+			
+		</script>
+
+		
+	</body>
+</html>

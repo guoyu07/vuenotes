@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<div id="app">
+			
+			<!--<div v-for="(key, item) in msg">
+				<p>{{key}}--{{item}}</p>
+			</div>-->
+			
+			<div v-for="item in msg">
+				{{$index}}--{{item}}
+			</div>
+			
+			<br />
+			
+			<!--<div v-for="item in obj">
+				{{$index}}--{{$key}}--{{item}}
+			</div>-->
+			
+			<div v-for="(key, item) in obj">
+				{{key}}--{{item}}
+			</div>
+			
+			<!-- track-by="$index" 通过 什么去遍历 , 遍历相同数据 尽量遍历数组的时候指定treak-by  -->
+			<div v-for="item in arr" track-by="$index">
+				{{$index}}--{{item}}
+			</div>
+			
+			<div v-for="(idx, item) in arr2">
+				{{item.name}}
+				<div v-for="val in item.type">
+					<!-- 子索引拿到父索引 -->
+					{{idx}} -- {{$index}} -- {{val}}
+				</div>
+			</div>
+			
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			new Vue({
+				el: '#app',
+				data: {
+					msg: ['pink', 'tan', 'red'],
+					obj: {
+						a: 'xixi',
+						b: 'haha',
+						c: 'yo'
+					},
+					arr: ['苹果', '苹果', '苹果'],
+					arr2: [
+						{name: 'pink', type: ['color', 'a', 'b']},
+						{name: 'zf', type: ['person', 'aa', 'bb']}
+					]
+				}
+			});
+			
+			
+		</script>
+		
+	</body>
+</html>

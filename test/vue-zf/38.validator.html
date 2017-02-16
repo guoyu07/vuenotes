@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+
+		<div id="app">
+			<validator name="validation">
+				<form novalidate>
+					<div class="username">
+						<label for="username">username:</label>
+						<input type="text" id="username" @valid="this.enable = true" @invalid="this.enable = false" v-validate:username=['required'] />
+					</div>
+					<div v-if="enable" class="password">
+						<label for="passsword">password:</label>
+						<input type="password" id="password" v-validate:password="{requird: {rule: true}, minlength: {rule: 8}}" />
+					</div>
+				</form>
+			</validator>
+		</div>
+
+		<script src="//cdn.bootcss.com/vue/1.0.24/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="//cdn.bootcss.com/vue-validator/2.1.3/vue-validator.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+		
+			new Vue({
+				el: '#app'
+			});
+			
+		</script>
+		
+	</body>
+</html>

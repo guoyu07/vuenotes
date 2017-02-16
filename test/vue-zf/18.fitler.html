@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<input type="text" v-model="userInp" />
+			<p>{{msg | concats userInp}}</p>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.filter('concats', function( val, inp ) {
+				if (inp) {
+					return val + inp;
+				}
+				return val;
+			});
+			
+			new Vue({
+				el: '#app',
+				data: {
+					msg: 'a'
+				}
+			});
+			
+			
+		</script>
+		
+	</body>
+</html>

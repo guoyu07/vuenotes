@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			
+			<ul>
+				<li v-for="item in items | orderBy 'age'">
+					{{item.msg}} -- {{$index}}
+				</li>
+			</ul>
+			
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		
+			new Vue({
+				el: '#app',
+				data: {
+					items: [
+						{ msg: '顺', age: 1 },
+						{ msg: '出', age: 10  },
+						{ msg: '快', age: 6 }
+					]
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

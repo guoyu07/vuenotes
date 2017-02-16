@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app" @click="up">
+			<div v-my-directive:hello.a.b="msg"></div>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.directive('my-directive', {
+				bind: function() {
+					console.log('bound!');
+				},
+				update: function( value ) {
+					this.el.innerHTML = 
+						'name -' + this.name + '<br />' +
+						'expression - ' + this.expression + '<br />' +
+						'argument - ' + this.arg + '<br />' +
+						'modifiers - ' + JSON.stringify(this.mondifiers) + '<br />' +
+						'value -' + value + '<br />' +
+						'vm-msg' + this.vm.msg;
+				}
+			});
+				//name -my-directive
+				//expression - msg
+				//argument - hello
+				//modifiers - undefined
+				//value -hello
+				//vm-msghello
+			
+			new Vue({
+				el: '#app',
+				data: {
+					msg: 'hello'
+				},
+				methods: {
+					up: function() {
+						console.log('click');
+					}
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

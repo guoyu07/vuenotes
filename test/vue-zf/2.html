@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			{{name}}, {{age}}
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			var message = {
+				name: 'hello',
+//				age: ''
+			};
+			
+			// VM
+			var vm = new Vue({
+				el: '#app',
+				data: message
+			});
+			
+			message.name = 'pink';
+			
+//			message.age = 10;
+			
+//			message = {
+//				name: 'tan'
+//			}
+			
+			Vue.set(message, 'age', 10000);
+//			
+//			console.log( message );
+			
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<pink
+				:foo="baz"
+				@aaa-a="doThis"
+				>
+				<img :src="http://www.baidu.com/img/baidu_jgylogo3.gif" slot="icon" />
+				<p slot="main-text">Hello!</p>
+			</pink>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.component('pink', {
+//				template: '<div>嘻嘻哈哈</div>',
+				methods: {
+					'aaa-a': function () {
+						return function () {
+							console.log( this );
+						}
+					}
+				}
+			});
+			
+			new Vue({
+				el: '#app'
+			});
+			
+		</script>
+
+	</body>
+</html>

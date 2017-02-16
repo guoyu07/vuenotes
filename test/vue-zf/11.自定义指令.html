@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<div v-my-directive="a"></div>
+			<button @click="change">change</button>{{a.b.c}}
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+		
+			Vue.directive('my-directive', {
+				deep: true,
+				update: function( obj ) {
+					console.log( obj.b.c );
+				}
+			});
+			new Vue({
+				el: '#app',
+				data: {
+					a: {
+						b: {
+							c: 2
+						}
+					}
+				},
+				methods: {
+					change: function() {
+						this.a.b.c = 4;
+					}
+				}
+			});
+		
+			
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<div v-my-directive="a++"></div>
+			{{a}}
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.directive('my-directive', {
+				acceptStatement: true,
+				update: function( fn ) {
+					// 传入一个是函数
+					// 调用它是将在所属实例作用域内计算"a++"语句
+					console.log( fn.toString() );
+					fn();
+				}
+			});
+			
+			new Vue({
+				el: '#app',
+				data: {
+					a: 5
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

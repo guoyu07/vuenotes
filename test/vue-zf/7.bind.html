@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			
+			<!-- v-bind 和  : 效果一样 -->
+			
+			<img :src="src" alt="" />
+			
+			<a :href="src">logo</a>
+			
+			<!-- 取动态数据，通过 : 号形式 -->
+			
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			// 绑定动态数据
+			new Vue({
+				el: '#app',
+				data: {
+					src: 'http://vuejs.org.cn/images/logo.png'
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

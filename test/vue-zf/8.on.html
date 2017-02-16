@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<div @click="world(1, $event)">{{msg}}</div>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			new Vue({
+				el: '#app',
+				data: {
+					msg: 'hello'
+				},
+				methods: {
+					world: function( e, ev ) {
+						
+						// 如果在click中执行，无法自动传递
+						
+						console.log(e, ev);
+						console.log(this.msg);
+						
+					}
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

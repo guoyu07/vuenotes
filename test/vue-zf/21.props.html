@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<input type="text" v-model="info.name" />
+			<child :msg.once="info"></child>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.config.debug = true;
+			
+			new Vue({
+				el: '#app',
+				data: function () {
+					return {
+						info: {
+							name: 'sun'
+						}
+					}
+				},
+				components: {
+					'child': {
+						// 声明 props
+						props: ['msg'],
+						template: '<div>{{msg.name}} Family!</div>'
+					}
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

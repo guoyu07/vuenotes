@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			{{msg}}
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			// VM
+			var vm = new Vue({
+//				el: '#app',
+				data: {
+					msg: 'hello world'
+				},
+				
+				// 实例创建完后，调用create方法
+				created: function () {
+					console.log('实例被创建');
+				},
+				beforeCompile: function () {
+					console.log('实例开始编译');
+				},
+				compiled: function () {
+					console.log('编译后');
+				},
+				ready: function () {
+					console.log('进入文档');
+				},
+				beforeDestory: function () {
+					console.log('销毁之前');
+				},
+				destroyed: function() {
+					console.log('销毁');
+				}
+			});
+			
+			// 手动挂载el元素
+			vm.$mount('#app');
+			vm.$destroy();
+			
+		</script>
+		
+	</body>
+</html>

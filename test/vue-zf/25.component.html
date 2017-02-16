@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<template id="pink">
+			<div>
+				<h1>This is my component!</h1>
+				<slot>
+					如果没有分发内容则显示我
+				</slot>
+			</div>
+		</template>
+		
+		<div id="app">
+			<pink-component>
+				<p>This is some original conent</p>
+				<p>This is some more original conent</p>
+			</pink-component>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.component('pink-component', {
+				template: '#pink'
+			});
+			
+			new Vue({
+				el: '#app',
+			});
+			
+		</script>
+		
+	</body>
+</html>

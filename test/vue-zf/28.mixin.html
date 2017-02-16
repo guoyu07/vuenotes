@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<mixin-com></mixin-com>
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.config.debug = true;
+			
+			// mixin对象
+			var myMixin = {
+				created: function () {
+					this.hello();
+				},
+				methods: {
+					hello: function (){
+						console.log( 'hello from mixin!' );
+					}
+				}
+			}
+			
+			// 定义组件，使用 mixin对象
+			var mixinCom = Vue.extend({
+				mixins: [myMixin],
+				template: '<h1>HELLO ~ </h1>'
+			});
+			
+			// 创建根实例
+			new Vue({
+				el: '#app',
+				components: {
+					'mixin-com': mixinCom
+				}
+			});
+			
+		</script>
+		
+	</body>
+</html>

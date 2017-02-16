@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<validator name="validation">
+				<form novalidate>
+					<h1>调查</h1>
+					<fieldset>
+						
+						<legend>请选择水果</legend>
+						<input type="checkbox" id="apple" value="apple" v-validate:fruits="{
+							required: { rule: true, message: requiredErrorMsg },
+							minlength: { rule: 1, message: minlengthErrorMsg },
+							maxlength: { rule: 2, message: maxlengthErrorMsg }
+							}" />
+							
+						<label for="apple">Apple</label>
+						<input type="checkbox" id="orange" value="orange" v-validate:fruits />
+						<label for="orange">Orange</label>
+						<input type="checkbox" id="grape" value="grape" v-validate:fruits />
+						<label for="grape">Grape</label>
+						<input type="checkbox" id="banana" value="banana" v-validate:fruits />
+						<label for="banana">Banana</label>
+						
+						<ul class="errors">
+							<li v-for="msg in $validation.fruits">
+								<p>{{msg | json}}</p>
+							</li>
+						</ul>
+					</fieldset>
+				</form>
+			</validator>
+		</div>
+
+		<script src="//cdn.bootcss.com/vue/1.0.24/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="//cdn.bootcss.com/vue-validator/2.1.3/vue-validator.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			new Vue({
+				el: '#app',
+				computed: {
+					requiredErrorMsg: function () {
+						return '请选择水果';
+					},
+					minlengthErrorMsg: function () {
+						return '请选择至少1个水果!';
+					},
+					maxlengthErrorMsg: function () {
+						return '请选择最多2个水果!';
+					}
+				}
+			});
+			
+		</script>
+
+	</body>
+</html>

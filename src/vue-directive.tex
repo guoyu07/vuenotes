@@ -1,11 +1,27 @@
-\part{Vue Directive}
+\part{Vue指令}
 
 
 \chapter{Overview}
 
+
+\section{v-if和v-show}
+
+在切换v-if模块时，Vue.js有一个局部编译/卸载工程，因为v-if中的模板可能包括数据绑定或子组件。
+
 \begin{compactitem}
-\item 类型：
+\item v-if是真实的条件渲染，可以确保条件块在切换时合适地销毁和重建条件块内的事件监听器和子组件。
+\item v-show是切换内联CSS样式，元素始终被编译并保留，只是简单地基于CSS进行切换。
 \end{compactitem}
+
+一般来说，v-if有更高的切换消耗，v-show有更高的初始渲染消耗。
+
+v-if是惰性的——如果初始渲染条件为false，那么不渲染，在渲染条件第一次变为true时才开始局部编译（并缓存起来）。
+
+\begin{compactitem}
+\item 如果需要频繁的切换，则使用v-show较好。
+\item 如果在运行时提交不会频繁切换，则使用v-if较好。
+\end{compactitem}
+
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -63,6 +79,8 @@
 
 
 v-text可以更新元素的 textContent。如果要更新部分的 textContent ，需要使用 \{\{ Mustache \}\} 插值。
+
+\section{类型}
 
 \begin{compactitem}
 \item 类型：string
@@ -131,6 +149,8 @@ v-html可以更新元素的 innerHTML 。
 
 如果试图使用 v-html 组合模板，可以重新考虑是否通过使用组件（Component）来替代。
 
+\section{类型}
+
 \begin{compactitem}
 \item 类型：string
 \end{compactitem}
@@ -196,13 +216,51 @@ v-html可以更新元素的 innerHTML 。
 
 \chapter{v-show}
 
-v-show可以根据表达式的真假值来切换元素的display CSS 属性。
+v-show可以根据表达式的真假值来切换元素的display CSS 属性，从而实现显示或隐藏HTML元素的效果。
+
+\begin{compactitem}
+\item 当v-show表达式赋值为false时，HTML元素上增加一个内联样式\texttt{style="display: none"}
+\item 当v-show表达式赋值为true时，HTML元素的内联样式更新为原始样式。
+\end{compactitem}
+
+\section{类型}
 
 \begin{compactitem}
 \item 类型：any
 \end{compactitem}
 
 当条件变化时该指令触发过渡效果。
+
+\section{DOM}
+
+\subsection{元素}
+
+
+\begin{lstlisting}[language=JavaScript]
+<html>
+  <head>
+    <script src="/path/to/vue.js"></script>
+  </head>
+  <body>
+  <input type="text" v-model="message" placeholder="edit me">
+  <div id="example">
+    <p v-show="greeting">Hello</p>
+  </div>
+  </body>
+  <script>
+  var exampleVM = new Vue({
+    el: '#example',
+    data: {
+      greeting: false
+    }
+  })
+  </script>
+</html>
+\end{lstlisting}
+
+\subsection{模板}
+
+v-show不支持<template>语法。
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -261,31 +319,73 @@ v-show可以根据表达式的真假值来切换元素的display CSS 属性。
 
 v-if可以根据表达式的值的真假条件渲染元素。
 
-在v-if切换时元素及它的数据绑定/组件被销毁并重建。如果元素是 <template> ，将提出它的内容作为条件块。
+\begin{compactitem}
+\item 在v-if切换时，元素及它的数据绑定/组件被销毁并重建。
+\item 在v-if切换时，如果元素是 <template> ，将提取出它的内容作为条件块。
+\end{compactitem}
+
+当条件变化时，v-if指令触发过渡效果。
+
+\section{类型}
+
 
 \begin{compactitem}
 \item 类型：any
 \end{compactitem}
 
-当条件变化时该指令触发过渡效果。
 
 
+\section{DOM}
+
+v-if指令可以完全根据表达式的值在DOM中生成或移除一个元素。
+
+\begin{compactitem}
+\item 如果v-if表达式赋值为false，那么对应的元素就会从DOM树中被移除；
+\item 如果v-if表达式赋值为true，那么对应的元素的一个克隆就会被重新插入到DOM树中。
+\end{compactitem}
+
+
+\begin{lstlisting}[language=JavaScript]
+<html>
+  <head>
+    <script src="/path/to/vue.js"></script>
+  </head>
+  <body>
+  <div id="example">
+    <p v-if="greeting">Hello</p>
+  </div>
+  </body>
+  <script>
+  var exampleVM = new Vue({
+    el: '#example',
+    data: {
+      greeting: false
+    }
+  })
+  </script>
+</html>
+\end{lstlisting}
+
+\subsection{元素}
+
+v-if需要添加到元素上才能使用。
 
 \begin{lstlisting}[language=JavaScript]
 
 \end{lstlisting}
 
 
+\subsection{模板}
 
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
-
-
+v-if切换多个元素时，可以把<template>元素作为包装元素，并在template上使用v-if，最终的渲染结果不会包含<template>。
 
 
 \begin{lstlisting}[language=JavaScript]
-
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
 \end{lstlisting}
 
 
@@ -325,9 +425,10 @@ v-if可以根据表达式的值的真假条件渲染元素。
 
 \chapter{v-else}
 
-v-else可以为 v-if 或者 v-else-if 添加 “else 块”。
+v-else可以为 v-if 或者 v-else-if 添加 “else 块”，而且v-else必须跟着v-if或v-show。
 
 
+\section{类型}
 
 \begin{compactitem}
 \item 类型：any
@@ -348,9 +449,58 @@ v-else可以为 v-if 或者 v-else-if 添加 “else 块”。
 \item 前一兄弟元素必须有 v-if 或 v-else-if
 \end{compactitem}
 
-\begin{lstlisting}[language=JavaScript]
 
+\section{DOM}
+
+\subsection{元素}
+
+
+\begin{lstlisting}[language=JavaScript]
+<html>
+  <head>
+    <script src="/path/to/vue.js"></script>
+  </head>
+  <body>
+  <div id="example">
+    <p v-if="ok">Hello</p>
+    <p v-else>Hi</p>
+  </div>
+  </body>
+  <script>
+  var exampleVM = new Vue({
+    el: '#example',
+    data: {
+      ok: false
+    }
+  })
+  </script>
+</html>
 \end{lstlisting}
+
+
+\subsection{组件}
+
+v-else和v-show的的优先级问题导致v-show不适合用在组件上。
+
+\begin{compactitem}
+\item v-else不适合用在组件上
+
+\begin{lstlisting}[language=JavaScript]
+<!-- v-else不适合用在组件上 -->
+<custom-component v-show="condition"></custom-component>
+<p v-else>这可能也是一个组件</p>
+\end{lstlisting}
+
+\item v-show代替v-else用在组件上
+
+\begin{lstlisting}[language=JavaScript]
+<!-- v-show代替v-else -->
+<custom-component v-show="condition"></custom-component>
+<p v-show="!!condition">这可能也是一个组件</p>
+\end{lstlisting}
+
+\end{compactitem}
+
 
 
 
@@ -400,6 +550,7 @@ v-else可以为 v-if 或者 v-else-if 添加 “else 块”。
 
 v-else-if可以为v-if表示“else if块”，支持链式使用。
 
+\section{类型}
 
 \begin{compactitem}
 \item 类型：any
@@ -477,6 +628,8 @@ v-else-if可以为v-if表示“else if块”，支持链式使用。
 \chapter{v-for}
 
 v-for可以基于源数据多次渲染元素或模板块。
+
+\section{类型}
 
 \begin{compactitem}
 \item 类型：Array|Object|number|string
@@ -557,6 +710,7 @@ v-on可以绑定事件监听器，v-on绑定的事件类型由参数指定。
 <button @click="doThis"></button>
 \end{lstlisting}
 
+\section{类型}
 
 \begin{compactitem}
 \item 缩写：@
@@ -683,6 +837,9 @@ v-on支持的修饰符如下：
 
 v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表达式。
 
+
+\section{类型}
+
 \begin{compactitem}
 \item 缩写：\texttt{:}
 \item 类型：any(with argument)|Object(without argument)
@@ -805,8 +962,12 @@ v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表�
 
 \chapter{v-model}
 
-v-model可以在表单控件（例如input、select和textarea）或者组件上创建双向绑定。
 
+
+v-model可以在表单控件（例如input、select、text、checkbox、radio和textarea）或者组件上创建双向数据绑定。
+
+
+\section{类型}
 
 \begin{compactitem}
 \item 类型：any
@@ -829,6 +990,13 @@ v-model可以在表单控件（例如input、select和textarea）或者组件上
 
 \end{compactitem}
 
+v-model的实质是语法糖，在用户的输入事件中更新数据，并且在极端情况下处理数据。
+
+
+\section{DOM}
+
+
+v-model根据控件类型来自动选择正确的方法更新元素。
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -842,12 +1010,10 @@ v-model可以在表单控件（例如input、select和textarea）或者组件上
 \end{lstlisting}
 
 
+\section{修饰符}
 
 
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
-
+\subsection{.number}
 
 
 
@@ -856,6 +1022,15 @@ v-model可以在表单控件（例如input、select和textarea）或者组件上
 \end{lstlisting}
 
 
+\subsection{.lazy}
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
+
+
+\subsection{.trim}
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -888,6 +1063,8 @@ v-model可以在表单控件（例如input、select和textarea）或者组件上
 
 
 v-pre不需要表达式，其用途是跳过这个元素和它的子元素的编译过程。
+
+\section{类型}
 
 v-pre可以用来显示原始 Mustache 标签，或者跳过大量没有指令的节点来加快编译。
 
@@ -947,6 +1124,9 @@ v-pre可以用来显示原始 Mustache 标签，或者跳过大量没有指令�
 \chapter{v-cloak}
 
 v-cloak不需要表达式，可以用来保持在元素上直到关联实例结束编译。和 CSS 规则（例如\texttt{[v-cloak] \{ display: none \}} 一起用时，v-pre指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
+
+
+\section{类型}
 
 下面的v-cloak示例让元素不会显示，直到编译结束。
 
@@ -1011,6 +1191,8 @@ v-cloak不需要表达式，可以用来保持在元素上直到关联实例结�
 \chapter{v-once}
 
 v-once不需要表达式，而且v-once可以只渲染元素和组件一次，这样随后的重新渲染中，元素/组件及其所有的子节点将被视为静态内容并跳过，从而可以用于优化更新性能。
+
+\section{类型}
 
 
 \begin{lstlisting}[language=JavaScript]

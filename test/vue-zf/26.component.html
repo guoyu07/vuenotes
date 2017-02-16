@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	
+		<template id="pink">
+			
+			<div>
+				<slot name="a"></slot>
+				<slot></slot>
+				<slot name="b"></slot>
+			</div>	
+			
+		</template>
+
+		<div id="app">
+			
+			<pink-multi>
+				<p slot="a">ONE</p>
+				<p slot="b">TWO</p>
+				<p>defalut A</p>
+			</pink-multi>
+		
+		</div>
+	
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			Vue.component('pink-multi', {
+				tempate: '#pink'
+			});
+			
+			new Vue({
+				el: '#app'
+			});
+			
+		</script>
+		
+	
+	</body>
+</html>

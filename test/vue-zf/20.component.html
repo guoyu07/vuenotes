@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	<div id="app">
+		
+		<zf-component></zf-component>
+		
+		<czf-component></czf-component>
+		
+	</div>	
+		
+	<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+		
+		// 在一个步骤中扩展与注册
+		Vue.component('zf-component', {
+			template: '<div>A</div>'
+		});
+		
+		// 局部注册
+		var com = Vue.extend({
+			template: '<div>B</div>',
+		});
+		
+		new Vue({
+			el: '#app',
+			components: {
+				'czf-component': com
+			}
+		});
+		
+	</script>
+	
+		
+	</body>
+</html>

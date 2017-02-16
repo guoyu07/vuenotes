@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<style type="text/css">
+		[v-cloak] {
+			display: none;			
+		}
+	</style>
+	<body>
+		
+		<div id="app">
+			
+			<div v-text="msg"></div>
+			
+			<div v-cloak>
+				<!-- 先将元素隐藏，获取数据完后再将其显示 -->
+				{{msg}}
+			</div>
+			
+		</div>
+		
+		<script src="//cdn.bootcss.com/vue/1.0.2/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			new Vue({
+				el: '#app',
+				data: {
+					msg: 'pink'
+				}
+			});
+			
+			
+			/**
+			 * v-if 当条件成立的时候，会将元素加上， 不成立，就会移除dom，并且内部的指令不会执行。
+			 * v-show 显示隐藏
+			 * 
+			 * 一般的，v-if有更高的切换消耗，而v-show有更高的初始渲染消耗。因此，如果需要频繁切换 v-show较好，如果在运行时条件不大可能改变v-if较好
+			 * 
+			 * template，是 vue 自身的标签 template， 不支持 v-show
+			 * 
+			 */
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

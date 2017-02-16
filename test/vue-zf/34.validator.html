@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<validator name="validation">
+				<form novalidate>
+					<div class="username-field">
+						<label for="username">username:</label>
+						<input type="text" id="username" v-validate:username="['required']" />
+					</div>
+					<div class="comment-filed">
+						<label for="comment">comment:</label>
+						<input type="text" id="comment" v-validate:comment="{maxlength: 256}" />
+					</div>
+					<div>{{$validation | json}}</div>
+					<div class="errors">
+						<p v-if="$validation.username.required">请输入你的名字</p>
+						<p v-if="$validation.comment.maxlength">您的评论太长了</p>
+					</div>
+					<input type="submit" value="send" v-if="$validation.valid" />
+				</form>
+			</validator>
+		</div>
+		
+
+		<!--<div id="app">
+		  <validator name="validation">
+		    <form novalidate>
+		      ID: <input type="text" v-validate:id="rules"><br />
+		      <div>
+		        <span v-if="$validation.id.minlength">Your ID is too short.</span>
+		        <span v-if="$validation.id.maxlength">Your ID is too long.</span>
+		      </div>
+		    </form>
+		  </validator>
+		</div>-->
+
+		<script src="//cdn.bootcss.com/vue/1.0.24/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="//cdn.bootcss.com/vue-validator/2.1.3/vue-validator.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+		
+			new Vue({
+				el: '#app'
+			});
+
+//			new Vue({
+//			  el: '#app',
+//				data: {
+//				  rules: {
+//				    minlength: 3,
+//				    maxlength: 16
+//				  }
+//				}
+//			});
+
+		</script>
+		
+	</body>
+</html>
