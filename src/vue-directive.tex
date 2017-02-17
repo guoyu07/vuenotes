@@ -106,14 +106,17 @@ HTML不区分大小写，camelCase风格的名字（例如v-ref:someRef）将全
 
 \end{lstlisting}
 
-\chapter{v-text}
+
+\chapter{Build-in Directive}
+
+\section{v-text}
 
 
 v-text可以更新元素的 textContent。如果要更新部分的 textContent ，需要使用 \{\{ Mustache \}\} 插值。
 
 实际上，\texttt{\{\{Mustache\}\}}在内部也被编译为textNode的一个v-text指令。
 
-\section{类型}
+\subsection{类型}
 
 \begin{compactitem}
 \item 类型：string
@@ -174,7 +177,7 @@ v-text可以更新元素的 textContent。如果要更新部分的 textContent �
 
 \end{lstlisting}
 
-\chapter{v-html}
+\section{v-html}
 
 v-html可以更新元素的 innerHTML 。
 
@@ -189,7 +192,7 @@ v-html可以更新元素的 innerHTML 。
 
 不建议直接动态渲染任何HTML片段，容易导致XSS攻击。
 
-\section{类型}
+\subsection{类型}
 
 \begin{compactitem}
 \item 类型：string
@@ -254,7 +257,7 @@ v-html可以更新元素的 innerHTML 。
 
 \end{lstlisting}
 
-\chapter{v-show}
+\section{v-show}
 
 v-show可以根据表达式的真假值来切换元素的display CSS 属性，从而实现显示或隐藏HTML元素的效果。
 
@@ -263,7 +266,7 @@ v-show可以根据表达式的真假值来切换元素的display CSS 属性，�
 \item 当v-show表达式赋值为true时，HTML元素的内联样式更新为原始样式。
 \end{compactitem}
 
-\section{类型}
+\subsection{类型}
 
 \begin{compactitem}
 \item 类型：any
@@ -271,9 +274,9 @@ v-show可以根据表达式的真假值来切换元素的display CSS 属性，�
 
 当条件变化时该指令触发过渡效果。
 
-\section{DOM}
+\subsection{DOM}
 
-\subsection{元素}
+\subsubsection{元素}
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -298,7 +301,7 @@ v-show可以根据表达式的真假值来切换元素的display CSS 属性，�
 </html>
 \end{lstlisting}
 
-\subsection{模板}
+\subsubsection{模板}
 
 v-show不支持<template>语法。
 
@@ -355,7 +358,7 @@ v-show不支持<template>语法。
 
 \end{lstlisting}
 
-\chapter{v-if}
+\section{v-if}
 
 v-if可以根据表达式的值的真假条件渲染元素。
 
@@ -366,7 +369,7 @@ v-if可以根据表达式的值的真假条件渲染元素。
 
 当条件变化时，v-if指令触发过渡效果。
 
-\section{类型}
+\subsection{类型}
 
 
 \begin{compactitem}
@@ -375,7 +378,7 @@ v-if可以根据表达式的值的真假条件渲染元素。
 
 
 
-\section{DOM}
+\subsection{DOM}
 
 v-if指令可以完全根据表达式的值在DOM中生成或移除一个元素（Element）。
 
@@ -406,7 +409,7 @@ v-if指令可以完全根据表达式的值在DOM中生成或移除一个元素�
 </html>
 \end{lstlisting}
 
-\subsection{元素}
+\subsubsection{元素}
 
 v-if需要添加到元素上才能使用。
 
@@ -415,7 +418,7 @@ v-if需要添加到元素上才能使用。
 \end{lstlisting}
 
 
-\subsection{模板}
+\subsubsection{模板}
 
 v-if切换多个元素时，可以把<template>元素作为包装元素，并在template上使用v-if，最终的渲染结果不会包含<template>。
 
@@ -463,12 +466,12 @@ v-if切换多个元素时，可以把<template>元素作为包装元素，并在
 
 \end{lstlisting}
 
-\chapter{v-else}
+\section{v-else}
 
 v-else可以为 v-if 或者 v-else-if 添加 “else 块”，而且v-else必须跟着v-if或v-show。
 
 
-\section{类型}
+\subsection{类型}
 
 \begin{compactitem}
 \item 类型：any
@@ -490,9 +493,9 @@ v-else可以为 v-if 或者 v-else-if 添加 “else 块”，而且v-else必须
 \end{compactitem}
 
 
-\section{DOM}
+\subsection{DOM}
 
-\subsection{元素}
+\subsubsection{元素}
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -518,7 +521,7 @@ v-else可以为 v-if 或者 v-else-if 添加 “else 块”，而且v-else必须
 \end{lstlisting}
 
 
-\subsection{组件}
+\subsubsection{组件}
 
 v-else和v-show的的优先级问题导致v-show不适合用在组件上。
 
@@ -585,12 +588,12 @@ v-else和v-show的的优先级问题导致v-show不适合用在组件上。
 \end{lstlisting}
 
 
-\chapter{v-else-if}
+\section{v-else-if}
 
 
 v-else-if可以为v-if表示“else if块”，支持链式使用。
 
-\section{类型}
+\subsection{类型}
 
 \begin{compactitem}
 \item 类型：any
@@ -665,7 +668,7 @@ v-else-if可以为v-if表示“else if块”，支持链式使用。
 
 \end{lstlisting}
 
-\chapter{v-for}
+\section{v-for}
 
 v-for可以基于源数据多次渲染元素或模板块，也可以使用\$index显示对应的数组索引。
 
@@ -775,7 +778,7 @@ var exampleVM = new Vue({
 \end{compactenum}
 
 
-\section{类型}
+\subsection{类型}
 
 \begin{compactitem}
 \item 类型：Array|Object|number|string
@@ -797,7 +800,7 @@ v-for支持遍历数组、对象、数字和字符串。
 
 v-for支持\texttt{item in/of items}的形式，其中of分隔符更接近JavaScript的遍历器语法。
 
-\subsection{Object}
+\subsubsection{Object}
 
 v-for来遍历一个对象时，每一个重复的实例都将有一个特殊的属性\$key或者给对象的键值提供一个别名。
 
@@ -848,7 +851,7 @@ ES5无法检测到新属性添加到一个对象上或者在对象中删除，Vu
 
 
 
-\subsection{Integer}
+\subsubsection{Integer}
 
 v-for支持整数。
 
@@ -859,14 +862,14 @@ v-for支持整数。
 </div>
 \end{lstlisting}
 
-\section{别名}
+\subsection{别名}
 
 v-for需要特别的别名，形式为\texttt{item in items}。例如，这里的items为数据数组，item就是当前数组元素的别名。
 
 v-for在开始时会对传入的表达式进行语法分析，如果不是\texttt{item in/of items}的形式就会给出警告信息。
 
 
-\subsection{index}
+\subsubsection{index}
 
 
 
@@ -910,7 +913,7 @@ v-for支持为数组索引指定别名（或者用于对象的键）：
 </html>
 \end{lstlisting}
 
-\subsection{key}
+\subsubsection{key}
 
 
 v-for默认行为将尝试不改变整体，只是替换元素。如果需要让v-for重新排序的元素，需要提供一个key的特殊属性，例如：
@@ -924,7 +927,7 @@ v-for默认行为将尝试不改变整体，只是替换元素。如果需要让
 
 
 
-\section{作用域}
+\subsection{作用域}
 
 v-for会产生一个特殊的作用域，和AngularJS的隔离作用域类似，需要明确指定props属性来传递数据，否则在组件内将获取不到数据。例如，对于组件内的<p>标签，可以使用<slot>：
 
@@ -935,7 +938,7 @@ v-for会产生一个特殊的作用域，和AngularJS的隔离作用域类似，
 </my-item>
 \end{lstlisting}
 
-\section{包装方法}
+\subsection{包装方法}
 
 Vue.js包装了被观察数据的变异方法来检测数据变动，这样当数据数据出现变动时就可以触发视图更新。
 
@@ -956,7 +959,7 @@ Vue.js包装的数据变动检测方法包括：
 Vue.js在重写上述方法后触发了一次notify。
 
 
-\subsection{\$set}
+\subsubsection{\$set}
 
 Vue.js还增加了两个方法来观测变化，分别是\$set和\$remove。
 
@@ -971,7 +974,7 @@ demo.items.$set(0, {childMsg: 'Changed!'})
 \end{lstlisting}
 
 
-\subsection{\$remove}
+\subsubsection{\$remove}
 
 \$remove是splice的语法糖，可以用来从目标数组中查找并删除元素。
 
@@ -1065,7 +1068,7 @@ vm.items = []
 \end{lstlisting}
 
 
-\chapter{v-on}
+\section{v-on}
 
 v-on可以绑定事件监听器，v-on绑定的事件类型由参数指定。
 
@@ -1081,7 +1084,7 @@ v-on可以绑定事件监听器，v-on绑定的事件类型由参数指定。
 
 表达式可以是一个方法的名字或一个内联语句，如果没有修饰符，也可以省略。
 
-\section{类型}
+\subsection{类型}
 
 \begin{compactitem}
 \item 缩写：@
@@ -1163,7 +1166,7 @@ v-on可以绑定事件监听器，v-on绑定的事件类型由参数指定。
 \end{lstlisting}
 
 
-\section{修饰符}
+\subsection{修饰符}
 
 
 v-on不仅支持支持参数，也支持修饰符，其中v-on支持的修饰符如下：
@@ -1224,12 +1227,12 @@ v-on不仅支持支持参数，也支持修饰符，其中v-on支持的修饰符
 
 \end{lstlisting}
 
-\chapter{v-bind}
+\section{v-bind}
 
 v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表达式。
 
 
-\section{类型}
+\subsection{类型}
 
 \begin{compactitem}
 \item 缩写：\texttt{:}
@@ -1346,13 +1349,13 @@ v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表�
 \end{lstlisting}
 
 
-\subsection{.sync}
+\subsubsection{.sync}
 
 .sync——双向绑定，只能用于prop绑定。
 
 
 
-\subsection{.once}
+\subsubsection{.once}
 
 .once——单次绑定，只能用于prop绑定。
 
@@ -1362,7 +1365,7 @@ v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表�
 \end{lstlisting}
 
 
-\subsection{.camel}
+\subsubsection{.camel}
 
 .camel——将绑定的特性名字转换回驼峰命名，只能用于普通HTML特性的绑定，通常用于绑定使用驼峰命名的SVG特性（例如viewBox）。
 
@@ -1378,14 +1381,14 @@ v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表�
 \end{lstlisting}
 
 
-\chapter{v-model}
+\section{v-model}
 
 
 
 v-model可以在表单控件（例如input、select、text、checkbox、radio和textarea）或者组件上创建双向数据绑定。
 
 
-\section{类型}
+\subsection{类型}
 
 \begin{compactitem}
 \item 类型：any
@@ -1411,7 +1414,7 @@ v-model可以在表单控件（例如input、select、text、checkbox、radio和
 v-model的实质是语法糖，在用户的输入事件中更新数据，并且特别处理一些极端情况下的数据。
 
 
-\section{DOM}
+\subsection{DOM}
 
 
 v-model根据控件类型来自动选择正确的方法更新元素。
@@ -1471,7 +1474,7 @@ v-model根据控件类型来自动选择正确的方法更新元素。
 \end{lstlisting}
 
 
-\section{修饰符}
+\subsection{修饰符}
 
 v-model支持在后面添加多个修饰符来进行定制（例如number、lazy和trim）
 
@@ -1485,7 +1488,7 @@ v-model的number修饰符可以用户的输入自动转换为Number类型（如�
 \end{lstlisting}
 
 
-\subsection{.lazy}
+\subsubsection{.lazy}
 
 默认情况下，v-model在input事件中同步输入框的值和数据，lazy修饰符可以把数据修改指定到change事件中才执行。
 
@@ -1513,7 +1516,7 @@ v-model的number修饰符可以用户的输入自动转换为Number类型（如�
 
 虽然输入数据时触发了input事件，lazy修饰符后也会把数据阻塞，直到触发了change事件后才修改msg的值。
 
-\subsection{.trim}
+\subsubsection{.trim}
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -1521,7 +1524,7 @@ v-model的number修饰符可以用户的输入自动转换为Number类型（如�
 \end{lstlisting}
 
 
-\subsection{.debounce}
+\subsubsection{.debounce}
 
 debounce修饰符可以设置一个最小的延时，在每次点击之后延时同步输入框的值，这样在高消耗操作（例如在input中输入内容时随时发送AJAX请求来实现自动完成）中较为有用。
 
@@ -1563,13 +1566,13 @@ debounce修饰符可以设置一个最小的延时，在每次点击之后延时
 
 \end{lstlisting}
 
-\chapter{v-pre}
+\section{v-pre}
 
 
 
 v-pre不需要表达式，其用途是跳过这个元素和它的子元素的编译过程。
 
-\section{类型}
+\subsection{类型}
 
 v-pre可以用来显示原始 Mustache 标签，或者跳过大量没有指令的节点来加快编译。
 
@@ -1626,13 +1629,13 @@ v-pre可以用来显示原始 Mustache 标签，或者跳过大量没有指令�
 
 \end{lstlisting}
 
-\chapter{v-cloak}
+\section{v-cloak}
 
 v-cloak不需要表达式，可以用来保持在元素上直到关联实例结束编译。和 CSS 规则（例如\texttt{[v-cloak] \{ display: none \}} 一起用时，v-pre指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
 
 AngularJS提供了和v-cloak相同的功能。
 
-\section{类型}
+\subsection{类型}
 
 下面的v-cloak示例让元素不会显示，直到编译结束。
 
@@ -1694,11 +1697,11 @@ AngularJS提供了和v-cloak相同的功能。
 
 \end{lstlisting}
 
-\chapter{v-once}
+\section{v-once}
 
 v-once不需要表达式，而且v-once可以只渲染元素和组件一次，这样随后的重新渲染中，元素/组件及其所有的子节点将被视为静态内容并跳过，从而可以用于优化更新性能。
 
-\section{类型}
+\subsection{类型}
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -1720,7 +1723,7 @@ v-once不需要表达式，而且v-once可以只渲染元素和组件一次，�
 </ul>
 \end{lstlisting}
 
-\chapter{directive}
+\section{directive}
 
 
 Vue.js允许在内置指令之外注册自定义指令，自定义指令提供一种机制将数据的变化映射为DOM行为。
@@ -1751,7 +1754,7 @@ angular.module('myapp',[],)
 Vue.directive(id,definition)接受两个参数：指令ID和定义对象，也可以使用组件的directives选项注册一个局部自定义指令（相当于AngularJS restrict属性值为A）。
 
 
-\section{Hook}
+\subsection{Hook}
 
 AngularJS提供了两个函数——compile和link，其中：
 
@@ -1761,6 +1764,8 @@ AngularJS提供了两个函数——compile和link，其中：
 \end{compactitem}
 
 compile和link的选项是互斥的，如果同时设置这两个选项，则会把compile返回的函数当作link函数，而忽略link选项本身。
+
+
 
 Vue.js提供的对应的函数都是可选的，相互之间没有制约关系。
 
@@ -1810,16 +1815,16 @@ Vue.directive('my-directive', function(value){
 })
 \end{lstlisting}
 
-\subsection{bind}
+\subsubsection{bind}
 
 
 
 
 
-\subsection{update}
+\subsubsection{update}
 
 
-\subsection{unbind}
+\subsubsection{unbind}
 
 
 

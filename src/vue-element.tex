@@ -6,11 +6,11 @@
 
 \chapter{key}
 
-key（string） 的特殊属性主要用在 Vue的虚拟DOM算法，在新旧nodes对比时辨识VNodes。
+特殊属性key（string） 主要用于在Vue的虚拟DOM算法中的新旧nodes对比过程中辨识VNodes。
 
 \begin{compactitem}
 \item 如果不使用key，Vue会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。
-\item 使用key，Vue会基于key的变化重新排列元素顺序，并且会移除key不存在的元素。
+\item 如果使用key，Vue会基于key的变化重新排列元素顺序，并且会移除key不存在的元素。
 \end{compactitem}
 
 
