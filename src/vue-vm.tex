@@ -7,16 +7,20 @@
 
 
 
-\chapter{VM Property}
+\chapter{实例属性}
 
 
 \section{vm.\$el}
 
+vm.\$el是Vue 实例使用的根 DOM 元素。
+
+\subsection{类型}
 
 
-
-
-
+\begin{compactitem}
+\item 类型：HTMLElement
+\item 可访问性：只读
+\end{compactitem}
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -44,9 +48,13 @@
 
 \section{vm.\$data}
 
+vm.\$data是Vue实例观察的数据对象，Vue实例代理了对其data对象属性的访问。
 
+\subsection{类型}
 
-
+\begin{compactitem}
+\item 类型：Object
+\end{compactitem}
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -69,11 +77,25 @@
 
 \section{vm.\$options}
 
+vm.\$options用于当前 Vue 实例的初始化选项，需要在选项中包含自定义属性时会有用处：
+
+\begin{lstlisting}[language=JavaScript]
+new Vue({
+   customOption: 'foo',
+   created: function() {
+      console.log(this.$options.customOption) // -> 'foo'
+   }
+})
+\end{lstlisting}
 
 
+\subsection{类型}
 
 
-
+\begin{compactitem}
+\item 类型：Object
+\item 可访问性：只读
+\end{compactitem}
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -99,9 +121,14 @@
 
 \section{vm.\$parent}
 
+vm.\$parent是当前组件实例的父实例，如果当前实例有的话。
 
+\subsection{类型}
 
-
+\begin{compactitem}
+\item 类型：Vue instance
+\item 可访问性：只读
+\end{compactitem}
 
 
 
@@ -127,10 +154,15 @@
 
 \section{vm.\$root}
 
+vm.\$root是当前组件树的根Vue实例。如果当前实例没有父实例，此实例将会是其自已。
 
 
+\subsection{类型}
 
-
+\begin{compactitem}
+\item 类型：Vue instance
+\item 可访问性：只读
+\end{compactitem}
 
 
 
@@ -156,12 +188,19 @@
 
 \section{vm.\$children}
 
+vm.\$children是当前实例的直接子组件。
 
 
 
+需要注意，\$children并不保证顺序，也不是响应式的。如果正在尝试使用\$children来进行数据绑定，可以考虑使用一个数组配合 v-for 来生成子组件，并且使用 Array 作为真正的来源。
 
 
+\subsection{类型}
 
+\begin{compactitem}
+\item 类型：Array<Vue instance>
+\item 可访问性：只读
+\end{compactitem}
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -186,17 +225,49 @@
 \section{vm.\$slots}
 
 
-
-
-
-
-
-
+v.\$slots用来访问被 slot 分发的内容。
 
 
 \begin{lstlisting}[language=JavaScript]
+<blog-post>
+  <h1 slot="header">
+    About Me
+  </h1>
+  <p>Here's some page content, which will be included in vm.$slots.default, because it's not inside a named slot.</p>
+  <p slot="footer">
+    Copyright 2016 Evan You
+  </p>
+  <p>If I have some content down here, it will also be included in vm.$slots.default.</p>.
+</blog-post>
 
+Vue.component('blog-post', {
+  render: function (createElement) {
+    var header = this.$slots.header
+    var body   = this.$slots.default
+    var footer = this.$slots.footer
+    return createElement('div', [
+      createElement('header', header),
+      createElement('main', body),
+      createElement('footer', footer)
+    ])
+  }
+})
 \end{lstlisting}
+
+
+每个具名 slot 有其相应的属性（例如，\texttt{slot="foo"}中的内容将会在 \texttt{vm.\$slots.foo}中被找到）。default 属性包括了所有没有被包含在具名 slot 中的节点。
+
+在使用 render 函数书写一个组件时，访问 vm.\$slots 最有帮助。
+
+\subsection{类型}
+
+
+\begin{compactitem}
+\item 类型：\texttt{\{ [name: string]: ?Array<VNode> \}}
+\item 可访问性：只读
+\end{compactitem}
+
+
 
 
 
@@ -215,12 +286,18 @@
 
 \section{vm.\$scopedSlots}
 
+vm.\$scopedSlots用于以编程方式访问作用域slots。 对于每个插槽，包括一个默认slot，对象包含返回VNodes的相应函数。
+
+在使用render函数编写组件时，访问vm.\$scopedSlots最有用。
+
+\subsection{类型}
 
 
 
-
-
-
+\begin{compactitem}
+\item 类型：\texttt{\{ [name: string]: props=>VNode | Array<VNode> \}}
+\item 可访问性：只读
+\end{compactitem}
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -244,10 +321,15 @@
 
 \section{vm.\$refs}
 
+vm.\$refs是一个对象，其中包含了所有拥有 ref 注册的子组件。
 
 
+\subsection{类型}
 
-
+\begin{compactitem}
+\item 类型：Object
+\item 可访问性：只读
+\end{compactitem}
 
 
 
@@ -274,9 +356,21 @@
 
 \section{vm.\$isServer}
 
+vm.\$isServer说明当前 Vue 实例是否运行于服务器。
 
 
+\subsection{类型}
 
+
+\begin{compactitem}
+\item 类型：boolean
+\item 可访问性：只读
+\end{compactitem}
+
+
+\begin{lstlisting}[language=JavaScript]
+
+\end{lstlisting}
 
 
 
@@ -295,17 +389,10 @@
 
 
 
-\begin{lstlisting}[language=JavaScript]
-
-\end{lstlisting}
+\chapter{实例方法}
 
 
-
-
-\chapter{VM Method}
-
-
-\section{VM Method Data}
+\section{实例方法/数据}
 
 
 \subsection{vm.\$watch}
@@ -425,7 +512,7 @@
 
 
 
-\section{VM Method Event}
+\section{实例方法/事件}
 
 
 \subsection{vm.\$on}
@@ -547,7 +634,7 @@
 
 
 
-\section{VM Method Lifecycle}
+\section{实例方法/生命周期}
 
 
 \subsection{vm.\$mount}
