@@ -3,8 +3,19 @@
 
 \chapter{Overview}
 
-数据绑定就是把数据和视图进行关联，当数据发生变化时可以自动更新视图。Vue.js把数据绑定的语法设计为可配置的，可以在Vue.config全局配置上修改数据绑定的语法。
+数据绑定就是把数据和视图进行关联，当数据发生变化时可以自动更新视图。
 
+
+文本插值是最基本的数据绑定形式，不同的JavaScript框架都提供了自己的数据绑定语法，Vue.js同样提供了不同的文本渲染方式来满足日常的模板渲染需求。
+
+数据绑定的一个常见需求是操作元素的 class 列表和它的内联样式，class和style都是属性 ，Vue.js支持使用v-bind 处理它们——只需要计算出表达式最终的字符串。
+
+以前字符串拼接麻烦又易错，因此在 v-bind 用于 class 和 style 时， Vue.js 专门增强了它，现在表达式的结果类型除了字符串之外，还可以是对象或数组。
+
+
+
+
+Vue.config是一个包含了Vue.js所有的全局配置的对象，可以在Vue.js实例化之前修改其中的属性。例如，文本插值的Mustache标签的定义如下：
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -12,34 +23,27 @@ let delimiters = ['{{','}}']
 let unsafeDelimiters = ['{{{','}}}']
 \end{lstlisting}
 
-Vue.config是一个包含了Vue.js所有的全局配置的对象，可以在Vue.js实例化之前修改其中的属性。
-
-
+Vue.js把数据绑定的语法设计为可配置的，可以在Vue.config全局配置上修改数据绑定的语法。
 
 \begin{lstlisting}[language=JavaScript]
-Vue.config.delimeters = ['<%','%>]
+Vue.config.delimeters = ['<%','%>']
 Vue.config.unsafeDelimeters = ['<$','$>']
 \end{lstlisting}
 
-不同的JavaScript框架都提供了自己的数据绑定语法，Vue.js提供了不同的文本渲染方式来满足日常的模板渲染需求。
 
 
-
-
-数据绑定一个常见需求是操作元素的 class 列表和它的内联样式，class和style都是属性 ，可以用v-bind 处理它们——只需要计算出表达式最终的字符串。
-
-不过，字符串拼接麻烦又易错，在 v-bind 用于 class 和 style 时， Vue.js 专门增强了它，现在表达式的结果类型除了字符串之外，还可以是对象或数组。
 
 \section{Mustache}
 
-Vue.js支持使用Mustache标签（也就是双大括号\{\{\}\}）来来处理文本插值。
+
+Vue.js支持使用Mustache标签（也就是双大括号\texttt{\{\{\}\}}）来处理文本插值。
 
 
 \begin{lstlisting}[language=JavaScript]
 <span>Text: {{ text }}</span>
 \end{lstlisting}
 
-上述的标签\{\{text\}\}被相应的数据对象的text属性的值替换，而且当text的值改变时，文本中的值也会联动地发生变化。
+上述的Mustache标签\texttt{\{\{text\}\}}会被相应的数据对象的text属性的值替换，而且当text属性的值改变时，文本中的值也会联动地发生变化。
 
 如果数据只需要渲染一次，后续不再更新，可以使用\texttt{"*"}来进行指定：
 
@@ -47,7 +51,7 @@ Vue.js支持使用Mustache标签（也就是双大括号\{\{\}\}）来来处理�
 <span>{{ *text }}</span>
 \end{lstlisting}
 
-默认情况下，\{\{\}\}会把内部的值全部作为字符串进行处理，如果值是HTML片段，可以使用三个大括号来绑定，例如：
+默认情况下，\texttt{\{\{\}\}}会把内部的值全部作为字符串进行处理，如果值是HTML片段，可以使用三个大括号来绑定，例如：
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -56,7 +60,7 @@ Vue.js支持使用Mustache标签（也就是双大括号\{\{\}\}）来来处理�
 logo: '<span>Hello</span>'
 \end{lstlisting}
 
-Vue.js支持把\{\{\}\}放在HTML标签内，例如：
+Vue.js支持把Mustache标签\texttt{\{\{\}\}}放在HTML标签内，例如：
 
 \begin{lstlisting}[language=JavaScript]
 <li data-id='{{ id }}'></li>
@@ -65,23 +69,30 @@ Vue.js支持把\{\{\}\}放在HTML标签内，例如：
 
 注意，Vue.js指令和自身特性内是不可以插值的，否则Vue.js会发出警告。
 
+\section{Expression}
 
-文本插值支持字符串、HTML片段以及表达式形式的值，表达式可以由JavaScript表达式和过滤器构成，而且过滤器可以没有，也可以有多个。
+文本插值支持字符串、HTML片段以及表达式形式的值。其中，表达式可以由JavaScript表达式和过滤器构成，而且过滤器可以没有，也可以有多个，表达式的值就是其运算结果。
 
-复杂的JavaScript表达式可以是数值、变量和运算符的综合体，简单的JavaScript表达式可以是常量或变量名称，表达式的值是其运算结果。
+\begin{compactitem}
+\item 简单的JavaScript表达式可以是常量或变量名称；
+\item 复杂的JavaScript表达式可以是数值、变量和运算符的综合体。
+\end{compactitem}
 
 
-
+\begin{example}
+JavaScript表达式
 \begin{lstlisting}[language=JavaScript]
-{{ cents/10 }}
-{{ true ? 1 : 0 }}
+{{ cents/10 }} // 在原值基础上除以100
+{{ true ? 1 : 0 }} // 值为true则渲染出1，否则渲染出0
 {{ example.split(' ') }}
 \end{lstlisting}
+\end{example}
+
 
 下面的插值是不合法的：
 
 \begin{lstlisting}[language=JavaScript]
-{{ var logo = 'hello' }} // 语句不是表达式
+{{ var logo = 'hello' }} // 表达式不能是语句
 {{ if(true) return 'world' }} // 只支持三元式，不支持条件控制语句
 \end{lstlisting}
 
@@ -92,42 +103,54 @@ Vue.js支持在表达式后面添加过滤符来实现类似Linux中的管道的
 {{ example | toUpperCase }}
 \end{lstlisting}
 
-JavaScript过滤器本质上是一个JavaScript函数，而且Vue.js允许串联过滤器。
+本质上，JavaScript过滤器就是一个JavaScript函数（例如toUpperCase）。
+
+Vue.js允许串联过滤器。
 
 \begin{lstlisting}[language=JavaScript]
 {{ example | filterA | filterB }}
 \end{lstlisting}
 
-Vue.js支持带有参数的过滤器，参数之间使用空格隔开，例如：
-
+Vue.js支持带有参数的过滤器，参数之间使用空格隔开，例如下面的a、b都是参数，使用空格隔开：
 
 \begin{lstlisting}[language=JavaScript]
 {{ example | filter a b }}
 \end{lstlisting}
 
-Vue.js提供了一些内置的过滤器。
+Vue.js提供了一些内置的过滤器，例如：
+
+\begin{compactitem}
+\item orderBy
+\item limitBy
+\item filterBy
+\end{compactitem}
 
 \section{Directive}
 
 
-Vue.js提供的指令可以理解为带有v-前缀的特殊特性，指令的值限定为绑定表达式，即JavaScript表达式和过滤器。
+Vue.js提供的指令可以理解为带有v-前缀的特殊特性。
 
-Vue.js指令的职责就是当表达式的值发生变化时，联动地把某些特殊的行为反映到DOM上来实现视图更新，例如：
+\begin{compactitem}
+\item Vue.js指令必须添加到一个HTML元素上才能使用。
+\item Vue.js指令的值限定为绑定表达式，即JavaScript表达式和过滤器。
+\item Vue.js指令的职责就是当表达式的值发生变化时，联动地把某些特殊的行为反映到DOM上来实现视图更新。
+\end{compactitem}
 
+在下面的示例中，如果show为true则显示Hello，否则就不显示。
 
 \begin{lstlisting}[language=JavaScript]
 <div v-if="show">Hello</div>
 \end{lstlisting}
 
-
-这里，如果show为true则显示Hello，否则就不显示。
-
 Vue.js还支持在指令和表达式之间插入一个用冒号分隔的参数，例如：
 
 \begin{lstlisting}[language=JavaScript]
-<a v-bind:href="url"></a>
-<div v-on:click="action"></div>
+<a v-bind:href="url"></a> // 等价于<a :href="url"></a>
+
+<div v-on:click="action"></div> // 等价于<div @click="action"></div>
 \end{lstlisting}
+
+
 
 Vue.js提供了一些内置的指令，例如：
 
@@ -148,7 +171,7 @@ Vue.js提供了一些内置的指令，例如：
 \item v-pre
 \end{compactitem}
 
-\subsection{v-if}
+
 
 
 \section{Binding HTML Classes}

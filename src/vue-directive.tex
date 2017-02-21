@@ -5,8 +5,6 @@
 
 
 
-
-
 \section{v-if和v-show}
 
 在切换v-if模块时，Vue.js有一个局部编译/卸载工程，因为v-if中的模板可能包括数据绑定或子组件。
@@ -18,7 +16,7 @@
 
 一般来说，v-if有更高的切换消耗，v-show有更高的初始渲染消耗。
 
-v-if是惰性的——如果初始渲染条件为false，那么不渲染，在渲染条件第一次变为true时才开始局部编译（并缓存起来）。
+v-if是惰性的——如果初始渲染条件为false，那么不渲染，在渲染条件第一次变为true时才开始局部编译（并把编译结果缓存起来）。
 
 \begin{compactitem}
 \item 如果需要频繁的切换，则使用v-show较好。
@@ -56,7 +54,7 @@ v-ref不需要表达式，必须提供参数id，可以通过父组件的\$refs�
 \item 如果v-ref使用在一个对象上，注册的值将是一个对象，包含所有的子组件，对应于绑定对象。
 \end{compactitem}
 
-HTML不区分大小写，camelCase风格的名字（例如v-ref:someRef）将全部转换为小写，可以使用v-ref:some-ref设置this.\$els.someRef。
+HTML不区分大小写，因此v-ref使用的camelCase风格的名字（例如v-ref:someRef）将全部转换为小写，可以使用v-ref:some-ref设置this.\$els.someRef。
 
 
 
@@ -109,10 +107,29 @@ HTML不区分大小写，camelCase风格的名字（例如v-ref:someRef）将全
 
 \chapter{Build-in Directive}
 
+
+Vue.js提供的内置指令如下：
+
+\begin{compactitem}
+\item v-text
+\item v-html
+\item v-show
+\item v-if
+\item v-else
+\item v-else-if
+\item v-for
+\item v-on
+\item v-bind
+\item v-model
+\item v-pre
+\item v-cloak
+\item v-once
+\end{compactitem}
+
 \section{v-text}
 
 
-v-text可以更新元素的 textContent。如果要更新部分的 textContent ，需要使用 \{\{ Mustache \}\} 插值。
+v-text可以更新元素的 textContent。如果要更新部分的 textContent ，需要使用 \texttt{\{\{ Mustache \}\}} 插值。
 
 实际上，\texttt{\{\{Mustache\}\}}在内部也被编译为textNode的一个v-text指令。
 
@@ -179,9 +196,7 @@ v-text可以更新元素的 textContent。如果要更新部分的 textContent �
 
 \section{v-html}
 
-v-html可以更新元素的 innerHTML 。
-
-注意，内容按普通 HTML 插入，不会作为 Vue 模板进行编译，数据绑定被忽略。
+v-html可以更新元素的 innerHTML ，而且内容以普通 HTML的形式插入，不会作为 Vue 模板进行编译，数据绑定将被忽略。
 
 \begin{compactitem}
 \item 如果试图使用 v-html 组合模板，可以重新考虑是否通过使用组件（Component）来替代。
@@ -383,8 +398,8 @@ v-if可以根据表达式的值的真假条件渲染元素。
 v-if指令可以完全根据表达式的值在DOM中生成或移除一个元素（Element）。
 
 \begin{compactitem}
-\item 如果v-if表达式赋值为false，那么对应的元素就会从DOM树中被移除；
-\item 如果v-if表达式赋值为true，那么对应的元素的一个克隆就会被重新插入到DOM树中。
+\item 如果v-if表达式赋值为false，那么对应的元素就会从DOM中被移除；
+\item 如果v-if表达式赋值为true，那么对应的元素的一个克隆将被重新插入到DOM中。
 \end{compactitem}
 
 
@@ -523,7 +538,7 @@ v-else可以为 v-if 或者 v-else-if 添加 “else 块”，而且v-else必须
 
 \subsubsection{组件}
 
-v-else和v-show的的优先级问题导致v-show不适合用在组件上。
+v-else和v-show的的优先级问题导致v-else不适合用在组件上。
 
 \begin{compactitem}
 \item v-else不适合用在组件上
@@ -539,7 +554,7 @@ v-else和v-show的的优先级问题导致v-show不适合用在组件上。
 \begin{lstlisting}[language=JavaScript]
 <!-- v-show代替v-else -->
 <custom-component v-show="condition"></custom-component>
-<p v-show="!!condition">这可能也是一个组件</p>
+<p v-show="!condition">这可能也是一个组件</p>
 \end{lstlisting}
 
 \end{compactitem}
@@ -795,14 +810,7 @@ v-for指令的值必须使用特定语法\texttt{alias in expression}来为当�
 
 v-for支持遍历数组、对象、数字和字符串。
 
-
-
-
-v-for支持\texttt{item in/of items}的形式，其中of分隔符更接近JavaScript的遍历器语法。
-
-\subsubsection{Object}
-
-v-for来遍历一个对象时，每一个重复的实例都将有一个特殊的属性\$key或者给对象的键值提供一个别名。
+\subsubsection{Array}
 
 
 
@@ -813,9 +821,46 @@ v-for来遍历一个对象时，每一个重复的实例都将有一个特殊的
   </head>
   <body id="example">
   <ul id="demo">
-    <li v-for="value in primitiveValues">{{ $key}}:{{$value}}</li>
+    <li v-for="item in items">
+      {{ item.$index }} - {{ parentMessage }} {{ item.msg }}
+    </li>
+  </ul>
+  </body>
+  <script>
+  var exampleVM = new Vue({
+    el: '#demo',
+    data: {
+      parentMessage: '滴滴',
+      items: [
+        { msg: '顺风车' },
+        { msg: '专车' }
+      ]
+    }
+  })
+  </script>
+</html>
+\end{lstlisting}
+
+
+
+v-for支持\texttt{item in/of items}的形式，其中of分隔符更接近JavaScript的遍历器语法。
+
+\subsubsection{Object}
+
+v-for来遍历一个对象时，每一个重复的实例都将有一个特殊的属性\$key，或者给对象的键值提供一个别名。
+
+
+
+\begin{lstlisting}[language=JavaScript]
+<html>
+  <head>
+    <script src="/path/to/vue.js"></script>
+  </head>
+  <body id="demo">
+  <ul id="demo">
+    <li v-for="value in primitiveValues">{{ $key}} : {{$value}}</li>
     <li>=====</li>
-    <li v-for="(key, item) in objectValues">{{key}}:{{item.msg}}</li>
+    <li v-for="(key, item) in objectValues">{{key}} : {{item.msg}}</li>
   </ul>
   </body>
   <script>
@@ -841,7 +886,7 @@ v-for来遍历一个对象时，每一个重复的实例都将有一个特殊的
 </html>
 \end{lstlisting}
 
-ES5无法检测到新属性添加到一个对象上或者在对象中删除，Vue.js增加了三种方法\$add、\$set和\$delete来添加和删除属性，同时触发视图更新。
+ES5无法检测到新属性添加到一个对象上或者在对象中删除，Vue.js为此增加了三种方法\$add、\$set和\$delete来添加和删除属性，同时触发视图更新。
 
 \begin{compactitem}
 \item \texttt{\$add(key,value)}
@@ -940,7 +985,7 @@ v-for会产生一个特殊的作用域，和AngularJS的隔离作用域类似，
 
 \subsection{包装方法}
 
-Vue.js包装了被观察数据的变异方法来检测数据变动，这样当数据数据出现变动时就可以触发视图更新。
+Vue.js包装了被观察数据的变异方法来检测数据变动，这样当数据出现变动时就可以触发视图更新。
 
 
 Vue.js包装的数据变动检测方法包括：
@@ -957,6 +1002,8 @@ Vue.js包装的数据变动检测方法包括：
 
 
 Vue.js在重写上述方法后触发了一次notify。
+
+
 
 
 \subsubsection{\$set}
@@ -979,7 +1026,7 @@ demo.items.$set(0, {childMsg: 'Changed!'})
 \$remove是splice的语法糖，可以用来从目标数组中查找并删除元素。
 
 \begin{compactitem}
-\item 不使用\$remove执行查找并删除元素
+\item 不使用\$remove
 
 \begin{lstlisting}[language=JavaScript]
 var index = this.items.indexOf(item)
@@ -988,7 +1035,7 @@ if (index !== -1) {
 }
 \end{lstlisting}
 
-\item 使用\$remove查找并删除元素
+\item 使用\$remove
 
 \begin{lstlisting}[language=JavaScript]
 demo.items.$remove(item)
@@ -1007,9 +1054,11 @@ demo.items = demo.items.filter(function(item) {
 \end{lstlisting}
 
 
-在某些情况下可能会需要全新对象（例如通过API调用创建的对象）来替换数组。
+在某些情况下，可能会需要使用全新对象（例如通过API调用创建的对象）来替换数组。
 
-默认情况下，v-for通过数据对象的特征来决定对已有作用域和DOM元素的复用程度，可能导致重新渲染整个列表。不过，如果每个对象都有一个唯一的ID属性，那么就可以使用track-by特性来提示Vue.js来尽可能地复用已有的实例。
+默认情况下，v-for通过数据对象的特征来决定对已有作用域和DOM元素的复用程度，可能导致重新渲染整个列表。
+
+如果每个对象都有一个唯一的ID属性，那么就可以使用track-by特性来提示Vue.js来尽可能地复用已有的实例。
 
 \begin{lstlisting}[language=JavaScript]
 {
@@ -1020,7 +1069,7 @@ demo.items = demo.items.filter(function(item) {
 }
 \end{lstlisting}
 
-针对上述情况，可以给Vue.js发出提示，例如：
+针对上述情况，可以使用track-by给Vue.js发出提示，例如：
 
 \begin{lstlisting}[language=JavaScript]
 <div v-for="item in items" track-by="_uid">
@@ -1103,9 +1152,6 @@ v-on可以绑定事件监听器，v-on绑定的事件类型由参数指定。
 \begin{compactitem}
 \item v-on用在普通元素上时，只能监听 原生 DOM 事件。
 
-在监听原生 DOM 事件时，如果只定义一个数，DOM event为事件的唯一参数。如果在内联语句中处理器中访问原生DOM事件，可以用特殊变量\$event把事件传入方法。
-
-
 \begin{lstlisting}[language=JavaScript]
 <!-- 方法处理器 -->
 <button v-on:click="doThis"></button>
@@ -1116,12 +1162,14 @@ v-on可以绑定事件监听器，v-on绑定的事件类型由参数指定。
 
 
 \item v-on用在自定义元素组件上时，也可以监听子组件触发的自定义事件。
-
-自定义事件的内联语句可以访问一个\$arguments属性，其本质是一个数组，包含了传给子组件的\$emit回调的参数。
-
-
-
 \end{compactitem}
+
+其中，在监听原生 DOM 事件时，如果只定义一个参数，DOM event为事件的唯一参数。如果在内联语句处理器中访问原生DOM事件，可以用特殊变量\$event把事件传入方法。
+
+
+在监听自定义事件时，内联语句可以访问一个\$arguments属性，其本质是一个数组，包含了传给子组件的\$emit回调的参数。
+
+
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -1229,7 +1277,7 @@ v-on不仅支持支持参数，也支持修饰符，其中v-on支持的修饰符
 
 \section{v-bind}
 
-v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表达式。
+v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表达式来实现响应更新HTML特性。
 
 
 \subsection{类型}
@@ -1281,7 +1329,7 @@ v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表�
 
 \end{compactitem}
 
-没有参数时，v-bind可以绑定到一个对象。
+没有参数时，v-bind可以绑定到一个对象，此时class和style绑定不支持数组和对象（对象key会转换为小写）。
 
 \begin{lstlisting}[language=JavaScript]
 <!-- 绑定一个属性 -->
@@ -1327,27 +1375,36 @@ v-bind可以动态地绑定一个或多个特性，或一个组件 prop 到表�
 \end{compactitem}
 
 
-\section{修饰符}
+\subsection{修饰符}
 
 在绑定prop时，prop必须在子组件中声明，v-bind支持使用不同的修饰符来指定不同的绑定类型。
-
-
-\begin{compactitem}
-\item .sync——双向绑定，只能用于prop绑定。
-\item .once——单次绑定，只能用于prop绑定。
-\item .camel——将绑定的特性名字转换回驼峰命名，只能用于普通HTML特性的绑定。
-\end{compactitem}
 
 
 \begin{lstlisting}[language=JavaScript]
 <!-- prop绑定，prop必须在my-component组件内声明 -->
 <my-component :prop="someThing"></my-component>
+\end{lstlisting}
+
+
+\begin{compactitem}
+\item .sync——双向绑定，只能用于prop绑定。
+
+\begin{lstlisting}[language=JavaScript]
 <!-- 双向prop绑定 -->
 <my-component :prop.sync="someThing"></my-component>
+\end{lstlisting}
+
+
+\item .once——单次绑定，只能用于prop绑定。
+
+\begin{lstlisting}[language=JavaScript]
 <!-- 单次prop绑定 -->
 <my-component :prop.once="someThing"></my-component>
 \end{lstlisting}
 
+
+\item .camel——将绑定的特性名字转换回驼峰命名，只能用于普通HTML特性的绑定。
+\end{compactitem}
 
 \subsubsection{.sync}
 
@@ -1417,7 +1474,7 @@ v-model的实质是语法糖，在用户的输入事件中更新数据，并且�
 \subsection{DOM}
 
 
-v-model根据控件类型来自动选择正确的方法更新元素。
+v-model可以根据控件类型自动选择正确的方法来更新元素。
 
 
 \begin{lstlisting}[language=JavaScript]
@@ -1479,12 +1536,12 @@ v-model根据控件类型来自动选择正确的方法更新元素。
 v-model支持在后面添加多个修饰符来进行定制（例如number、lazy和trim）
 
 
-\subsection{.number}
+\subsubsection{.number}
 
-v-model的number修饰符可以用户的输入自动转换为Number类型（如果原值的转换结果为NaN，则返回原值）。
+v-model的number修饰符可以把用户的输入自动转换为Number类型（如果原值的转换结果为NaN，则返回原值）。
 
 \begin{lstlisting}[language=JavaScript]
-
+ <input type="text" v-model="data.name" placeholder="" number><br>
 \end{lstlisting}
 
 
@@ -1631,22 +1688,43 @@ v-pre可以用来显示原始 Mustache 标签，或者跳过大量没有指令�
 
 \section{v-cloak}
 
-v-cloak不需要表达式，可以用来保持在元素上直到关联实例结束编译。和 CSS 规则（例如\texttt{[v-cloak] \{ display: none \}} 一起用时，v-pre指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
+v-cloak不需要表达式，可以用来保持在元素上直到关联实例结束编译。AngularJS提供了和v-cloak相同的功能的指令。
 
-AngularJS提供了和v-cloak相同的功能。
+v-pre指令和 CSS 规则（例如\texttt{[v-cloak] \{ display: none \}} 一起用时，可以隐藏未编译的 Mustache 标签直到实例准备完毕，否则有可能用户会先看到Mustache标签，然后看到编译后的数据。
+
+
 
 \subsection{类型}
 
 下面的v-cloak示例让元素不会显示，直到编译结束。
 
 \begin{lstlisting}[language=JavaScript]
-[v-cloak] {
-  display: none;
-}
+<html>
+<head>
+  <title>v-cloak</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
 
-<div v-cloak>
-  {{ message }}
+<body>
+<div id="app">
+  <div>{{ message }}</div>
+  <!-- 先将元素隐藏，获取数据完后再将其显示 -->
+  <div v-cloak>{{ message }}</div>
 </div>
+<body>
+<script>
+  new Vue({
+    el: `'#app',
+    data: {
+      message: 'hello'
+    }
+  });
+</script>
+</html>
 \end{lstlisting}
 
 
