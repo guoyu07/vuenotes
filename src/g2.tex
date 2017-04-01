@@ -1,0 +1,87 @@
+\part{G2}
+
+\chapter{Overview}
+
+
+G2 (The Grammar Of Graphics) 是一个由纯 JavaScript 编写、强大的语义化图表生成工具，它提供了一整套图形语法，可以让用户通过简单的语法搭建出无数种图表，并且集成了大量的统计工具，支持多种坐标系绘制，可以让用户自由地定制图表，是为大数据时代而准备的强大的可视化工具。
+
+g2支持通过将脚本下载到本地也支持直接引入在线资源。
+
+\begin{lstlisting}[language=HTML]
+<!-- 引入在线资源 -->
+<script src="https://a.alipayobjects.com/g/datavis/g2/2.2.5/g2.js"></script>
+<!-- 引入本地脚本 -->
+<script src="./g2.js"></script>
+\end{lstlisting}
+
+在 G2 引入页面后，就已经做好了创建第一个图表的准备了。例如，下面是以一个基础的柱状图为例开始我们的第一个图表创建。
+
+在页面的body部分创建一个 div，并指定必须的属性 id：
+
+\begin{lstlisting}[language=HTML]
+<div id="c1"></div>
+\end{lstlisting}
+
+在创建 div 容器后就可以进行简单的图表绘制，具体步骤如下：
+
+\begin{compactenum}
+\item 创建 Chart 图表对象，指定图表所在的容器 ID、指定图表的宽高、边距等信息；
+\item 载入图表数据源；
+\item 使用图形语法进行图表的绘制；
+\item 渲染图表。
+\end{compactenum}
+
+
+如果使用 <script></script>包裹g2图表的代码，那么可以放在页面代码的任意位置（最好的做法是放在<body>之前）。
+
+
+\begin{lstlisting}[language=HTML]
+var data = [
+  {genre: 'Sports', sold: 275},
+  {genre: 'Strategy', sold: 115},
+  {genre: 'Action', sold: 120},
+  {genre: 'Shooter'复制代码, sold: 350},
+  {genre: 'Other', sold: 150},
+];
+
+var chart = new G2.Chart({
+   id: 'c1',
+   width: 600,
+   height: 300
+});
+
+chart.source(data, {
+   genre: {}
+});
+\end{lstlisting}
+
+\section{NPM}
+
+
+\begin{lstlisting}[language=bash]
+$ npm install g2 --save
+\end{lstlisting}
+
+在成功安装g2之后就可以使用 import 或 require 进行引用，例如：
+
+\begin{lstlisting}[language=JavaScript]
+var G2 = require('g2');
+var chart = new G2.Chart({
+    id: 'c1',
+    width: 600,
+    height: 300
+});
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
